@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscribe to my Newsletter - Only Jo's OnlyFans Reviews</title>
+  <meta name="description" content="Subscribe to Only Jo's newsletter for the latest OnlyFans creator reviews and honest lesbian content recommendations delivered to your inbox.">
+  <meta name="keywords" content="lesbian couple onlyfans, lesbian content onlyfans, lesbian videos reviews, girl on girl videos reviews, queer onlyfans creators">
+   <link rel="stylesheet" href="newsletter.css">
+</head>
+
+<body>
+
+ <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <a href="#" class="logo">Only for you - Reviews</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="all-reviews.html">All my reviews</a></li>
+        <li><a href="creator-vote.html">Does this girl like pussy ?</a></li>
+        <li><a href="creator-ratings.html">Rate lesbian videos</a></li>
+        <li><a href="newsletter.html">Newsletter</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Newsletter Container -->
+   <div class="newsletter-container">
+    <div id="signup-form">
+      <div class="newsletter-icon">
+  <img src="images/onlyjo.png" alt="Only Jo Profile" class="newsletter-image">
+       </div>
+      
+      <h1 class="newsletter-title">Join Only Jo's Inner Circle</h1>
+      <p class="newsletter-subtitle">
+        Get exclusive bisexual and queer OnlyFans creator reviews, early access to lesbian videos ratings, and honest lesbian videos recommendations delivered straight to your inbox.
+      </p>
+
+
+      </div>
+
+      <form class="newsletter-form" id="newsletterForm">
+        <div class="form-group">
+          <label for="email" class="form-label">Email Address *</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            class="form-input" 
+            placeholder="your.email@example.com" 
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="name" class="form-label">First Name (Optional)</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            class="form-input" 
+            placeholder="What should I call you?"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="interests" class="form-label">Content Interests</label>
+          <select id="interests" name="interests" class="form-select">
+            <option value="milf">Lesbian couples</option>
+            <option value="milf">Solo & Girlfriend Experience</option>
+            <option value="milf">Group</option>
+            <option value="all">Everything - I'm exploring</option>
+          </select>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="consent" name="consent" class="checkbox" required>
+          <label for="consent" class="checkbox-label">
+            I agree to receive marketing emails from Only Jo and understand I can unsubscribe at any time. 
+          </label>
+        </div>
+
+        <button type="submit" class="subscribe-btn" id="submitBtn">
+          <span id="btnText">Join the Newsletter</span>
+          <span class="loading" id="loading">
+            <span class="spinner"></span>
+          </span>
+        </button>
+      </form>
+
+      <p class="footer-note">
+         Unsubscribe anytime with one click.
+      </p>
+    </div>
+
+
+   <script src="newsletter.js"></script>

@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All the Ratings - The LGBT content rated by you and for you !</title>
+
+<style>
+
+:root {
+      --black: #000000;
+      --white: #ffffff;
+      --lilac: #c5b0e5;
+      --light-lilac: #e5dbff;
+      --purple: #764ba2;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      color: var(--black);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: var(--white);
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      border-bottom: 1px solid #e5e5e5;
+      transition: all 0.3s ease;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      color: var(--black);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--lilac);
+    }
+
+    .nav-links a.active {
+      color: var(--purple);
+      font-weight: 600;
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 1200px;
+      margin: 120px auto 2rem;
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 1rem;
+      padding-top: 2rem;
+      line-height: 1.2;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    .hero .subtitle {
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      color: var(--black);
+    }
+
+
+
+     /* Affiliate Banner */
+    .affiliate-banner {
+      padding: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .banner-title {
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--back);
+      margin-bottom: 0.5rem;
+    }
+
+    .banner-subtitle {
+      font-size: 1.1rem;
+      color: #c5b0e5;
+      margin-top: 1.5rem;
+      line-height: 1.4;
+    }
+
+    .banner-cta {
+      display: inline-block;
+      background: var(--black);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+
+    .banner-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid var(--black);
+    }
+
+    .banner-cta:hover {
+      transform: translateY(-2px);
+      background: var(--black);
+    }
+
+
+
+
+
+    /* Filter Section */
+    .filter-section {
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .filter-controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .filter-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+
+    .filter-select {
+      padding: 0.75rem 1rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      background: white;
+      min-width: 150px;
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--lilac);
+    }
+
+    /* Videos Grid */
+    .videos-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .video-card {
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      position: relative;
+      border : 1px solid var(--black);
+    }
+
+    .video-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .video-thumbnail-container {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .video-thumbnail {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-rating-overlay {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 0.5rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .video-info {
+      padding: 1.5rem;
+    }
+
+    .video-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .video-creator {
+      font-size: 0.9rem;
+      color: var(--purple);
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .video-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--gray-600);
+    }
+
+    .video-date {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .ratings-display {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .rating-item {
+      text-align: center;
+      flex: 1;
+    }
+
+    .rating-label {
+      font-size: 0.8rem;
+      color: var(--gray-600);
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+    }
+
+    .rating-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--purple);
+    }
+
+    .community-rating {
+      color: var(--lilac);
+    }
+
+    .video-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .action-btn {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--black);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--purple);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--light-lilac);
+      color: var(--black);
+    }
+
+    .btn-secondary:hover {
+      background: var(--lilac);
+      color: white;
+    }
+
+    /* Pagination */
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      align-items: center;
+      gap: 1rem;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+    }
+
+    .pagination-info {
+      font-size: 0.9rem;
+      color: var(--black);
+      margin: 0 1rem;
+    }
+
+    .pagination {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .page-btn {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--black);
+      background: white;
+      color: var(--black);
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      min-width: 44px;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .page-btn:hover {
+      border-color: var(--black);
+      background: var(--lilac);
+    }
+
+    .page-btn.active {
+      background: var(--black);
+      color: white;
+      border-color: var(--black);
+    }
+
+    .page-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .page-btn.prev, .page-btn.next {
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 4rem 0 2rem;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 2rem;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      font-weight: 300;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: clamp(1rem, 3vw, 2rem);
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #ffffff;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+    }
+
+    .footer-links a:hover {
+      opacity: 0.7;
+    }
+
+    .footer-newsletter {
+      flex: 1;
+      max-width: 400px;
+      min-width: 250px;
+    }
+
+    .footer-newsletter h4 {
+      color: #ffffff;
+      font-size: clamp(1rem, 2vw, 1.1rem);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .newsletter-signup {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      min-width: 200px;
+      padding: 10px 14px;
+      border: 1px solid #374151;
+      border-radius: 25px;
+      background-color: #1f2937;
+      color: #ffffff;
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+      transition: border-color 0.2s ease;
+    }
+
+    .newsletter-input:focus {
+      outline: none;
+      border-color: #6b7280;
+    }
+
+    .newsletter-input::placeholder {
+      color: #9ca3af;
+    }
+
+    .newsletter-btn {
+      background-color: #ffffff;
+      color: #000000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .newsletter-btn:hover {
+      background-color: #f3f4f6;
+      transform: translateY(-1px);
+    }
+
+    .gdpr-consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .gdpr-checkbox {
+      display: none;
+    }
+
+    .gdpr-label {
+      display: flex;
+      align-items: flex-start;
+      cursor: pointer;
+      user-select: none;
+      gap: 8px;
+      line-height: 1.4;
+    }
+
+    .gdpr-checkmark {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      border: 1px solid #6b7280;
+      border-radius: 3px;
+      background-color: #1f2937;
+      position: relative;
+      transition: all 0.2s ease;
+      margin-top: 2px;
+    }
+
+    .gdpr-checkbox:checked + .gdpr-label .gdpr-checkmark {
+      background-color: #ffffff;
+      border-color: #ffffff;
+    }
+
+    .gdpr-checkbox:checked + .gdpr-label .gdpr-checkmark::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 1px;
+      width: 4px;
+      height: 8px;
+      border: solid #000000;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .gdpr-text {
+      font-size: clamp(0.7rem, 2vw, 0.8rem);
+      color: #d1d5db;
+      flex: 1;
+    }
+
+    .privacy-link {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .privacy-link:hover {
+      opacity: 0.8;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        gap: 1rem;
+        height: auto;
+        padding: 20px 24px;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: clamp(15px, 3vw, 20px);
+        font-size: clamp(14px, 3vw, 16px);
+      }
+
+      .header {
+        position: relative;
+      }
+
+      .hero {
+        margin-top: 2rem;
+      }
+
+      .videos-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .filter-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .filter-group {
+        width: 100%;
+      }
+
+      .filter-select {
+        width: 100%;
+      }
+
+      .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .footer-links {
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .newsletter-signup {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .newsletter-input {
+        min-width: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .videos-container {
+        padding: 0 1rem;
+      }
+
+      .stats-section,
+      .filter-section {
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+
+      .video-card {
+        border-radius: 12px;
+      }
+
+      .video-info {
+        padding: 1rem;
+      }
+
+      .video-actions {
+        flex-direction: column;
+      }
+
+      .pagination-container {
+        padding: 0 1rem;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <a href="#" class="logo">Video Reviews</a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#explore">All my reviews</a></li>
+        <li><a href="#blog">Does this girl like pussy ?</a></li>
+        <li><a href="#tools">Rate videos</a></li>
+        <li><a href="#tools">Newsletter</a></li>
+      </ul>
+    </nav>
+
+    </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>All the Ratings 👀</h1>
+
+   <!-- Affiliate Banner -->
+      <section class="affiliate-banner">
+        <div class="banner-content">
+          <div class="banner-image">
+               <img src="sheseducedme-banner1.png" alt="Lesbian couple">
+          </div>
+          <p class="banner-subtitle">
+            <em>*<strong>WARNING</strong> : They might do way more than just kissing.</em>
+
+    <p class="subtitle">
+      Discover every LGBT video reviewed by our community
+    </p>
+
+
+  </section>
+  </section>
+
+
+  <!-- Filter Section -->
+
+  <section class="filter-section">
+    <div class="filter-controls">
+      <div class="filter-group">
+        <label class="filter-label">Sort by</label>
+        <select class="filter-select" id="sortFilter">
+          <option value="rating-desc">Highest Rated</option>
+          <option value="rating-asc">Lowest Rated</option>
+          <option value="date-desc">Most Recent</option>
+          <option value="date-asc">Oldest First</option>
+          <option value="reviews-desc">Most Reviewed</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Creator</label>
+        <select class="filter-select" id="creatorFilter">
+          <option value="all">All Creators</option>
+          <option value="madeline">Madeline Rousset</option>
+          <option value="sophie">Sophie Divine</option>
+          <option value="luna">Luna Star</option>
+          <option value="alex">Alex Harper</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Rating Range</label>
+        <select class="filter-select" id="ratingFilter">
+          <option value="all">All Ratings</option>
+          <option value="9-10">9-10 (Excellent)</option>
+          <option value="7-8">7-8 (Good)</option>
+          <option value="5-6">5-6 (Average)</option>
+          <option value="1-4">1-4 (Poor)</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- Videos Container -->
+  <div class="videos-container">
+    <div class="videos-grid" id="videosGrid">
+      <!-- Video cards will be dynamically generated here -->
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-container">
+      <button class="page-btn prev" id="prevBtn" onclick="changePage(-1)">← Previous</button>
+      <div class="pagination" id="pagination">
+        <!-- Pagination buttons will be generated here -->
+      </div>
+      <button class="page-btn next" id="nextBtn" onclick="changePage(1)">Next →</button>
+      <div class="pagination-info">
+        <span id="pageInfo">Showing 1-12 of 47 videos</span>
+      </div>
+    </div>
+  </div>
+
+
+   <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#">Home</a>
+        <a href="#">Reviews</a>
+        <a href="#">Onlyfans</a>
+        <a href="#">Newsletter</a>
+        <a href="#">Telegram</a>
+        <a href="#">Reddit</a>
+      </div>
+      <div class="footer-newsletter">
+        <div class="newsletter-form">
+          <h4>Stay Updated</h4>
+          <form id="newsletterForm" class="newsletter-signup">
+            <input type="email" placeholder="Enter your email" class="newsletter-input" required>
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+          </form>
+          <div class="gdpr-consent">
+            <input type="checkbox" id="gdprConsent" class="gdpr-checkbox" required>
+            <label for="gdprConsent" class="gdpr-label">
+              <span class="gdpr-checkmark"></span>
+              <span class="gdpr-text">I agree to receive marketing emails and understand I can unsubscribe at any time. <a href="#" class="privacy-link">Privacy Policy</a></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+ <script>
+
+// Sample video data
+const videosData = [
+  {
+    id: 1,
+    title: "FRENCH L - I think we are more than friends now ?",
+    creator: "Madeline Rousset",
+    videoId: "dQw4w9WgXcQ",
+    averageRating: 8.7,
+    communityRating: 9.2,
+    reviewCount: 45,
+    reviewDate: "2024-01-15",
+    reviewLink: "#review-1"
+  },
+  {
+    id: 2,
+    title: "Lesbian Couple Morning Routine - Realistic & Sweet",
+    creator: "Sophie Divine",
+    videoId: "jNQXAC9IVRw",
+    averageRating: 9.1,
+    communityRating: 8.8,
+    reviewCount: 67,
+    reviewDate: "2024-01-12",
+    reviewLink: "#review-2"
+  },
+  {
+    id: 3,
+    title: "First Time Together - Authentic LGBT Love Story",
+    creator: "Luna Star",
+    videoId: "VFbhKZFzbzk",
+    averageRating: 7.9,
+    communityRating: 8.4,
+    reviewCount: 32,
+    reviewDate: "2024-01-10",
+    reviewLink: "#review-3"
+  },
+  {
+    id: 4,
+    title: "Girls Night Out - What Really Happens",
+    creator: "Alex Harper",
+    videoId: "9bZkp7q19f0",
+    averageRating: 8.3,
+    communityRating: 7.9,
+    reviewCount: 58,
+    reviewDate: "2024-01-08",
+    reviewLink: "#review-4"
+  },
+  {
+    id: 5,
+    title: "Romantic Dinner Date - Two Women in Love",
+    creator: "Madeline Rousset",
+    videoId: "dQw4w9WgXcQ",
+    averageRating: 9.4,
+    communityRating: 9.6,
+    reviewCount: 78,
+    reviewDate: "2024-01-05",
+    reviewLink: "#review-5"
+  },
+  {
+    id: 6,
+    title: "Coming Out Story - My Journey to Self Acceptance",
+    creator: "Sophie Divine",
+    videoId: "jNQXAC9IVRw",
+    averageRating: 8.8,
+    communityRating: 9.1,
+    reviewCount: 92,
+    reviewDate: "2024-01-03",
+    reviewLink: "#review-6"
+  },
+  {
+    id: 7,
+    title: "Pride Month Special - Celebrating Love",
+    creator: "Luna Star",
+    videoId: "VFbhKZFzbzk",
+    averageRating: 7.6,
+    communityRating: 8.2,
+    reviewCount: 41,
+    reviewDate: "2024-01-01",
+    reviewLink: "#review-7"
+  },
+  {
+    id: 8,
+    title: "Intimate Moments - Real Couple Documentary",
+    creator: "Alex Harper",
+    videoId: "9bZkp7q19f0",
+    averageRating: 8.9,
+    communityRating: 8.7,
+    reviewCount: 55,
+    reviewDate: "2023-12-28",
+    reviewLink: "#review-8"
+  },
+  {
+    id: 9,
+    title: "Weekend Getaway - Girls Trip Adventure",
+    creator: "Madeline Rousset",
+    videoId: "dQw4w9WgXcQ",
+    averageRating: 7.2,
+    communityRating: 7.8,
+    reviewCount: 29,
+    reviewDate: "2023-12-25",
+    reviewLink: "#review-9"
+  },
+  {
+    id: 10,
+    title: "Honest Review - Best LGBT Dating Apps",
+    creator: "Sophie Divine",
+    videoId: "jNQXAC9IVRw",
+    averageRating: 8.5,
+    communityRating: 8.3,
+    reviewCount: 73,
+    reviewDate: "2023-12-22",
+    reviewLink: "#review-10"
+  },
+  {
+    id: 11,
+    title: "Cooking Together - Lesbian Couple's Kitchen",
+    creator: "Luna Star",
+    videoId: "VFbhKZFzbzk",
+    averageRating: 8.1,
+    communityRating: 8.6,
+    reviewCount: 38,
+    reviewDate: "2023-12-20",
+    reviewLink: "#review-11"
+  },
+  {
+    id: 12,
+    title: "Movie Night Recommendations - LGBT Cinema",
+    creator: "Alex Harper",
+    videoId: "9bZkp7q19f0",
+    averageRating: 9.0,
+    communityRating: 9.3,
+    reviewCount: 64,
+    reviewDate: "2023-12-18",
+    reviewLink: "#review-12"
+  },
+  {
+    id: 13,
+    title: "Self-Care Sunday - Pamper Session for Two",
+    creator: "Madeline Rousset",
+    videoId: "dQw4w9WgXcQ",
+    averageRating: 7.8,
+    communityRating: 8.1,
+    reviewCount: 47,
+    reviewDate: "2023-12-15",
+    reviewLink: "#review-13"
+  },
+  {
+    id: 14,
+    title: "Long Distance Relationship Tips - Making It Work",
+    creator: "Sophie Divine",
+    videoId: "jNQXAC9IVRw",
+    averageRating: 8.6,
+    communityRating: 8.9,
+    reviewCount: 81,
+    reviewDate: "2023-12-12",
+    reviewLink: "#review-14"
+  },
+  {
+    id: 15,
+    title: "Fashion Haul - Couple's Style Guide",
+    creator: "Luna Star",
+    videoId: "VFbhKZFzbzk",
+    averageRating: 7.4,
+    communityRating: 7.7,
+    reviewCount: 33,
+    reviewDate: "2023-12-10",
+    reviewLink: "#review-15"
+  },
+  {
+    id: 16,
+    title: "Beach Day Vlog - Summer Romance",
+    creator: "Alex Harper",
+    videoId: "9bZkp7q19f0",
+    averageRating: 8.7,
+    communityRating: 8.4,
+    reviewCount: 52,
+    reviewDate: "2023-12-08",
+    reviewLink: "#review-16"
+  },
+  {
+    id: 17,
+    title: "Meeting Her Parents - Coming Out Story",
+    creator: "Madeline Rousset",
+    videoId: "dQw4w9WgXcQ",
+    averageRating: 9.2,
+    communityRating: 9.0,
+    reviewCount: 69,
+    reviewDate: "2023-12-05",
+    reviewLink: "#review-17"
+  },
+  {
+    id: 18,
+    title: "Anniversary Celebration - 2 Years Together",
+    creator: "Sophie Divine",
+    videoId: "jNQXAC9IVRw",
+    averageRating: 8.9,
+    communityRating: 9.1,
+    reviewCount: 76,
+    reviewDate: "2023-12-03",
+    reviewLink: "#review-18"
+  },
+  {
+    id: 19,
+    title: "Workout Routine - Couples Fitness Goals",
+    creator: "Luna Star",
+    videoId: "VFbhKZFzbzk",
+    averageRating: 7.1,
+    communityRating: 7.5,
+    reviewCount: 28,
+    reviewDate: "2023-12-01",
+    reviewLink: "#review-19"
+  },
+  {
+    id: 20,
+    title: "Holiday Shopping - Gift Ideas for Her",
+    creator: "Alex Harper",
+    videoId: "9bZkp7q19f0",
+    averageRating: 8.0,
+    communityRating: 8.2,
+    reviewCount: 44,
+    reviewDate: "2023-11-28",
+    reviewLink: "#review-20"
+  }
+];
+
+// Pagination variables
+let currentPage = 1;
+const videosPerPage = 12;
+let filteredVideos = [...videosData];
+
+// Initialize page
+document.addEventListener('DOMContentLoaded', function() {
+  renderVideos();
+  setupFilters();
+  updateStats();
+});
+
+// Render videos based on current page and filters
+function renderVideos() {
+  const startIndex = (currentPage - 1) * videosPerPage;
+  const endIndex = startIndex + videosPerPage;
+  const videosToShow = filteredVideos.slice(startIndex, endIndex);
+  
+  const videosGrid = document.getElementById('videosGrid');
+  videosGrid.innerHTML = '';
+  
+  videosToShow.forEach(video => {
+    const videoCard = createVideoCard(video);
+    videosGrid.appendChild(videoCard);
+  });
+  
+  updatePagination();
+  updatePageInfo();
+}
+
+// Create individual video card
+function createVideoCard(video) {
+  const card = document.createElement('div');
+  card.className = 'video-card';
+  
+  const formattedDate = new Date(video.reviewDate).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
+  
+  card.innerHTML = `
+    <div class="video-thumbnail-container">
+      <iframe 
+        class="video-thumbnail"
+        src="https://www.youtube.com/embed/${video.videoId}" 
+        title="${video.title}" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+      <div class="video-rating-overlay">${video.averageRating}/10</div>
+    </div>
+    <div class="video-info">
+      <h3 class="video-title">${video.title}</h3>
+      <div class="video-creator">By ${video.creator}</div>
+      <div class="video-meta">
+        <div class="video-date">📅 ${formattedDate}</div>
+        <div class="review-count">${video.reviewCount} reviews</div>
+      </div>
+      <div class="ratings-display">
+        <div class="rating-item">
+          <div class="rating-label">Average Rating</div>
+          <div class="rating-value">${video.averageRating}</div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">Community</div>
+          <div class="rating-value community-rating">${video.communityRating}</div>
+        </div>
+      </div>
+      <div class="video-actions">
+        <a href="${video.reviewLink}" class="action-btn btn-primary">Read Review</a>
+        <a href="#watch-${video.id}" class="action-btn btn-secondary">Watch Video</a>
+      </div>
+    </div>
+  `;
+  
+  return card;
+}
+
+// Update pagination controls
+function updatePagination() {
+  const totalPages = Math.ceil(filteredVideos.length / videosPerPage);
+  const pagination = document.getElementById('pagination');
+  pagination.innerHTML = '';
+  
+  // Always show first page
+  if (totalPages > 0) {
+    addPageButton(1, pagination);
+  }
+  
+  // Show dots if needed
+  if (currentPage > 3) {
+    addDotsButton(pagination);
+  }
+  
+  // Show pages around current page
+  const startPage = Math.max(2, currentPage - 1);
+  const endPage = Math.min(totalPages - 1, currentPage + 1);
+  
+  for (let i = startPage; i <= endPage; i++) {
+    if (i !== 1 && i !== totalPages) {
+      addPageButton(i, pagination);
+    }
+  }
+  
+  // Show dots if needed
+  if (currentPage < totalPages - 2) {
+    addDotsButton(pagination);
+  }
+  
+  // Always show last page
+  if (totalPages > 1) {
+    addPageButton(totalPages, pagination);
+  }
+  
+  // Update prev/next buttons
+  document.getElementById('prevBtn').disabled = currentPage === 1;
+  document.getElementById('nextBtn').disabled = currentPage === totalPages;
+}
+
+// Add page button to pagination
+function addPageButton(pageNum, container) {
+  const button = document.createElement('button');
+  button.className = `page-btn ${pageNum === currentPage ? 'active' : ''}`;
+  button.textContent = pageNum;
+  button.onclick = () => goToPage(pageNum);
+  container.appendChild(button);
+}
+
+// Add dots to pagination
+function addDotsButton(container) {
+  const dots = document.createElement('span');
+  dots.className = 'page-btn';
+  dots.textContent = '...';
+  dots.style.cursor = 'default';
+  dots.style.border = 'none';
+  container.appendChild(dots);
+}
+
+// Update page info
+function updatePageInfo() {
+  const startIndex = (currentPage - 1) * videosPerPage + 1;
+  const endIndex = Math.min(currentPage * videosPerPage, filteredVideos.length);
+  const pageInfo = document.getElementById('pageInfo');
+  pageInfo.textContent = `Showing ${startIndex}-${endIndex} of ${filteredVideos.length} videos`;
+}
+
+// Navigate to specific page
+function goToPage(page) {
+  const totalPages = Math.ceil(filteredVideos.length / videosPerPage);
+  if (page >= 1 && page <= totalPages) {
+    currentPage = page;
+    renderVideos();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+// Change page by offset
+function changePage(offset) {
+  goToPage(currentPage + offset);
+}
+
+// Setup filter functionality
+function setupFilters() {
+  document.getElementById('sortFilter').addEventListener('change', applyFilters);
+  document.getElementById('creatorFilter').addEventListener('change', applyFilters);
+  document.getElementById('ratingFilter').addEventListener('change', applyFilters);
+}
+
+// Apply all filters
+function applyFilters() {
+  const sortBy = document.getElementById('sortFilter').value;
+  const creatorFilter = document.getElementById('creatorFilter').value;
+  const ratingFilter = document.getElementById('ratingFilter').value;
+  
+  // Start with all videos
+  filteredVideos = [...videosData];
+  
+  // Apply creator filter
+  if (creatorFilter !== 'all') {
+    filteredVideos = filteredVideos.filter(video => {
+      const creatorName = video.creator.toLowerCase();
+      return creatorName.includes(creatorFilter);
+    });
+  }
+  
+  // Apply rating filter
+  if (ratingFilter !== 'all') {
+    filteredVideos = filteredVideos.filter(video => {
+      const rating = video.averageRating;
+      switch(ratingFilter) {
+        case '9-10': return rating >= 9;
+        case '7-8': return rating >= 7 && rating < 9;
+        case '5-6': return rating >= 5 && rating < 7;
+        case '1-4': return rating >= 1 && rating < 5;
+        default: return true;
+      }
+    });
+  }
+  
+  // Apply sorting
+  filteredVideos.sort((a, b) => {
+    switch(sortBy) {
+      case 'rating-desc':
+        return b.averageRating - a.averageRating;
+      case 'rating-asc':
+        return a.averageRating - b.averageRating;
+      case 'date-desc':
+        return new Date(b.reviewDate) - new Date(a.reviewDate);
+      case 'date-asc':
+        return new Date(a.reviewDate) - new Date(b.reviewDate);
+      case 'reviews-desc':
+        return b.reviewCount - a.reviewCount;
+      default:
+        return 0;
+    }
+  });
+  
+  // Reset to first page and render
+  currentPage = 1;
+  renderVideos();
+}
+
+// Update statistics
+function updateStats() {
+  const totalVideos = videosData.length;
+  const totalReviews = videosData.reduce((sum, video) => sum + video.reviewCount, 0);
+  const averageRating = (videosData.reduce((sum, video) => sum + video.averageRating, 0) / totalVideos).toFixed(1);
+  const topRated = Math.max(...videosData.map(video => video.averageRating)).toFixed(1);
+  
+  document.getElementById('totalVideos').textContent = totalVideos;
+  document.getElementById('totalReviews').textContent = totalReviews.toLocaleString();
+  document.getElementById('averageRating').textContent = averageRating;
+  document.getElementById('topRated').textContent = topRated;
+}
+
+// Newsletter form handling
+document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const email = this.querySelector('.newsletter-input').value;
+  const consent = document.getElementById('gdprConsent').checked;
+  
+  if (!consent) {
+    alert('Please agree to the privacy policy to subscribe.');
+    return;
+  }
+  
+  alert(`Thank you for subscribing with email: ${email}`);
+  this.reset();
+  document.getElementById('gdprConsent').checked = false;
+});
+
+ </script>
+
+ </body>
+ </html>
