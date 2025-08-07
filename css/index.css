@@ -1685,8 +1685,9 @@ body {
   }
 
   .filter-btn {
-    padding: 0.5rem 0.5rem;
+    padding: 0.2rem 0.2rem;
     margin-left: 0.8px;
+    margin-right: 0.8px;
     font-size: 0.85rem;
     justify-content: center;
   }
