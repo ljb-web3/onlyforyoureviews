@@ -938,6 +938,10 @@ body {
     padding: 0.2rem 0.6rem;
   }
 
+  .product-image img {
+    width: 100%;
+  }
+
   /* Popular posts mobile */
   .popular-post {
     flex-direction: column;
