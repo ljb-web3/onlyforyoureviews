@@ -1175,6 +1175,8 @@ body {
 /* TikTok Videos Section */
 .tiktok-section {
   margin: 4rem 0;
+  margin-left: 1px;
+  margin-right: 1px;
   padding-bottom: 120px;
   padding-top: 50px;
 }
