@@ -927,6 +927,7 @@ body {
   /* Affiliate banner mobile */
   .product-image {
     height: 120px;
+    width: 100%;
   }
 
   .product-info {
@@ -937,10 +938,7 @@ body {
     font-size: 0.7rem;
     padding: 0.2rem 0.6rem;
   }
-
-  .product-image img {
-    width: 100%;
-  }
+  
 
   /* Popular posts mobile */
   .popular-post {
