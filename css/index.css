@@ -1760,7 +1760,7 @@ body {
     grid-template-columns: 1fr;
     gap: 1rem;
     padding: 0 1rem;
-    margin: 4rem 0 2rem 0;
+    margin: 4rem 0 3rem 0;
   }
 
   .filter-buttons {
