@@ -503,16 +503,11 @@
     }
 
 
-  
-
-
-
-
-
-
-
-
-
+  .grid-gap-sm-text {
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
 
     .product-image img {
       width: 100%;
@@ -539,15 +534,15 @@
       line-height: 1.4;
     }
 
-    /* TextPanther Features */
-    .textpanther-features {
+    /* SextPanther Features */
+    .sextpanther-features {
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
       margin: 0.8rem 0;
     }
 
-    .tp-feature {
+    .product-feature {
       background: rgba(197, 176, 229, 0.1);
       color: #000;
       padding: 0.25rem 0.75rem;
@@ -557,14 +552,14 @@
       line-height: 1.4;
     }
 
-    .tp-audiences {
+    .product-audiences {
       margin: 1rem 0;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
     }
 
-    .tp-audience {
+    .product-audience {
       background: rgba(197, 176, 229, 0.15);
       padding: 0.5rem;
       border-radius: 8px;
@@ -572,7 +567,7 @@
       line-height: 1.4;
     }
 
-    .tp-audience strong {
+    .product-audience strong {
       color: var(--purple);
       font-weight: 700;
     }
@@ -598,12 +593,12 @@
       transform: translateY(-1px);
     }
 
-    .textpanther-link {
+    .sextpanther-link {
       background: var(--purple) !important;
       color: white !important;
     }
 
-    .textpanther-link:hover {
+    .sextpanther-link:hover {
       background: #000 !important;
     }
 
