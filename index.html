@@ -187,13 +187,34 @@
           <p class="newsletter-description">
             Subscribe and get list of free lesbians and bisexual girls Onlyfans
           </p>
-          <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
-            <input type="email" class="newsletter-input" placeholder="Enter your email" required>
-            <button type="submit" class="newsletter-btn">Subscribe</button>
-          </form>
-        </div>
-      </div>
-    </div>
+        <!-- Netlify Form with all necessary attributes -->
+                    <form name="newsletter" 
+                          method="POST" 
+                          action="/subscribed" 
+                          data-netlify="true" 
+                          netlify-honeypot="bot-field" 
+                          id="newsletterForm" 
+                          class="newsletter-signup">
+                        
+                        <!-- Hidden honeypot field for spam protection -->
+                        <div style="display: none;">
+                            <label>Don't fill this out if you're human: 
+                                <input name="bot-field" />
+                            </label>
+                        </div>
+                        
+                        <!-- Email Input -->
+                        <input type="email" 
+                               name="email" 
+                               placeholder="Enter your email" 
+                               class="newsletter-input" 
+                               required>
+                        
+                        <!-- Submit Button -->
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                    
+  
 
     <!-- Site Comparison Section -->
     <section class="comparison-section">
@@ -631,6 +652,7 @@
     </footer>
 
   <script src="/js/index.js"></script>
+
 
 
 
