@@ -868,6 +868,7 @@ body {
      width: 300px;
      height: 130px;
      object-fit: cover;
+     justify-content: center;
     }
 
   #promo-img {
