@@ -1638,6 +1638,8 @@ body {
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
     align-items: center;
+    margin-left: 2rem
+    margin-right: 2rem
   }
 
   /* Footer mobile responsiveness */
