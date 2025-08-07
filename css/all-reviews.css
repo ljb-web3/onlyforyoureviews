@@ -166,6 +166,7 @@
     }
 
     .post-rating {
+      margin-top: 3px;
       background: var(--black);
       color: white;
       padding: 0.25rem 0.75rem;
