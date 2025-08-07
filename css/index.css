@@ -1372,6 +1372,14 @@ body {
   flex: 1;
 }
 
+  .gdpr-text-side {
+  font-size: 0.2rem;
+  color: #d1d5db;
+  flex: 1;
+}
+  
+  
+
 .privacy-link {
   color: #ffffff;
   text-decoration: underline;
