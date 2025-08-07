@@ -203,6 +203,7 @@ function createAffiliateDashboard() {
         ).join('')}
         <button onclick="this.parentElement.remove()">Close</button>
         <button onclick="dataManager.exportData()">Export Data</button>
+        <button onclick="openAdminPanel(); this.parentElement.remove();">Admin Panel</button>
     `;
     
     document.body.appendChild(dashboard);
@@ -226,13 +227,16 @@ function getTotalReviews() {
 }
 
 // ============================================
-// SYSTÈME DE COUNTDOWN ET INITIALISATION
+// SYSTÈME DE COUNTDOWN FIXE - 15 JOURS
 // ============================================
 
-// Countdown end date (7 days from now for example)
-const countdownEndDate = new Date();
-countdownEndDate.setDate(countdownEndDate.getDate() + 7);
-countdownEndDate.setHours(23, 59, 59, 999);
+// DATE FIXE DE FIN - 15 jours à partir d'aujourd'hui (modifiez selon vos besoins)
+// Calculé automatiquement à partir d'aujourd'hui (8 août 2025)
+const COUNTDOWN_START_DATE = new Date('2025-08-08 00:00:00');
+const COUNTDOWN_END_DATE = new Date(COUNTDOWN_START_DATE.getTime() + (15 * 24 * 60 * 60 * 1000)); // 15 jours après
+
+// Alternative avec date fixe manuelle (décommentez pour utiliser)
+// const COUNTDOWN_END_DATE = new Date('2025-08-23 23:59:59'); // 15 jours à partir du 8 août
 
 // Initialiser le gestionnaire de données
 const dataManager = new DataManager();
@@ -246,17 +250,31 @@ document.addEventListener('DOMContentLoaded', async function() {
     loadPersistedData();
     
     console.log('✅ Site initialized with persistent data');
+    console.log('⏰ Countdown ends on:', COUNTDOWN_END_DATE.toLocaleString());
 });
 
-// Countdown functionality
+// Countdown functionality - VERSION AMÉLIORÉE AVEC DATE FIXE
 function startCountdown() {
     function updateCountdown() {
         const now = new Date().getTime();
-        const distance = countdownEndDate.getTime() - now;
+        const distance = COUNTDOWN_END_DATE.getTime() - now;
 
         if (distance < 0) {
             // Countdown finished
-            document.getElementById('countdownTimer').innerHTML = '<div style="text-align: center; color: #dc2626; font-weight: 600;">VOTING CLOSED</div>';
+            document.getElementById('countdownTimer').innerHTML = '<div style="text-align: center; color: #dc2626; font-weight: 600; font-size: 1.2em; padding: 20px;">VOTING CLOSED</div>';
+            
+            // Désactiver les boutons de soumission
+            const submitButton = document.querySelector('.modal-submit');
+            const commentButton = document.querySelector('.comment-submit');
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'Voting Closed';
+            }
+            if (commentButton) {
+                commentButton.disabled = true;
+                commentButton.textContent = 'Voting Closed';
+            }
+            
             return;
         }
 
@@ -265,10 +283,16 @@ function startCountdown() {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        document.getElementById('days').textContent = days;
-        document.getElementById('hours').textContent = hours;
-        document.getElementById('minutes').textContent = minutes;
-        document.getElementById('seconds').textContent = seconds;
+        // Mise à jour des éléments avec vérification d'existence
+        const daysElement = document.getElementById('days');
+        const hoursElement = document.getElementById('hours');
+        const minutesElement = document.getElementById('minutes');
+        const secondsElement = document.getElementById('seconds');
+
+        if (daysElement) daysElement.textContent = days;
+        if (hoursElement) hoursElement.textContent = hours;
+        if (minutesElement) minutesElement.textContent = minutes;
+        if (secondsElement) secondsElement.textContent = seconds;
     }
 
     updateCountdown();
@@ -322,7 +346,7 @@ function updateRatingComparison() {
     const communityRatingElement = document.getElementById('communityRatingValue');
     
     const userRating = getUserPersonalRating();
-    if (userRating !== null) {
+    if (userRating !== null && myRatingElement) {
         myRatingElement.textContent = userRating + '/10';
         myRatingElement.style.color = '#059669'; // Green color for user rating
     }
@@ -333,6 +357,15 @@ function updateRatingComparison() {
 
 // Modal functionality
 function openCommentModal() {
+    // Vérifier si le countdown est terminé
+    const now = new Date().getTime();
+    const distance = COUNTDOWN_END_DATE.getTime() - now;
+    
+    if (distance < 0) {
+        alert('Voting period has ended. Comments are no longer accepted.');
+        return;
+    }
+    
     document.getElementById('commentModal').style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
@@ -348,6 +381,17 @@ function closeCommentModal() {
 // Comment functionality with rating - VERSION AMÉLIORÉE AVEC PERSISTANCE
 function submitComment(event) {
     event.preventDefault();
+    
+    // Vérifier si le countdown est terminé
+    const now = new Date().getTime();
+    const distance = COUNTDOWN_END_DATE.getTime() - now;
+    
+    if (distance < 0) {
+        alert('Voting period has ended. Comments are no longer accepted.');
+        closeCommentModal();
+        return;
+    }
+    
     const userName = document.getElementById('userName').value.trim();
     const userRating = document.getElementById('userRating').value;
     const commentText = document.getElementById('userComment').value.trim();
@@ -456,10 +500,18 @@ function updateAverageRating() {
     if (countElement) countElement.textContent = `Based on ${storedRatings.length + 22} ratings`;
 }
 
-// Progress bar update function (placeholder)
+// Progress bar update function
 function updateProgressBar() {
-    // Cette fonction peut être implémentée selon vos besoins
-    console.log('Progress bar updated');
+    // Calculer le progrès basé sur le temps écoulé
+    const totalDuration = COUNTDOWN_END_DATE.getTime() - COUNTDOWN_START_DATE.getTime();
+    const elapsed = new Date().getTime() - COUNTDOWN_START_DATE.getTime();
+    const progress = Math.min(100, Math.max(0, (elapsed / totalDuration) * 100));
+    
+    // Si vous avez une barre de progression dans votre HTML, décommentez la ligne suivante
+    // const progressBar = document.getElementById('progressBar');
+    // if (progressBar) progressBar.style.width = progress + '%';
+    
+    console.log(`⏰ Countdown progress: ${progress.toFixed(1)}%`);
 }
 
 // Close modal when clicking outside
@@ -509,30 +561,36 @@ function loadVideo(videoId, title) {
 }
 
 // Newsletter form handling
-document.getElementById('newsletterForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const email = this.querySelector('.newsletter-input').value;
-    const consent = document.getElementById('gdprConsent').checked;
-    
-    if (!consent) {
-        alert('Please agree to the privacy policy to subscribe.');
-        return;
+document.addEventListener('DOMContentLoaded', function() {
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.newsletter-input').value;
+            const consentCheckbox = document.getElementById('gdprConsent');
+            const consent = consentCheckbox ? consentCheckbox.checked : true;
+            
+            if (consentCheckbox && !consent) {
+                alert('Please agree to the privacy policy to subscribe.');
+                return;
+            }
+            
+            // Sauvegarder l'email dans localStorage pour tracking
+            let newsletters = JSON.parse(localStorage.getItem('newsletter_signups') || '[]');
+            newsletters.push({
+                email: email,
+                timestamp: new Date().toISOString(),
+                consent: true
+            });
+            localStorage.setItem('newsletter_signups', JSON.stringify(newsletters));
+            
+            alert(`Thank you for subscribing with email: ${email}`);
+            this.reset();
+            if (consentCheckbox) consentCheckbox.checked = false;
+            
+            console.log('📧 Newsletter signup saved');
+        });
     }
-    
-    // Sauvegarder l'email dans localStorage pour tracking
-    let newsletters = JSON.parse(localStorage.getItem('newsletter_signups') || '[]');
-    newsletters.push({
-        email: email,
-        timestamp: new Date().toISOString(),
-        consent: true
-    });
-    localStorage.setItem('newsletter_signups', JSON.stringify(newsletters));
-    
-    alert(`Thank you for subscribing with email: ${email}`);
-    this.reset();
-    document.getElementById('gdprConsent').checked = false;
-    
-    console.log('📧 Newsletter signup saved');
 });
 
 // ============================================
@@ -610,15 +668,20 @@ function clearAllRatings() {
 // Panel d'administration
 function openAdminPanel() {
     const adminPanel = document.getElementById('adminPanel');
-    adminPanel.style.display = 'block';
-    
-    // Charger les statistiques
-    loadAdminStats();
-    loadAdminComments();
+    if (adminPanel) {
+        adminPanel.style.display = 'block';
+        
+        // Charger les statistiques
+        loadAdminStats();
+        loadAdminComments();
+    }
 }
 
 function closeAdminPanel() {
-    document.getElementById('adminPanel').style.display = 'none';
+    const adminPanel = document.getElementById('adminPanel');
+    if (adminPanel) {
+        adminPanel.style.display = 'none';
+    }
 }
 
 function loadAdminStats() {
@@ -627,19 +690,24 @@ function loadAdminStats() {
     const affiliateClicks = JSON.parse(localStorage.getItem('affiliate_clicks') || '[]');
     
     const statsDiv = document.getElementById('adminStats');
-    statsDiv.innerHTML = `
-        <strong>📊 Current Data:</strong><br>
-        • Comments: ${comments.length}<br>
-        • Ratings: ${ratings.length}<br>
-        • Affiliate Clicks: ${affiliateClicks.length}<br>
-        • Total Reviews: ${getTotalReviews()}<br>
-        • Last Backup: ${localStorage.getItem('lastCloudBackup') || 'Never'}
-    `;
+    if (statsDiv) {
+        statsDiv.innerHTML = `
+            <strong>📊 Current Data:</strong><br>
+            • Comments: ${comments.length}<br>
+            • Ratings: ${ratings.length}<br>
+            • Affiliate Clicks: ${affiliateClicks.length}<br>
+            • Total Reviews: ${getTotalReviews()}<br>
+            • Last Backup: ${localStorage.getItem('lastCloudBackup') || 'Never'}<br>
+            • Countdown Ends: ${COUNTDOWN_END_DATE.toLocaleString()}
+        `;
+    }
 }
 
 function loadAdminComments() {
     const comments = JSON.parse(localStorage.getItem('comments') || '[]');
     const commentsDiv = document.getElementById('adminCommentsList');
+    
+    if (!commentsDiv) return;
     
     if (comments.length === 0) {
         commentsDiv.innerHTML = '<p>No user comments found.</p>';
@@ -683,34 +751,6 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Dashboard simple pour vos stats - MISE À JOUR
-function createAffiliateDashboard() {
-    const stats = showAffiliateStats();
-    if (!stats) {
-        alert('Aucune donnée de tracking disponible');
-        return;
-    }
-    
-    // Créer une popup avec les stats
-    const dashboard = document.createElement('div');
-    dashboard.className = 'stats-dashboard';
-    dashboard.style.display = 'block';
-    dashboard.innerHTML = `
-        <h4>📊 Affiliate Stats</h4>
-        <p><strong>Total:</strong> ${stats.totalClicks} clicks</p>
-        <p><strong>Sessions:</strong> ${stats.uniqueSessions}</p>
-        <div><strong>Top Sites:</strong></div>
-        ${Object.entries(stats.topSites).slice(0, 3).map(([site, count]) => 
-            `<div>• ${site}: ${count}</div>`
-        ).join('')}
-        <button onclick="this.parentElement.remove()">Close</button>
-        <button onclick="dataManager.exportData()">Export Data</button>
-        <button onclick="openAdminPanel(); this.parentElement.remove();">Admin Panel</button>
-    `;
-    
-    document.body.appendChild(dashboard);
-}
-
 // Fonction pour voir le statut des données
 function showDataStatus() {
     const stats = {
@@ -718,7 +758,8 @@ function showDataStatus() {
         comments: JSON.parse(localStorage.getItem('comments') || '[]').length,
         affiliateClicks: JSON.parse(localStorage.getItem('affiliate_clicks') || '[]').length,
         newsletters: JSON.parse(localStorage.getItem('newsletter_signups') || '[]').length,
-        lastBackup: localStorage.getItem('lastCloudBackup') || 'Never'
+        lastBackup: localStorage.getItem('lastCloudBackup') || 'Never',
+        countdownEnd: COUNTDOWN_END_DATE.toLocaleString()
     };
     
     console.log('📊 Data Status:', stats);
@@ -763,6 +804,60 @@ function goToAllRatings() {
 }
 
 // ============================================
+// FONCTIONS DE DEBUG ET UTILITAIRES COUNTDOWN
+// ============================================
+
+// Fonction pour vérifier le statut du countdown
+function getCountdownStatus() {
+    const now = new Date().getTime();
+    const distance = COUNTDOWN_END_DATE.getTime() - now;
+    const totalDuration = COUNTDOWN_END_DATE.getTime() - COUNTDOWN_START_DATE.getTime();
+    const elapsed = now - COUNTDOWN_START_DATE.getTime();
+    const progress = Math.min(100, Math.max(0, (elapsed / totalDuration) * 100));
+    
+    const status = {
+        isActive: distance > 0,
+        timeRemaining: distance,
+        daysRemaining: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        hoursRemaining: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutesRemaining: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+        secondsRemaining: Math.floor((distance % (1000 * 60)) / 1000),
+        progressPercentage: progress.toFixed(2),
+        startDate: COUNTDOWN_START_DATE.toLocaleString(),
+        endDate: COUNTDOWN_END_DATE.toLocaleString()
+    };
+    
+    console.log('⏰ Countdown Status:', status);
+    return status;
+}
+
+// Fonction pour forcer la fin du countdown (pour tests)
+function forceCountdownEnd() {
+    if (confirm('Are you sure you want to force the countdown to end? This is for testing purposes only.')) {
+        // Modifier temporairement la date de fin
+        window.COUNTDOWN_END_DATE = new Date(Date.now() - 1000); // Il y a 1 seconde
+        console.log('⚠️ Countdown forcefully ended for testing');
+        alert('Countdown has been forcefully ended. Refresh the page to restore normal countdown.');
+    }
+}
+
+// Fonction pour reset le countdown (pour tests)
+function resetCountdown() {
+    if (confirm('Reset countdown to original 15-day duration?')) {
+        location.reload();
+    }
+}
+
+// Fonction pour étendre le countdown (pour tests)
+function extendCountdown(additionalDays = 7) {
+    if (confirm(`Extend countdown by ${additionalDays} days?`)) {
+        const newEndDate = new Date(COUNTDOWN_END_DATE.getTime() + (additionalDays * 24 * 60 * 60 * 1000));
+        console.log(`⏰ Countdown extended to: ${newEndDate.toLocaleString()}`);
+        alert(`Countdown extended by ${additionalDays} days. Note: This is temporary and will reset on page reload.`);
+    }
+}
+
+// ============================================
 // FONCTIONS DE DEBUG (console commands)
 // ============================================
 
@@ -770,17 +865,31 @@ function goToAllRatings() {
 // showDataStatus() - Voir le statut des données
 // showAffiliateStats() - Voir les stats d'affiliation
 // getConversionRates() - Voir les taux de conversion
+// getCountdownStatus() - Voir le statut du countdown
+// forceCountdownEnd() - Forcer la fin du countdown (test)
+// resetCountdown() - Reset le countdown
+// extendCountdown(days) - Étendre le countdown
 // clearAllData() - Vider toutes les données
 // dataManager.exportData() - Exporter les données
 // createAffiliateDashboard() - Voir le dashboard
 
 console.log(`
-🚀 OnlyforyouReview - Enhanced Version Loaded!
+🚀 OnlyforyouReview - Enhanced Version with Fixed 15-Day Countdown Loaded!
+
+⏰ COUNTDOWN INFO:
+• Start Date: ${COUNTDOWN_START_DATE.toLocaleString()}
+• End Date: ${COUNTDOWN_END_DATE.toLocaleString()}
+• Duration: 15 days
+• Status: ${new Date() < COUNTDOWN_END_DATE ? 'ACTIVE' : 'EXPIRED'}
 
 📊 Available Debug Commands:
 • showDataStatus() - View data status
 • showAffiliateStats() - View affiliate statistics  
 • getConversionRates() - View conversion rates
+• getCountdownStatus() - View countdown status ⏰
+• forceCountdownEnd() - Force countdown end (testing) ⚠️
+• resetCountdown() - Reset countdown to original duration
+• extendCountdown(days) - Extend countdown by X days
 • createAffiliateDashboard() - Show stats dashboard
 • openAdminPanel() - Open admin panel for comment management
 • deleteComment(index) - Delete specific comment
@@ -794,12 +903,19 @@ console.log(`
 • Ctrl+Shift+A - Open admin panel
 
 ✅ Features Active:
+• ⏰ FIXED 15-day countdown (no browser reset)
 • Persistent ratings & comments
 • Advanced affiliate tracking
 • Auto-backup every 30 seconds
 • Export functionality
 • Session tracking
-• ✨ NEW: Comment/Rating deletion system
-• ✨ NEW: Admin panel for management
-• ✨ NEW: Individual comment delete buttons (hover to see)
+• Comment/Rating deletion system
+• Admin panel for management
+• Individual comment delete buttons
+• Countdown validation for submissions
+
+🔒 Security Features:
+• Comments blocked when countdown expires
+• Modal submission disabled after deadline
+• Visual countdown status indicators
 `);
