@@ -181,42 +181,41 @@
         </div>
         </div>
 
-          <!-- Newsletter -->
-        <div class="sidebar-section">
-          <h3 class="sidebar-title">Never miss a review</h3>
-          <p class="newsletter-description">
-            Subscribe and get list of free lesbians and bisexual girls Onlyfans
-          </p>
-          <form class="newsletter-form">
-    <!-- Netlify Form with all necessary attributes -->
-                    <form name="newsletter" 
-                          method="POST" 
-                          action="/subscribed" 
-                          data-netlify="true" 
-                          netlify-honeypot="bot-field" 
-                          id="newsletterForm" 
-                          class="newsletter-signup">
-                        
-                        <!-- Hidden honeypot field for spam protection -->
-                        <div style="display: none;">
-                            <label>Don't fill this out if you're human: 
-                                <input name="bot-field" />
-                            </label>
-                        </div>
-                        
-                        <!-- Email Input -->
-                        <input type="email" 
-                               name="email" 
-                               placeholder="Enter your email" 
-                               class="newsletter-input" 
-                               required>
-                        
-                        <!-- Submit Button -->
-                        <button type="submit" class="newsletter-btn">Subscribe</button>
-                    </form>
-                      </div>
-      </div>
+         <!-- Newsletter -->
+<div class="sidebar-section">
+  <h3 class="sidebar-title">Never miss a review</h3>
+  <p class="newsletter-description">
+    Subscribe and get list of free lesbians and bisexual girls Onlyfans
+  </p>
+
+  <!-- Netlify Form -->
+  <form name="newsletter" 
+        method="POST" 
+        action="/subscribed" 
+        data-netlify="true" 
+        netlify-honeypot="bot-field" 
+        id="newsletterForm" 
+        class="newsletter-signup">
+    
+    <!-- Hidden honeypot field for spam protection -->
+    <div style="display: none;">
+      <label>Don't fill this out if you're human: 
+        <input name="bot-field" />
+      </label>
     </div>
+
+    <!-- Email Input -->
+    <input type="email" 
+           name="email" 
+           placeholder="Enter your email" 
+           class="newsletter-input" 
+           required>
+
+    <!-- Submit Button -->
+    <button type="submit" class="newsletter-btn">Subscribe</button>
+  </form>
+</div>
+
 
                     
   
@@ -657,6 +656,7 @@
     </footer>
 
   <script src="/js/index.js"></script>
+
 
 
 
