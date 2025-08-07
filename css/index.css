@@ -563,12 +563,75 @@ body {
   font-size: 0.9rem;
 }
 
-/* TextPanther image specific style */
-.textpanther-image {
+/* SextPanther image specific style */
+.sextpanther-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
+
+/* GDPR Consent Container */
+.gdpr-consent-side {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Hide the default checkbox */
+.gdpr-checkbox-side {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Custom checkbox style */
+.gdpr-checkmark-side {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #888;
+  border-radius: 4px;
+  position: relative;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+/* Checkmark appears when checkbox is checked */
+.gdpr-checkbox-side:checked + .gdpr-label .gdpr-checkmark-side::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0px;
+  width: 5px;
+  height: 10px;
+  border: solid #111;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Label Text */
+.gdpr-text-side {
+  display: inline-block;
+  color: #444;
+}
+
+/* Link inside label */
+.gdpr-text-side .privacy-link {
+  color: #e14594;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.gdpr-text-side .privacy-link:hover {
+  text-decoration: none;
+}
+
+
+
 
 /* Blog Reviews Section - Carousel */
 .blog-reviews-container {
