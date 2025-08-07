@@ -866,7 +866,6 @@ body {
 
    .product-image img {
       width: 100%;
-      height: 100%;
       object-fit: cover;
     }
 
@@ -926,12 +925,11 @@ body {
   }
 
   /* Affiliate banner mobile */
-  
    .product-image img {
       width: 100%;
-      height: 100%;
       object-fit: cover;
     }
+
   
   .product-info {
     padding: 0.75rem;
