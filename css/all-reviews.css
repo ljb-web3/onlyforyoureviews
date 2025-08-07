@@ -380,7 +380,7 @@
     }
 
     .product-image {
-      width: 250px;
+      width: 100%;
       height: 200px;
       display: flex;
       align-items: center;
