@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sonia von Sasher | OnlyFans Reviews</title>
-     <link rel="stylesheet" href="/css/blogpost.css">
+  <title>Sonia von Sacher Review | OnlyFans Reviews</title>
+   <link rel="stylesheet" href="/css/blogpost.css">
 </head>
 <body>
 
   <!-- Header -->
   <header class="header">
     <nav class="nav">
-    <div class="logo"><img src="logoOFYR.png" alt="Logo"></div>
+    <div class="logo"><img src="../logoOFYR.png" alt="Logo OFYR"></div>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="all-reviews.html">All my reviews</a></li>
-        <li><a href="creator-vote.html">Does this girl like pussy ?</a></li>
-        <li><a href="creator-ratings.html">Rate lesbian videos</a></li>
-        <li><a href="newsletter.html">Newsletter</a></li>
+        <li><a href="/..">Home</a></li>
+        <li><a href="../all-reviews">All my reviews</a></li>
+        <li><a href="../creator-vote">Does this girl like pussy ?</a></li>
+        <li><a href="../creator-ratings">Rate lesbian videos</a></li>
+        <li><a href="../newsletter">Newsletter</a></li>
       </ul>
     </nav>
   </header>
@@ -31,15 +31,15 @@
              <!-- Affiliate Banner -->
         <div class="banner-card">
           <div class="banner-image">
-            <img src="bannerersties-solo.png" alt="Ersties">
+            <img src="../bannerersties-solo.png" alt="Ersties">
           </div>
         </div>
 
     
         <nav class="breadcrumb">
-          <a href="#">Home</a> 
+          <a href="../">Home</a> 
           <span>›</span> 
-          <a href="#">Reviews</a> 
+          <a href="../all-reviews">Reviews</a> 
           <span>›</span> 
           <span>Sonia von Sacher</span>
         </nav>
@@ -71,7 +71,7 @@
 
       <!-- Creator Info Card -->
       <div class="creator-info-card">
-        <img src="firstsonia.png" alt="Sonia von Sacher photo" class="creator-avatar">
+        <img src="../firstsonia.png" alt="Sonia von Sacher photo" class="creator-avatar">
         
         <div class="creator-details">
           <h3>Sonia von Sacher</h3>
@@ -275,7 +275,7 @@
            <div class="cta-section">
   <p class="cta-section p">This is an honest review based on my subscription experience. I received no compensation.</p>
 
-          <a href="#" class="cta-button">Go see her OnlyFans</a>
+          <a href="https://onlyfans.com/soniavonsacher" class="cta-button">Go see her OnlyFans</a>
 
           <a href="#" class="cta-button">Chat with hot girls</a>
         </div>
@@ -291,16 +291,16 @@
       <div class="sidebar-section">
         <h3 class="sidebar-title">Latest Reviews</h3>
 
-        <a href="sierra-jade.html" class="related-review">
-          <img src="previewsierra.png" alt="Sierra Jade Review" class="related-avatar">
+        <a href="/all-reviews/sierra-jade" class="related-review">
+          <img src="../previewsierra.png" alt="Sierra Jade Review" class="related-avatar">
          <div class="related-info">
             <h4>Sierra Jade</h4>
             <div class="related-score">Note : 4.5/10</div>
           </div>
         </a>
 
-        <a href="alanah-cole.html" class="related-review">
-        <img src="previewalanah.png" alt="Alanah Cole Review" class="related-avatar">
+        <a href="/all-reviews/alanah-cole" class="related-review">
+        <img src="../previewalanah.png" alt="Alanah Cole Review" class="related-avatar">
         <div class="related-info">
             <h4>Alanah Cole</h4>
             <div class="related-score">Note : 3/10</div>
@@ -322,31 +322,62 @@
       </div>
 
 
+    <!-- Newsletter Sidebar -->
+        <div class="sidebar-newsletter">
+          <h3 class="newsletter-title">Never miss a review</h3>
+          <p class="newsletter-description">
+            Subscribe and get list of free lesbians and bisexual girls OnlyFans
+          </p>
 
-       <!-- Newsletter -->
-<div class="sidebar-section">
-  <h3 class="sidebar-title">Never miss a review</h3>
-  <p class="newsletter-description">
-    Get notified when new reviews are published
-  </p>
-  <form class="newsletter-form">
-    <input 
-      type="email" 
-      placeholder="Your email" 
-      class="newsletter-email-input"
-      required
-    >
-    <button 
-      type="submit" 
-      class="newsletter-submit-btn"
-    >
-      Subscribe
-    </button>
-  </form>
-</div>
+          <form name="sidebar-newsletter" 
+                method="POST" 
+                action="/subscribed" 
+                data-netlify="true" 
+                netlify-honeypot="bot-field" 
+                class="newsletter-form-sidebar"
+                id="sidebarNewsletterForm">
+
+            <!-- Honeypot -->
+            <div style="display: none;">
+              <label>Don't fill this out if you're human:
+                <input name="bot-field" />
+              </label>
+            </div>
+
+            <!-- Hidden form name -->
+            <input type="hidden" name="form-name" value="sidebar-newsletter">
+
+            <!-- Email input -->
+            <input type="email" 
+                   name="email" 
+                   placeholder="Enter your email" 
+                   class="newsletter-input-sidebar" 
+                   required>
+
+            <!-- Submit button -->
+            <button type="submit" class="newsletter-btn-sidebar">Subscribe</button>
+
+            <!-- GDPR consent -->
+            <div class="gdpr-consent-sidebar">
+              <input type="checkbox" 
+                     id="gdprConsentSidebar" 
+                     name="gdpr-consent"
+                     class="gdpr-checkbox-sidebar" 
+                     required>
+              <label for="gdprConsentSidebar" class="gdpr-label-sidebar">
+                <span class="gdpr-checkmark-sidebar"></span>
+                <span class="gdpr-text-sidebar">
+                  I agree to receive marketing emails and understand I can unsubscribe at any time. 
+                  <a href="/privacy-policy" class="privacy-link">Privacy Policy</a>
+                </span>
+              </label>
+            </div>
+          </form>
+        </div>
+       
 
 
-  <!-- TextPanther Card -->
+  <!-- SextPanther Card -->
          <div class="product-card sextpanther-card">
           <div class="product-image">
             <img src="sextpantherad0.png" alt="SextPanther Chat App">
@@ -373,62 +404,51 @@
       </div>
 
 
-  <!-- TextPanther Card -->
+  <!-- SextPanther Card -->
         <div class="product-card sextpanther-card">
           <div class="product-image">
-            <img src="sextpantherad4.png" alt="SextPanther Chat App">
+            <img src="../sextpantherad4.png" alt="SextPanther Chat App">
           </div>
               </div>
-
-                <!-- TextPanther Card -->
+        
         <div class="product-card sextpanther-card">
           <div class="product-image">
-            <img src="sextpantherad4.png" alt="SextPanther Chat App">
-          </div>
-              </div>
-            
-                <!-- TextPanther Card -->
-        <div class="product-card sextpanther-card">
-          <div class="product-image">
-            <img src="sextpantherad4.png" alt="SextPanther Chat App">
+            <img src="../sextpantherad4.png" alt="SextPanther Chat App">
           </div>
               </div>
             
-            
-
-        <!-- TextPanther Card -->
         <div class="product-card sextpanther-card">
           <div class="product-image">
-            <img src="sextpantherad4.png" alt="SextPanther Chat App">
+            <img src="../sextpantherad4.png" alt="SextPanther Chat App">
+          </div>
+              </div>
+            
+        <div class="product-card sextpanther-card">
+          <div class="product-image">
+            <img src="../sextpantherad4.png" alt="SextPanther Chat App">
           </div>
               </div>
             </div>
       </div>
 
 
-
-
-
-
-
     </aside>
   </div>
 
-  <!-- Footer -->
+
+    <!-- Footer -->
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="all-reviews.html">All my reviews</a>
-      <a href="newsletter.html">Newsletter</a>
+      <a href="../">Home</a>
+      <a href="../all-reviews">All my reviews</a>
+      <a href="../newsletter">Newsletter</a>
       <a href="#">Reddit</a>
       </div>
-      <div style="color: #9ca3af;">
         <p>© 2025 Only for you Reviews. Honest OnlyFans reviews by a girl, for everyone.</p>
       </div>
     </div>
   </footer>
-
   
     <script src="blogpost.js"></script>
 
