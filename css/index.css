@@ -1305,11 +1305,6 @@ body {
   transform: translateY(-1px);
 }
 
-.gdpr-consent-side {
-  display: flex;
-  align items: flex-start;
-  gap: 2px;
-
 .gdpr-consent {
   display: flex;
   align-items: flex-start;
@@ -1319,14 +1314,6 @@ body {
 .gdpr-checkbox {
   display: none;
 }
-
-  .gdpr-label-side {
-  display: flex;
-  align-items: flex-start;
-  cursor: pointer;
-  user-select: none;
-  gap: 3px;
-  }
     
 
 .gdpr-label {
@@ -1348,10 +1335,6 @@ body {
   transition: all 0.2s ease;
   margin-top: 2px;
 }
-
-  .gdrp-checkmark-side {
-    margin: auto;
-  }
 
 .gdpr-checkbox:checked + .gdpr-label .gdpr-checkmark {
   background-color: #ffffff;
@@ -1375,13 +1358,6 @@ body {
   color: #d1d5db;
   flex: 1;
 }
-
-  .gdpr-text-side {
-  font-size: 0.3rem;
-  color: #d1d5db;
-  flex: 1;
-}
-  
   
 
 .privacy-link {
