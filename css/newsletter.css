@@ -33,9 +33,9 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  backdrop-filter: blur(20px);
   z-index: 1000;
   border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 50px;
   transition: all 0.3s ease;
 }
 
