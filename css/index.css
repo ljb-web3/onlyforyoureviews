@@ -1305,6 +1305,11 @@ body {
   transform: translateY(-1px);
 }
 
+.gdpr-consent-side {
+  display: flex;
+  align items: flex-start;
+  gap: 2px;
+
 .gdpr-consent {
   display: flex;
   align-items: flex-start;
