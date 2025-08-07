@@ -183,18 +183,41 @@
 
 
 
-          <!-- Newsletter -->
-        <div class="sidebar-section">
-          <h3 class="sidebar-title">Never miss a review</h3>
-          <p class="newsletter-description">
-            Subscribe and get list of free lesbians and bisexual girls Onlyfans
-          </p>
-          <form class="newsletter-form" >
-            <input type="email" class="newsletter-input" placeholder="Enter your email" required>
-            <button type="submit" class="newsletter-btn">Subscribe</button>
-          </form>
-        </div>
-      </div>
+         <!-- Newsletter -->
+<div class="sidebar-section">
+  <h3 class="sidebar-title">Never miss a review</h3>
+  <p class="newsletter-description">
+    Subscribe and get list of free lesbians and bisexual girls OnlyFans
+  </p>
+
+  <form name="newsletter" 
+        method="POST" 
+        action="/subscribed" 
+        data-netlify="true" 
+        netlify-honeypot="bot-field" 
+        class="newsletter-form">
+
+    <!-- Honeypot (for bots) -->
+    <div style="display: none;">
+      <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+    </div>
+
+    <!-- Hidden form name (Netlify needs this) -->
+    <input type="hidden" name="form-name" value="newsletter">
+
+    <!-- Email field -->
+    <input type="email" 
+           name="email" 
+           placeholder="Enter your email" 
+           class="newsletter-input" 
+           required>
+
+    <!-- Submit button -->
+    <button type="submit" class="newsletter-btn">Subscribe</button>
+  </form>
+</div>
+ 
+    </div>
     </div>
 
 
@@ -636,6 +659,7 @@
     </footer>
 
   <script src="/js/index.js"></script>
+
 
 
 
