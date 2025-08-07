@@ -38,14 +38,11 @@
 
     window.addEventListener('scroll', updateReadingProgress);
 
-    // Related review click tracking
-    document.querySelectorAll('.related-review').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const creatorName = this.querySelector('h4').textContent;
-        alert(`Opening review for ${creatorName}...`);
-      });
-    });
+    document.querySelectorAll('.related-review').forEach(el => {
+  el.addEventListener('click', function() {
+    const h4 = this.querySelector('h4');
+    const creatorName = h4 ? h4.textContent : 'this review';
+    // Tracking
 
     // Copy link functionality for sharing
     function copyArticleLink() {
