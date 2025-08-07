@@ -1320,13 +1320,21 @@ body {
   display: none;
 }
 
+  .gdpr-label-side {
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  user-select: none;
+  gap: 3px;
+  }
+    
+
 .gdpr-label {
   display: flex;
   align-items: flex-start;
   cursor: pointer;
   user-select: none;
   gap: 8px;
-  line-height: 1.4;
 }
 
 .gdpr-checkmark {
