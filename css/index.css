@@ -1681,11 +1681,13 @@ body {
 
   .filter-buttons {
     gap: 0.5rem;
+    justify-content: center;
   }
 
   .filter-btn {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.5rem;
     font-size: 0.85rem;
+    justify-content: center;
   }
 
   /* Footer mobile responsiveness */
