@@ -1351,6 +1351,7 @@ body {
 
   .gdrp-checkmark-side {
     margin: auto;
+  }
 
 .gdpr-checkbox:checked + .gdpr-label .gdpr-checkmark {
   background-color: #ffffff;
@@ -1376,7 +1377,7 @@ body {
 }
 
   .gdpr-text-side {
-  font-size: 0.4rem;
+  font-size: 0.3rem;
   color: #d1d5db;
   flex: 1;
 }
