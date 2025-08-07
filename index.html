@@ -26,7 +26,7 @@
   <section class="hero">
     <h1>The only guide you need 👀</h1>
     <p class="subtitle">
-      Discover the best lesbian content and Onlyfans pages by girls who love girls,from one.
+      Discover the best lesbian content and Onlyfans pages by girls who love girls, from one.
     </p>
   </section>
 
@@ -138,11 +138,6 @@
             My goal is simple: help you find creators who genuinely match what you're looking for, whether that's amazing cosplay, authentic girlfriend experience, or just high-quality content from someone who actually cares about their subscribers.
           </p>
         </div>
-
-        <div class="contact-section">
-          <div class="contact-links">
-          </div>
-        </div>
       </div>
 
       <!-- Profile Section -->
@@ -157,89 +152,81 @@
         </p>
        
         <!-- SextPanther Card -->
-        <div class="product-card sextpanther-card">
+        <div class="product-card textpanther-card">
           <div class="product-image">
             <img src="sextpantherad.png" alt="SextPanther Chat App" class="textpanther-image">
           </div>
           <div class="product-info">
-            <div class="product-title"></div>
-            <div class="product-description">
+            <div class="textpanther-features">
+              <span class="tp-feature">🏳️‍🌈 Find lesbian and bisexual women</span>
+              <span class="tp-feature">💬 Chat, phone & video options</span>
+              <span class="tp-feature">🔍 Filter by kinks and fetishes</span>
+              <span class="tp-feature">✅ Verified real profiles only</span>
+              <span class="tp-feature">💸 Transparent pricing</span>
             </div>
-            <div class="sextpanther-features">
-              <span class="product-feature">🏳️‍🌈 Find lesbian and bisexual women</span>
-              <span class="product-feature">💬 Chat, phone & video options</span>
-              <span class="product-feature">🔍 Filter by kinks and fetishes</span>
-              <span class="product-feature">✅ Verified real profiles only</span>
-              <span class="product-feature">💸 Transparent pricing</span>
-            </div>
-            <div class="product-audiences">
-              <div class="product-audience">
-                <strong>For guys and girls :</strong> Explore your fantasies with these beauties !
+            <div class="tp-audiences">
+              <div class="tp-audience">
+                <strong>For guys and girls:</strong> Explore your fantasies with these beauties!
               </div>
             </div>
-            <a href="#" class="affiliate-link sextpanther-link" onclick="trackAffiliate('sextpanther')">Try SextPanther</a>
+            <a href="#" class="affiliate-link textpanther-link" onclick="trackAffiliate('textpanther')">Try SextPanther</a>
+          </div>
         </div>
+
+        <!-- Newsletter Sidebar -->
+        <div class="sidebar-newsletter">
+          <h3 class="newsletter-title">Never miss a review</h3>
+          <p class="newsletter-description">
+            Subscribe and get list of free lesbians and bisexual girls OnlyFans
+          </p>
+
+          <form name="sidebar-newsletter" 
+                method="POST" 
+                action="/subscribed" 
+                data-netlify="true" 
+                netlify-honeypot="bot-field" 
+                class="newsletter-form-sidebar"
+                id="sidebarNewsletterForm">
+
+            <!-- Honeypot -->
+            <div style="display: none;">
+              <label>Don't fill this out if you're human:
+                <input name="bot-field" />
+              </label>
+            </div>
+
+            <!-- Hidden form name -->
+            <input type="hidden" name="form-name" value="sidebar-newsletter">
+
+            <!-- Email input -->
+            <input type="email" 
+                   name="email" 
+                   placeholder="Enter your email" 
+                   class="newsletter-input-sidebar" 
+                   required>
+
+            <!-- Submit button -->
+            <button type="submit" class="newsletter-btn-sidebar">Subscribe</button>
+
+            <!-- GDPR consent -->
+            <div class="gdpr-consent-sidebar">
+              <input type="checkbox" 
+                     id="gdprConsentSidebar" 
+                     name="gdpr-consent"
+                     class="gdpr-checkbox-sidebar" 
+                     required>
+              <label for="gdprConsentSidebar" class="gdpr-label-sidebar">
+                <span class="gdpr-checkmark-sidebar"></span>
+                <span class="gdpr-text-sidebar">
+                  I agree to receive marketing emails and understand I can unsubscribe at any time. 
+                  <a href="/privacy-policy" class="privacy-link">Privacy Policy</a>
+                </span>
+              </label>
+            </div>
+          </form>
         </div>
-
-
-
-         <!-- Fixed Sidebar Newsletter Form -->
-<div class="sidebar-section">
-  <h3 class="sidebar-title">Never miss a review</h3>
-  <p class="newsletter-description">
-    Subscribe and get list of free lesbians and bisexual girls OnlyFans
-  </p>
-
-  <form name="sidebar-newsletter" 
-        method="POST" 
-        action="/subscribed" 
-        data-netlify="true" 
-        netlify-honeypot="bot-field" 
-        class="newsletter-form"
-        id="sidebarNewsletterForm">
-
-    <!-- Honeypot -->
-    <div style="display: none;">
-      <label>Don't fill this out if you're human:
-        <input name="bot-field" />
-      </label>
-    </div>
-
-    <!-- Netlify required hidden input -->
-    <input type="hidden" name="form-name" value="sidebar-newsletter">
-
-    <!-- Email input -->
-    <input type="email" 
-           name="email" 
-           placeholder="Enter your email" 
-           class="newsletter-input" 
-           required>
-
-    <!-- GDPR consent - INSIDE the form -->
-    <div class="gdpr-consent-side">
-      <input type="checkbox" 
-             id="gdprConsentSidebar" 
-             name="gdpr-consent"
-             class="gdpr-checkbox-side" 
-             required>
-      <label for="gdprConsentSidebar" class="gdpr-label">
-        <span class="gdpr-checkmark-side"></span>
-        <span class="gdpr-text-side">
-          I agree to receive marketing emails and understand I can unsubscribe at any time. 
-          <a href="/privacy-policy" class="privacy-link">Privacy Policy</a>
-        </span>
-      </label>
-    </div>
-
-    <!-- Submit -->
-    <button type="submit" class="newsletter-btn-side">Subscribe</button>
-  </form>
-</div>
       </div>
     </div>
-
-
-  
 
     <!-- Site Comparison Section -->
     <section class="comparison-section">
@@ -351,129 +338,124 @@
       </div>
     </section>
 
-   
-  <!-- Recommendations Section -->
-  <section class="recommendations-section">
-    <div class="section-header">
-      <h2>My selection for you</h2>
-      <p>My selection of premium membership sites that actually deliver lesbian quality content.</p>
-    </div>
+    <!-- Recommendations Section -->
+    <section class="recommendations-section">
+      <div class="section-header">
+        <h2>My selection for you</h2>
+        <p>My selection of premium membership sites that actually deliver lesbian quality content.</p>
+      </div>
 
-    <div class="recommendations-container">
-      <!-- Ersties Video -->
-      <div class="video-recommendation">
-        <div class="video-player">
-          <div class="video-carousel-container">
-            <div class="video-carousel" id="erstiesCarousel">
-              <div class="video-slide">
-                <img src="ersties1.png" alt="Ersties Preview 1">
+      <div class="recommendations-container">
+        <!-- Ersties Video -->
+        <div class="video-recommendation">
+          <div class="video-player">
+            <div class="video-carousel-container">
+              <div class="video-carousel" id="erstiesCarousel">
+                <div class="video-slide">
+                  <img src="ersties1.png" alt="Ersties Preview 1">
+                </div>
+                <div class="video-slide">
+                  <img src="ersties2.png" alt="Ersties Preview 2">
+                </div>
+                <div class="video-slide">
+                  <img src="ersties3.png" alt="Ersties Preview 3">
+                </div>
+                <div class="video-slide">
+                  <img src="ersties4.png" alt="Ersties Preview 4">
+                </div>
               </div>
-              <div class="video-slide">
-                <img src="ersties2.png" alt="Ersties Preview 2">
-              </div>
-              <div class="video-slide">
-                <img src="ersties3.png" alt="Ersties Preview 3">
-              </div>
-              <div class="video-slide">
-                <img src="ersties4.png" alt="Ersties Preview 4">
-              </div>
+              <button class="video-nav prev" onclick="prevVideoSlide('ersties')">&lt;</button>
+              <button class="video-nav next" onclick="nextVideoSlide('ersties')">&gt;</button>
+              <div class="video-dots" id="erstiesDots"></div>
             </div>
-            <button class="video-nav prev" onclick="prevVideoSlide('ersties')">&lt;</button>
-            <button class="video-nav next" onclick="nextVideoSlide('ersties')">&gt;</button>
-            <div class="video-dots" id="erstiesDots"></div>
+          </div>
+          <div class="site-info">
+            <div class="site-logo">
+              <h3>Ersties</h3>
+              <span class="site-badge">B/G G/G Solo Group</span>
+            </div>
+            <h4 class="site-title">The most genuine intimate experiences</h4>
+            <p class="site-description">
+              Ersties is hands down the most authentic and pretty (mostly) lesbian content platform I've ever encountered. 
+              Founded in Berlin, this site focuses on real women having genuine intimate experiences - no scripts, 
+              no fake performances, just pretty girls being authentically sexy on camera without even being boring. 
+            </p>
+            <div class="price-tag">
+              <span class="price-label">Monthly subscription</span>
+              <span class="price-amount">€29.99</span>
+              <span class="price-note">• Cancel anytime</span>
+            </div>
+            <div class="why-love">
+              <h5>Why I love Ersties:</h5>
+              <ul>
+                <li>✨ Authentic amateur women and adult content creators</li>
+                <li>💕 Real orgasms and genuine emotional reactions</li>
+                <li>🌈 Diverse body types and ethnicities represented</li>
+                <li>🎬 Intimate, documentary-style filming approach</li>
+              </ul>
+            </div>
+            <a href="#" class="site-cta-btn" onclick="trackAffiliate('ersties')">
+              Explore Ersties →
+            </a>
           </div>
         </div>
-        <div class="site-info">
-          <div class="site-logo">
-            <h3>Ersties</h3>
-            <span class="site-badge">B/G G/G Solo Group</span>
+       
+        <!-- SheSeducedMe Video --> 
+        <div class="video-recommendation">
+          <div class="video-player">
+            <div class="video-carousel-container">
+              <div class="video-carousel" id="sheseducedmeCarousel">
+                <div class="video-slide">
+                  <img src="sheseducedme1.png" alt="SheSeducedMe Preview 1">
+                </div>
+                <div class="video-slide">
+                  <img src="sheseducedme2.png" alt="SheSeducedMe Preview 2">
+                </div>
+                <div class="video-slide">
+                  <img src="sheseducedme3.png" alt="SheSeducedMe Preview 3">
+                </div>
+                <div class="video-slide">
+                  <img src="sheseducedme4.png" alt="SheSeducedMe Preview 4">
+                </div>
+              </div>
+              <button class="video-nav prev" onclick="prevVideoSlide('sheseducedme')">&lt;</button>
+              <button class="video-nav next" onclick="nextVideoSlide('sheseducedme')">&gt;</button>
+              <div class="video-dots" id="sheseducedmeDots"></div>
+            </div>
           </div>
-          <h4 class="site-title">The most genuine intimate experiences</h4>
-          <p class="site-description">
-            Ersties is hands down the most authentic and pretty (mostly) lesbian content platform I've ever encountered. 
-            Founded in Berlin, this site focuses on real women having genuine intimate experiences - no scripts, 
-            no fake performances, just pretty girls being authentically sexy on camera without even being boring. 
-          </p>
-          <div class="price-tag">
-            <span class="price-label">Monthly subscription</span>
-            <span class="price-amount">€29.99</span>
-            <span class="price-note">• Cancel anytime</span>
+          <div class="site-info">
+            <div class="site-logo">
+              <h3>SheSeducedMe</h3>
+              <span class="site-badge">Only G/G !</span>
+            </div>
+            <h4 class="site-title">The hottest lesbian scenarios</h4>
+            <p class="site-description">
+              SheSeducedMe represents the premium end of lesbian erotica, combining really hot and engaging storytelling with 
+              absolutely gorgeous performers. This is perverted cinematic lesbian content that builds 
+              anticipation and emotionally investment with high quality production and direction. 
+            </p>
+            <div class="price-tag">
+              <span class="price-label">Monthly subscription</span>
+              <span class="price-amount">$29.99</span>
+              <span class="price-note">• First month 50% off</span>
+            </div>
+            <div class="why-love">
+              <h5>Why I love SheSeducedMe:</h5>
+              <ul>
+                <li>📚 Really fucking hot storylines that are a bit unethical</li>
+                <li>🎥 High-end production values and cinematography</li>
+                <li>💫 Focus on girl on girl scenes</li>
+                <li>⭐ Features both established stars and emerging talent</li>
+              </ul>
+            </div>
+            <a href="#" class="site-cta-btn" onclick="trackAffiliate('sheseducedme')">
+              Discover SheSeducedMe →
+            </a>
           </div>
-          <div class="why-love">
-            <h5>Why I love Ersties:</h5>
-            <ul>
-              <li>✨ Authentic amateur women and adult content creators</li>
-              <li>💕 Real orgasms and genuine emotional reactions</li>
-              <li>🌈 Diverse body types and ethnicities represented</li>
-              <li>🎬 Intimate, documentary-style filming approach</li>
-            </ul>
-          </div>
-          <a href="#" class="site-cta-btn" onclick="trackAffiliate('ersties')">
-            Explore Ersties →
-          </a>
         </div>
       </div>
-     
-
-      <!-- SheSeducedMe Video --> 
-
-      <div class="video-recommendation">
-        <div class="video-player">
-          <div class="video-carousel-container">
-            <div class="video-carousel" id="sheseducedmeCarousel">
-              <div class="video-slide">
-                <img src="sheseducedme1.png" alt="SheSeducedMe Preview 1">
-              </div>
-              <div class="video-slide">
-                <img src="sheseducedme2.png" alt="SheSeducedMe Preview 2">
-              </div>
-              <div class="video-slide">
-                <img src="sheseducedme3.png" alt="SheSeducedMe Preview 3">
-              </div>
-              <div class="video-slide">
-                <img src="sheseducedme4.png" alt="SheSeducedMe Preview 4">
-              </div>
-            </div>
-            <button class="video-nav prev" onclick="prevVideoSlide('sheseducedme')">&lt;</button>
-            <button class="video-nav next" onclick="nextVideoSlide('sheseducedme')">&gt;</button>
-            <div class="video-dots" id="sheseducedmeDots"></div>
-          </div>
-        </div>
-        <div class="site-info">
-          <div class="site-logo">
-            <h3>SheSeducedMe</h3>
-            <span class="site-badge">Only G/G !</span>
-          </div>
-          <h4 class="site-title">The hottest lesbian scenarios</h4>
-          <p class="site-description">
-            SheSeducedMe represents the premium end of lesbian erotica, combining really hot and engaging storytelling with 
-            absolutely gorgeous performers. This is perverted cinematic lesbian content that builds 
-            anticipation and emotionally investment with high quality production and direction. 
-          </p>
-          <div class="price-tag">
-            <span class="price-label">Monthly subscription</span>
-            <span class="price-amount">$29.99</span>
-            <span class="price-note">• First month 50% off</span>
-          </div>
-          <div class="why-love">
-            <h5>Why I love SheSeducedMe:</h5>
-            <ul>
-              <li>📚 Really fucking hot storylines that are a bit unethical</li>
-              <li>🎥 High-end production values and cinematography</li>
-              <li>💫 Focus on girl on girl scenes</li>
-              <li>⭐ Features both established stars and emerging talent</li>
-            </ul>
-          </div>
-          <a href="#" class="site-cta-btn" onclick="trackAffiliate('sheseducedme')">
-            Discover SheSeducedMe →
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
+    </section>
   </main>
-
 
   <!-- Reviews Section with Carousel -->
   <section>
@@ -626,85 +608,57 @@
         <a href="#">Reddit</a>
       </div>
 
-  <div class="footer-newsletter">
-  <div class="newsletter-form">
-  <h4>Never miss a review</h4>
+      <div class="footer-newsletter">
+        <h4>Never miss a review</h4>
+        
+        <form name="footer-newsletter" 
+              method="POST" 
+              action="/subscribed" 
+              data-netlify="true" 
+              netlify-honeypot="bot-field" 
+              id="footerNewsletterForm" 
+              class="newsletter-form-footer">
+          
+          <!-- Hidden honeypot field -->
+          <div style="display: none;">
+            <label>Don't fill this out if you're human: 
+              <input name="bot-field" />
+            </label>
+          </div>
 
-<!-- Netlify Form with all necessary attributes -->
-                    <form name="newsletter" 
-                          method="POST" 
-                          action="/subscribed" 
-                          data-netlify="true" 
-                          netlify-honeypot="bot-field" 
-                          id="newsletterForm" 
-                          class="newsletter-signup">
-                        
-                        <!-- Hidden honeypot field for spam protection -->
-                        <div style="display: none;">
-                            <label>Don't fill this out if you're human: 
-                                <input name="bot-field" />
-                            </label>
-                        </div>
-                        
-                        <!-- Email Input -->
-                        <input type="email" 
-                               name="email" 
-                               placeholder="Enter your email" 
-                               class="newsletter-input" 
-                               required>
-                        
-                        <!-- Submit Button -->
-                        <button type="submit" class="newsletter-btn">Subscribe</button>
-                    </form>
-                    
-                    <!-- GDPR Consent - Now inside the form structure -->
-                    <div class="gdpr-consent">
-                        <input type="checkbox" 
-                               id="gdprConsent" 
-                               name="gdpr-consent"
-                               class="gdpr-checkbox" 
-                               form="newsletterForm"
-                               required>
-                        <label for="gdprConsent" class="gdpr-label">
-                            <span class="gdpr-checkmark"></span>
-                            <span class="gdpr-text">I agree to receive marketing emails and understand I can unsubscribe at any time. <a href="/privacy-policy" class="privacy-link">Privacy Policy</a></span>
-                        </label>
-                    </div>
-                  
-                </div>
-            </div>
-        </div>
-    </footer>
+          <!-- Hidden form name -->
+          <input type="hidden" name="form-name" value="footer-newsletter">
+          
+          <!-- Email Input -->
+          <input type="email" 
+                 name="email" 
+                 placeholder="Enter your email" 
+                 class="newsletter-input-footer" 
+                 required>
+          
+          <!-- Submit Button -->
+          <button type="submit" class="newsletter-btn-footer">Subscribe</button>
+
+          <!-- GDPR Consent -->
+          <div class="gdpr-consent-footer">
+            <input type="checkbox" 
+                   id="gdprConsentFooter" 
+                   name="gdpr-consent"
+                   class="gdpr-checkbox-footer" 
+                   required>
+            <label for="gdprConsentFooter" class="gdpr-label-footer">
+              <span class="gdpr-checkmark-footer"></span>
+              <span class="gdpr-text-footer">I agree to receive marketing emails and understand I can unsubscribe at any time. 
+                <a href="/privacy-policy" class="privacy-link">Privacy Policy</a>
+              </span>
+            </label>
+          </div>
+        </form>
+      </div>
+    </div>
+  </footer>
 
   <script src="/js/index.js"></script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</body>
+</html>
