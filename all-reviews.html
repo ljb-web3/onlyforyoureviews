@@ -379,15 +379,32 @@
   </div>
 
 
-    <!-- Footer -->
+   <!-- Footer -->
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-links">
-        <a href="/index">Home</a>
+        a href="/index">Home</a>
         <a href="/all-reviews">All my reviews</a>
         <a href="/newsletter">Newsletter</a>
         <a href="#">Reddit</a>
       </div>
+      <div class="footer-newsletter">
+        <div class="newsletter-form">
+          <h4>Stay Updated</h4>
+          <form id="newsletterForm" class="newsletter-signup">
+            <input type="email" placeholder="Enter your email" class="newsletter-input" required>
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+          </form>
+          <div class="gdpr-consent">
+            <input type="checkbox" id="gdprConsent" class="gdpr-checkbox" required>
+            <label for="gdprConsent" class="gdpr-label">
+              <span class="gdpr-checkmark"></span>
+              <span class="gdpr-text">I agree to receive marketing emails and understand I can unsubscribe at any time. <a href="#" class="privacy-link">Privacy Policy</a></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
   </footer>
 
   <script src="/js/index.js"></script>
@@ -397,6 +414,7 @@
   
 </body>
 </html>
+
 
 
 
