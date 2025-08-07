@@ -21,7 +21,6 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.6;
-  min-height: 100vh;
   background: linear-gradient(135deg, var(--light-lilac), var(--lilac));
   display: flex;
   flex-direction: column;
