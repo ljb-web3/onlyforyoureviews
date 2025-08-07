@@ -589,6 +589,8 @@ body {
   pointer-events: none;
 }
 
+
+
 /* Custom checkbox design */
 .gdpr-checkmark-side {
   display: inline-block;
@@ -1328,6 +1330,22 @@ body {
   display: flex;
   gap: 8px;
   margin-bottom: 12px;
+}
+
+.newsletter-btn-side {
+ background-color: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 5px 5px;
+  margin: 2px 1px 1px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+  
 }
 
 .footer .newsletter-input {
