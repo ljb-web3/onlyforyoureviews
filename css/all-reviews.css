@@ -867,6 +867,7 @@ body {
    .product-image {
       width: 100%;
       object-fit: cover;
+     height: 130px;
     }
 
   /* Page header responsive */
