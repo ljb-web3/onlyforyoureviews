@@ -278,17 +278,60 @@
         </div>
       </div>
 
-      <!-- Newsletter -->
-      <div class="sidebar-section">
-        <h3 class="sidebar-title">Subscribe to Reviews</h3>
-        <p class="newsletter-description">
-          Get notified when we publish new creator reviews and exclusive content.
-        </p>
-        <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
-          <input type="email" class="newsletter-input" placeholder="Enter your email" required>
-          <button type="submit" class="newsletter-btn">Subscribe</button>
-        </form>
+         <!-- Newsletter Sidebar -->
+        <div class="sidebar-newsletter">
+          <h3 class="newsletter-title">Never miss a review</h3>
+          <p class="newsletter-description">
+            Subscribe and get list of free lesbians and bisexual girls OnlyFans
+          </p>
+
+          <form name="sidebar-newsletter" 
+                method="POST" 
+                action="/subscribed" 
+                data-netlify="true" 
+                netlify-honeypot="bot-field" 
+                class="newsletter-form-sidebar"
+                id="sidebarNewsletterForm">
+
+            <!-- Honeypot -->
+            <div style="display: none;">
+              <label>Don't fill this out if you're human:
+                <input name="bot-field" />
+              </label>
+            </div>
+
+            <!-- Hidden form name -->
+            <input type="hidden" name="form-name" value="sidebar-newsletter">
+
+            <!-- Email input -->
+            <input type="email" 
+                   name="email" 
+                   placeholder="Enter your email" 
+                   class="newsletter-input-sidebar" 
+                   required>
+
+            <!-- Submit button -->
+            <button type="submit" class="newsletter-btn-sidebar">Subscribe</button>
+
+            <!-- GDPR consent -->
+            <div class="gdpr-consent-sidebar">
+              <input type="checkbox" 
+                     id="gdprConsentSidebar" 
+                     name="gdpr-consent"
+                     class="gdpr-checkbox-sidebar" 
+                     required>
+              <label for="gdprConsentSidebar" class="gdpr-label-sidebar">
+                <span class="gdpr-checkmark-sidebar"></span>
+                <span class="gdpr-text-sidebar">
+                  I agree to receive marketing emails and understand I can unsubscribe at any time. 
+                  <a href="/privacy-policy" class="privacy-link">Privacy Policy</a>
+                </span>
+              </label>
+            </div>
+          </form>
+        </div>
       </div>
+    </div>
 
       <!-- Rating Guide -->
       <div class="sidebar-section">
@@ -337,7 +380,7 @@
   </div>
 
 
-   <!-- Footer -->
+    <!-- Footer -->
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-links">
@@ -347,55 +390,55 @@
         <a href="#">Reddit</a>
       </div>
 
-  <div class="footer-newsletter">
-  <div class="newsletter-form">
-  <h4>Never miss a review</h4>
+      <div class="footer-newsletter">
+        <h4>Never miss a review</h4>
+        
+        <form name="footer-newsletter" 
+              method="POST" 
+              action="/subscribed" 
+              data-netlify="true" 
+              netlify-honeypot="bot-field" 
+              id="footerNewsletterForm" 
+              class="newsletter-form-footer">
+          
+          <!-- Hidden honeypot field -->
+          <div style="display: none;">
+            <label>Don't fill this out if you're human: 
+              <input name="bot-field" />
+            </label>
+          </div>
 
-<!-- Netlify Form with all necessary attributes -->
-                    <form name="newsletter" 
-                          method="POST" 
-                          action="/subscribed" 
-                          data-netlify="true" 
-                          netlify-honeypot="bot-field" 
-                          id="newsletterForm" 
-                          class="newsletter-signup">
-                        
-                        <!-- Hidden honeypot field for spam protection -->
-                        <div style="display: none;">
-                            <label>Don't fill this out if you're human: 
-                                <input name="bot-field" />
-                            </label>
-                        </div>
-                        
-                        <!-- Email Input -->
-                        <input type="email" 
-                               name="email" 
-                               placeholder="Enter your email" 
-                               class="newsletter-input" 
-                               required>
-                        
-                        <!-- Submit Button -->
-                        <button type="submit" class="newsletter-btn">Subscribe</button>
-                    </form>
-                    
-                    <!-- GDPR Consent - Now inside the form structure -->
-                    <div class="gdpr-consent">
-                        <input type="checkbox" 
-                               id="gdprConsent" 
-                               name="gdpr-consent"
-                               class="gdpr-checkbox" 
-                               form="newsletterForm"
-                               required>
-                        <label for="gdprConsent" class="gdpr-label">
-                            <span class="gdpr-checkmark"></span>
-                            <span class="gdpr-text">I agree to receive marketing emails and understand I can unsubscribe at any time. <a href="/privacy-policy" class="privacy-link">Privacy Policy</a></span>
-                        </label>
-                    </div>
-                  
-                </div>
-            </div>
-        </div>
-    </footer>
+          <!-- Hidden form name -->
+          <input type="hidden" name="form-name" value="footer-newsletter">
+          
+          <!-- Email Input -->
+          <input type="email" 
+                 name="email" 
+                 placeholder="Enter your email" 
+                 class="newsletter-input-footer" 
+                 required>
+          
+          <!-- Submit Button -->
+          <button type="submit" class="newsletter-btn-footer">Subscribe</button>
+
+          <!-- GDPR Consent -->
+          <div class="gdpr-consent-footer">
+            <input type="checkbox" 
+                   id="gdprConsentFooter" 
+                   name="gdpr-consent"
+                   class="gdpr-checkbox-footer" 
+                   required>
+            <label for="gdprConsentFooter" class="gdpr-label-footer">
+              <span class="gdpr-checkmark-footer"></span>
+              <span class="gdpr-text-footer">I agree to receive marketing emails and understand I can unsubscribe at any time. 
+                <a href="/privacy-policy" class="privacy-link">Privacy Policy</a>
+              </span>
+            </label>
+          </div>
+        </form>
+      </div>
+    </div>
+  </footer>
 
   <script src="/js/index.js"></script>
 
@@ -404,6 +447,7 @@
   
 </body>
 </html>
+
 
 
 
