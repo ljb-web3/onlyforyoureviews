@@ -135,6 +135,8 @@ body {
 /* Filter Buttons */
 .filter-section {
   margin-bottom: 3rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 .filter-title {
