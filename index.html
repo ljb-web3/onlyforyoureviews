@@ -216,6 +216,20 @@
     <button type="submit" class="newsletter-btn">Subscribe</button>
   </form>
 </div>
+
+          <!-- GDPR Consent - Now inside the form structure -->
+                    <div class="gdpr-consent">
+                        <input type="checkbox" 
+                               id="gdprConsent" 
+                               name="gdpr-consent"
+                               class="gdpr-checkbox" 
+                               form="newsletterForm"
+                               required>
+                        <label for="gdprConsent" class="gdpr-label">
+                            <span class="gdpr-checkmark"></span>
+                            <span class="gdpr-text">I agree to receive marketing emails and understand I can unsubscribe at any time. <a href="/privacy-policy" class="privacy-link">Privacy Policy</a></span>
+                        </label>
+                    </div>
  
     </div>
     </div>
@@ -659,6 +673,7 @@
     </footer>
 
   <script src="/js/index.js"></script>
+
 
 
 
