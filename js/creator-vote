@@ -1,163 +1,168 @@
 // Voting functionality - starts with zero votes
-    let votingData = {
-      hasVoted: false,
-      userVote: null,
-      yesVotes: 0,
-      noVotes: 0
-    };
+let votingData = {
+  hasVoted: false,
+  userVote: null,
+  yesVotes: 0,
+  noVotes: 0
+};
 
-    let commentCount = 4;
+let commentCount = 4;
 
-    function vote(choice) {
-      if (votingData.hasVoted) {
-        alert('You have already voted for this creator!');
-        return;
-      }
+function vote(choice) {
+  if (votingData.hasVoted) {
+    alert('You have already voted for this creator!');
+    return;
+  }
 
-      votingData.hasVoted = true;
-      votingData.userVote = choice;
+  votingData.hasVoted = true;
+  votingData.userVote = choice;
 
-      // Update vote counts
-      if (choice === 'yes') {
-        votingData.yesVotes++;
-      } else {
-        votingData.noVotes++;
-      }
+  // Update vote counts
+  if (choice === 'yes') {
+    votingData.yesVotes++;
+  } else {
+    votingData.noVotes++;
+  }
 
-      const totalVotes = votingData.yesVotes + votingData.noVotes;
-      
-      // Calculate percentages (handle division by zero)
-      let yesPercentage = 0;
-      let noPercentage = 0;
-      
-      if (totalVotes > 0) {
-        yesPercentage = Math.round((votingData.yesVotes / totalVotes) * 100);
-        noPercentage = 100 - yesPercentage;
-      }
+  const totalVotes = votingData.yesVotes + votingData.noVotes;
+  
+  // Calculate percentages (handle division by zero)
+  let yesPercentage = 0;
+  let noPercentage = 0;
+  
+  if (totalVotes > 0) {
+    yesPercentage = Math.round((votingData.yesVotes / totalVotes) * 100);
+    noPercentage = 100 - yesPercentage;
+  }
 
-      // Update button states
-      const yesBtn = document.getElementById('vote-yes-btn');
-      const noBtn = document.getElementById('vote-no-btn');
-      
-      // Reset button styles
-      yesBtn.classList.remove('voted');
-      noBtn.classList.remove('voted');
-      
-      // Mark voted button
-      if (choice === 'yes') {
-        yesBtn.classList.add('voted');
-      } else {
-        noBtn.classList.add('voted');
-      }
+  // Update button states
+  const yesBtn = document.getElementById('vote-yes-btn');
+  const noBtn = document.getElementById('vote-no-btn');
+  
+  // Reset button styles
+  yesBtn.classList.remove('voted');
+  noBtn.classList.remove('voted');
+  
+  // Mark voted button
+  if (choice === 'yes') {
+    yesBtn.classList.add('voted');
+  } else {
+    noBtn.classList.add('voted');
+  }
 
-      // Disable buttons
-      yesBtn.disabled = true;
-      noBtn.disabled = true;
+  // Disable buttons
+  yesBtn.disabled = true;
+  noBtn.disabled = true;
 
-      // Update vote display
-      updateVoteDisplay(yesPercentage, noPercentage, votingData.yesVotes, votingData.noVotes);
+  // Update vote display
+  updateVoteDisplay(yesPercentage, noPercentage, votingData.yesVotes, votingData.noVotes);
 
-      // Show confirmation
-      if (choice === 'yes') {
-        alert('✅ Vote recorded: YES YES YES 💦');
-      } else {
-        alert('❌ Vote recorded: Probably really straight');
-      }
-    }
+  // Show confirmation
+  if (choice === 'yes') {
+    alert('✅ Vote recorded: YES YES YES 💦');
+  } else {
+    alert('❌ Vote recorded: Probably really straight');
+  }
+}
 
-    function updateVoteDisplay(yesPercentage, noPercentage, yesCount, noCount) {
-      document.getElementById('yes-fill').style.width = yesPercentage + '%';
-      document.getElementById('no-fill').style.width = noPercentage + '%';
-      
-      document.getElementById('yes-result-text').textContent = 
-        `Yes: ${yesPercentage}% (${yesCount.toLocaleString()} vote${yesCount === 1 ? '' : 's'})`;
-      document.getElementById('no-result-text').textContent = 
-        `Probably Not: ${noPercentage}% (${noCount.toLocaleString()} vote${noCount === 1 ? '' : 's'})`;
-    }
+function updateVoteDisplay(yesPercentage, noPercentage, yesCount, noCount) {
+  document.getElementById('yes-fill').style.width = yesPercentage + '%';
+  document.getElementById('no-fill').style.width = noPercentage + '%';
+  
+  document.getElementById('yes-result-text').textContent = 
+    `Yes: ${yesPercentage}% (${yesCount.toLocaleString()} vote${yesCount === 1 ? '' : 's'})`;
+  document.getElementById('no-result-text').textContent = 
+    `Probably Not: ${noPercentage}% (${noCount.toLocaleString()} vote${noCount === 1 ? '' : 's'})`;
+}
 
-    function handleSubscribe() {
-      if (confirm('This will redirect you to the creator\'s page. Continue?')) {
-        alert('Redirecting... (In real implementation, this would open the page)');
-      }
-    }
+function handleSubscribe() {
+  if (confirm('This will redirect you to the creator\'s page. Continue?')) {
+    alert('Redirecting... (In real implementation, this would open the page)');
+  }
+}
 
-    function trackAffiliate(productId) {
-      console.log('Tracking affiliate click for:', productId);
-      alert('Redirecting to affiliate content...');
-    }
+function trackAffiliate(productId) {
+  console.log('Tracking affiliate click for:', productId);
+  alert('Redirecting to affiliate content...');
+}
 
-    // Modal functionality
-    function openCommentModal() {
-      document.getElementById('commentModal').style.display = 'block';
-      document.body.style.overflow = 'hidden';
-    }
+// Modal functionality
+function openCommentModal() {
+  document.getElementById('commentModal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
 
-    function closeCommentModal() {
-      document.getElementById('commentModal').style.display = 'none';
-      document.body.style.overflow = 'auto';
-      // Clear form
-      document.getElementById('userName').value = '';
-      document.getElementById('userComment').value = '';
-    }
+function closeCommentModal() {
+  document.getElementById('commentModal').style.display = 'none';
+  document.body.style.overflow = 'auto';
+  // Clear form
+  document.getElementById('userName').value = '';
+  document.getElementById('userComment').value = '';
+}
 
-    // Comment functionality
-    function submitComment(event) {
-      event.preventDefault();
-      
-      const userName = document.getElementById('userName').value.trim();
-      const commentText = document.getElementById('userComment').value.trim();
-      
-      if (!userName || !commentText) {
-        alert('Please fill in both name and comment fields.');
-        return;
-      }
+// Comment functionality
+function submitComment(event) {
+  event.preventDefault();
+  
+  const userName = document.getElementById('userName').value.trim();
+  const commentText = document.getElementById('userComment').value.trim();
+  
+  if (!userName || !commentText) {
+    alert('Please fill in both name and comment fields.');
+    return;
+  }
 
-      if (commentText.length < 10) {
-        alert('Please write a more detailed comment (at least 10 characters).');
-        return;
-      }
+  if (commentText.length < 10) {
+    alert('Please write a more detailed comment (at least 10 characters).');
+    return;
+  }
 
-      // Create new comment element
-      const commentsList = document.getElementById('comments-list');
-      const newComment = document.createElement('div');
-      newComment.className = 'comment';
-      
-      newComment.innerHTML = `
-        <div class="comment-author">${userName}</div>
-        <div class="comment-time">Just now</div>
-        <div class="comment-text">${commentText}</div>
-      `;
-      
-      // Add to top of comments list
-      commentsList.insertBefore(newComment, commentsList.firstChild);
-      
-      // Update comment count
-      commentCount++;
-      document.getElementById('comments-count').textContent = `Community Discussion (${commentCount} comments)`;
-      
-      // Close modal and show success
-      closeCommentModal();
-      alert('Comment posted successfully!');
-    }
+  // Create new comment element
+  const commentsList = document.getElementById('comments-list');
+  const newComment = document.createElement('div');
+  newComment.className = 'comment';
+  
+  newComment.innerHTML = `
+    <div class="comment-author">${userName}</div>
+    <div class="comment-time">Just now</div>
+    <div class="comment-text">${commentText}</div>
+  `;
+  
+  // Add to top of comments list
+  commentsList.insertBefore(newComment, commentsList.firstChild);
+  
+  // Update comment count
+  commentCount++;
+  document.getElementById('comments-count').textContent = `Community Discussion (${commentCount} comments)`;
+  
+  // Close modal and show success
+  closeCommentModal();
+  alert('Comment posted successfully!');
+}
 
-    // Close modal when clicking outside
-    window.onclick = function(event) {
-      const modal = document.getElementById('commentModal');
-      if (event.target === modal) {
-        closeCommentModal();
-      }
-    }
+// Close modal when clicking outside
+window.onclick = function(event) {
+  const modal = document.getElementById('commentModal');
+  if (event.target === modal) {
+    closeCommentModal();
+  }
+}
 
-    // Previous creator functionality
-    function viewCreatorDetails(creatorId) {
-      alert(`Viewing details for ${creatorId}. This would redirect to their results page.`);
-    }
+// Previous creator functionality
+function viewCreatorDetails(creatorId) {
+  alert(`Viewing details for ${creatorId}. This would redirect to their results page.`);
+}
 
-    
-// Countdown end date (7 days from now for example)
-const countdownEndDate = new Date();
-countdownEndDate.setDate(countdownEndDate.getDate() + 7);
-countdownEndDate.setHours(23, 59, 59, 999);
+// DATE FIXE DE FIN - Modifiez cette date selon vos besoins
+// Format: new Date('YYYY-MM-DD HH:MM:SS')
+const COUNTDOWN_END_DATE = new Date('2025-09-08 23:59:59');
+
+// Alternative: pour définir automatiquement 30 jours à partir d'une date de départ fixe
+// Décommentez les lignes ci-dessous et commentez la ligne au-dessus si vous préférez
+/*
+const START_DATE = new Date('2025-08-08 00:00:00'); // Date de début fixe
+const COUNTDOWN_END_DATE = new Date(START_DATE.getTime() + (30 * 24 * 60 * 60 * 1000)); // 30 jours après
+*/
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', function() {
@@ -169,11 +174,18 @@ document.addEventListener('DOMContentLoaded', function() {
 function startCountdown() {
   function updateCountdown() {
     const now = new Date().getTime();
-    const distance = countdownEndDate.getTime() - now;
+    const distance = COUNTDOWN_END_DATE.getTime() - now;
 
     if (distance < 0) {
       // Countdown finished
-      document.getElementById('countdownTimer').innerHTML = '<div style="text-align: center; color: #dc2626; font-weight: 600;">VOTING CLOSED</div>';
+      document.getElementById('countdownTimer').innerHTML = '<div style="text-align: center; color: #dc2626; font-weight: 600; font-size: 1.2em; padding: 20px;">VOTING CLOSED</div>';
+      
+      // Désactiver les boutons de vote
+      const yesBtn = document.getElementById('vote-yes-btn');
+      const noBtn = document.getElementById('vote-no-btn');
+      if (yesBtn) yesBtn.disabled = true;
+      if (noBtn) noBtn.disabled = true;
+      
       return;
     }
 
@@ -182,54 +194,81 @@ function startCountdown() {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById('days').textContent = days;
-    document.getElementById('hours').textContent = hours;
-    document.getElementById('minutes').textContent = minutes;
-    document.getElementById('seconds').textContent = seconds;
+    // Mise à jour des éléments avec vérification d'existence
+    const daysElement = document.getElementById('days');
+    const hoursElement = document.getElementById('hours');
+    const minutesElement = document.getElementById('minutes');
+    const secondsElement = document.getElementById('seconds');
+
+    if (daysElement) daysElement.textContent = days;
+    if (hoursElement) hoursElement.textContent = hours;
+    if (minutesElement) minutesElement.textContent = minutes;
+    if (secondsElement) secondsElement.textContent = seconds;
   }
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
 }
 
-    // Newsletter functionality
-    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+// Progress bar functionality (optionnel)
+function updateProgressBar() {
+  const START_DATE = new Date('2025-08-08 00:00:00'); // Même date de début que pour le countdown
+  const totalDuration = COUNTDOWN_END_DATE.getTime() - START_DATE.getTime();
+  const elapsed = new Date().getTime() - START_DATE.getTime();
+  const progress = Math.min(100, Math.max(0, (elapsed / totalDuration) * 100));
+  
+  // Si vous avez une barre de progression dans votre HTML, décommentez la ligne suivante
+  // document.getElementById('progressBar').style.width = progress + '%';
+}
+
+// Newsletter functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const newsletterForm = document.getElementById('newsletterForm');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
       e.preventDefault();
       const email = this.querySelector('input[type="email"]').value;
-      const consent = document.getElementById('gdprConsent').checked;
+      const consentCheckbox = document.getElementById('gdprConsent');
+      const consent = consentCheckbox ? consentCheckbox.checked : true;
       
-      if (!consent) {
+      if (consentCheckbox && !consent) {
         alert('Please agree to receive marketing emails.');
         return;
       }
       
       alert('Thank you for subscribing!');
       this.querySelector('input[type="email"]').value = '';
-      document.getElementById('gdprConsent').checked = false;
+      if (consentCheckbox) consentCheckbox.checked = false;
     });
+  }
+});
 
-    // Initialize page
-    document.addEventListener('DOMContentLoaded', function() {
-      // Initialize vote display starting at 0%
-      updateVoteDisplay(0, 0, 0, 0);
-      
-      // Start countdown
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
-      
-      // Add interactive effects to vote buttons
-      const voteButtons = document.querySelectorAll('.vote-btn');
-      voteButtons.forEach(btn => {
-        btn.addEventListener('mouseenter', function() {
-          if (!this.disabled) {
-            this.style.transform = 'translateY(-2px)';
-          }
-        });
-        
-        btn.addEventListener('mouseleave', function() {
-          if (!this.disabled) {
-            this.style.transform = 'translateY(0)';
-          }
-        });
-      });
+// Initialize page
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize vote display starting at 0%
+  updateVoteDisplay(0, 0, 0, 0);
+  
+  // Start countdown
+  startCountdown();
+  
+  // Add interactive effects to vote buttons
+  const voteButtons = document.querySelectorAll('.vote-btn');
+  voteButtons.forEach(btn => {
+    btn.addEventListener('mouseenter', function() {
+      if (!this.disabled) {
+        this.style.transform = 'translateY(-2px)';
+      }
     });
+    
+    btn.addEventListener('mouseleave', function() {
+      if (!this.disabled) {
+        this.style.transform = 'translateY(0)';
+      }
+    });
+  });
+
+  // Afficher la date de fin dans la console pour vérification
+  console.log('Countdown will end on:', COUNTDOWN_END_DATE.toLocaleString());
+  console.log('Current time:', new Date().toLocaleString());
+  console.log('Time remaining (ms):', COUNTDOWN_END_DATE.getTime() - new Date().getTime());
+});
