@@ -572,7 +572,7 @@ body {
 
 
 
-/* GDPR consent wrapper for sidebar */
+/* GDPR sidebar */
 .gdpr-consent-side {
   display: flex;
   align-items: flex-start;
@@ -582,7 +582,6 @@ body {
   line-height: 1.4;
 }
 
-/* Hide native checkbox */
 .gdpr-checkbox-side {
   position: absolute;
   opacity: 0;
@@ -590,8 +589,6 @@ body {
 }
 
 
-
-/* Custom checkbox design */
 .gdpr-checkmark-side {
   display: inline-block;
   width: 18px;
@@ -602,8 +599,6 @@ body {
   flex-shrink: 0;
   margin-top: 3px;
 }
-
-/* Checkmark when checkbox is checked */
 .gdpr-checkbox-side:checked + .gdpr-label .gdpr-checkmark-side::after {
   content: "";
   position: absolute;
@@ -615,15 +610,11 @@ body {
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
-
-/* Consent text */
 .gdpr-text-side {
   display: inline-block;
   color: #444;
   font-weight: 400;
 }
-
-/* Link inside consent text */
 .gdpr-text-side .privacy-link {
   color: #e14594;
   text-decoration: underline;
@@ -1344,8 +1335,6 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
-}
-  
 }
 
 .footer .newsletter-input {
