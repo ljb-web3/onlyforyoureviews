@@ -84,7 +84,8 @@ body {
 .newsletter-container {
   background: white;
   border-radius: 24px;
-  padding-bottom: 20px;
+  padding-bottom: 50px;
+  padding-top: 50px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
   max-width: 500px;
   width: 90%;
