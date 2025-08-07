@@ -1637,6 +1637,7 @@ body {
   .filter-btn {
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
+    align-items: center;
   }
 
   /* Footer mobile responsiveness */
@@ -1758,6 +1759,8 @@ body {
   .tiktok-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
+    padding: 0 1rem;
+    margin: 4rem 0 2rem 0;
   }
 
   .filter-buttons {
