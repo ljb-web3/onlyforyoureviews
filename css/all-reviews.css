@@ -833,10 +833,7 @@ body {
   /* Affiliate banner responsive */
   .product-image {
     height: 150px;
-  }
-
-  .product-image img {
-   width: 300px;
+    width: 300px;
   }
 
   .page-header .product-card {
