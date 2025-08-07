@@ -835,6 +835,10 @@ body {
     height: 150px;
   }
 
+  .product-image img {
+   width: 300px;
+  }
+
   .page-header .product-card {
     margin-bottom: 1.5rem;
   }
