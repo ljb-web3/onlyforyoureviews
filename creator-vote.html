@@ -232,55 +232,6 @@
         <a href="/newsletter">Newsletter</a>
         <a href="#">Reddit</a>
       </div>
-
-      <div class="footer-newsletter">
-        <h4>Never miss a review</h4>
-        
-        <form name="footer-newsletter" 
-              method="POST" 
-              action="/subscribed" 
-              data-netlify="true" 
-              netlify-honeypot="bot-field" 
-              id="footerNewsletterForm" 
-              class="newsletter-form-footer">
-          
-          <!-- Hidden honeypot field -->
-          <div style="display: none;">
-            <label>Don't fill this out if you're human: 
-              <input name="bot-field" />
-            </label>
-          </div>
-
-          <!-- Hidden form name -->
-          <input type="hidden" name="form-name" value="footer-newsletter">
-          
-          <!-- Email Input -->
-          <input type="email" 
-                 name="email" 
-                 placeholder="Enter your email" 
-                 class="newsletter-input-footer" 
-                 required>
-          
-          <!-- Submit Button -->
-          <button type="submit" class="newsletter-btn-footer">Subscribe</button>
-
-          <!-- GDPR Consent -->
-          <div class="gdpr-consent-footer">
-            <input type="checkbox" 
-                   id="gdprConsentFooter" 
-                   name="gdpr-consent"
-                   class="gdpr-checkbox-footer" 
-                   required>
-            <label for="gdprConsentFooter" class="gdpr-label-footer">
-              <span class="gdpr-checkmark-footer"></span>
-              <span class="gdpr-text-footer">I agree to receive marketing emails and understand I can unsubscribe at any time. 
-                <a href="/privacy-policy" class="privacy-link">Privacy Policy</a>
-              </span>
-            </label>
-          </div>
-        </form>
-      </div>
-    </div>
   </footer>
 
    
@@ -291,6 +242,7 @@
 </body>
 
 </html>
+
 
 
 
