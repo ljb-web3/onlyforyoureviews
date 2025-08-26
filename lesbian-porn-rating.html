@@ -98,13 +98,14 @@
     </div>
   </section>
 
-  <!-- Main Layout -->
+
+   <!-- Main Layout -->
   <div class="main-layout">
-    <main id="main" class="main-content">
+    <main class="main-content">
       <!-- Featured Video -->
-      <section class="featured-video" aria-labelledby="rating-of-week">
+      <section class="featured-video">
         <div class="video-header">
-          <h2 id="review-of-week">The rating of the week</h2>
+          <h2>The review of the week</h2>
         </div>
 
         <div class="video-container">
@@ -112,23 +113,23 @@
             width="100%" 
             height="100%" 
             src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-            title="FRENCH LESBIAN - I think we are more than friends now ?" 
+            title="Epic Travel Adventure: Backpacking Through Europe" 
             frameborder="0" 
-            loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
             allowfullscreen>
           </iframe>
         </div>
 
         <div class="video-details">
-          <h3 class="video-title">FRENCH LESBIAN — I think we are more than friends now?</h3>
-          <div class="video-meta">By Madeleine Rousset</div>
+          <h3 class="video-title">FRENCH LESBIAN - I think we are more than friends now ?</h3>
+          <div class="video-meta">
+            By Madeleine Rousset
+          </div>
         </div>
-
-        <div class="average-rating" aria-live="polite">
-          <div class="average-score" id="avgScore">—</div>
+        <div class="average-rating">
+          <div class="average-score">?</div>
           <div class="average-stars">Average Rating</div>
-          <div class="rating-count" id="ratingCount">Based on community ratings</div>
+          <div class="rating-count">Based on YOUR ratings</div>
         </div>
 
         <!-- Rating Comparison Section -->
@@ -136,163 +137,273 @@
           <div class="rating-vs">
             <div class="my-rating">
               <h4>My Rating</h4>
-              <div class="rating-value">Revealed in the video</div>
+              <div class="rating-value">?</div>
+              <p>Revealed in the video</p>
             </div>
+            
           </div>
           <div class="rating-reveal-info">
-            <a href="#comment" class="modal-submit">Submit your rating</a>
+         <button type="submit" class="modal-submit">Submit your rating</button>
           </div>
         </div>
       </section>
 
       <!-- Rating Section -->
-      <section class="rating-section" aria-labelledby="rate-this-video">
+      <section class="rating-section">
         <div class="rating-header">
-          <h2 id="rate-this-video">Rate This Video</h2>
-          <p>Share your honest opinion and help the community.</p>
+          <h3>Rate This Video</h3>
+          <p>Share your honest opinion and help the community</p>
         </div>
 
         <!-- Countdown Timer -->
-        <section class="countdown-section" aria-labelledby="vote-now">
+        <div class="countdown-section">
           <div class="countdown-header">
-            <h3 id="vote-now">Vote now</h3>
+            <h4>Vote now</h4>
           </div>
-          <div class="countdown-timer" id="countdownTimer" aria-live="polite">
-            <div class="time-unit"><span class="time-number" id="days">0</span><span class="time-label">Days</span></div>
-            <div class="time-unit"><span class="time-number" id="hours">0</span><span class="time-label">Hours</span></div>
-            <div class="time-unit"><span class="time-number" id="minutes">0</span><span class="time-label">Minutes</span></div>
-            <div class="time-unit"><span class="time-number" id="seconds">0</span><span class="time-label">Seconds</span></div>
+          <div class="countdown-timer" id="countdownTimer">
+            <div class="time-unit">
+              <span class="time-number" id="days">0</span>
+              <span class="time-label">Days</span>
+            </div>
+            <div class="time-unit">
+              <span class="time-number" id="hours">0</span>
+              <span class="time-label">Hours</span>
+            </div>
+            <div class="time-unit">
+              <span class="time-number" id="minutes">0</span>
+              <span class="time-label">Minutes</span>
+            </div>
+            <div class="time-unit">
+              <span class="time-number" id="seconds">0</span>
+              <span class="time-label">Seconds</span>
+            </div>
           </div>
-        </section>
+        </div>
 
         <div class="rating-display">
           <div class="current-rating">Write a review to rate this video</div>
-          <p>Click “Post comment” below to share your rating and review.</p>
+          <p>Click "Post comment" below to share your rating and review</p>
         </div>
 
         <!-- Community Award Section -->
-        <section class="community-award" aria-labelledby="award-goal">
+        <div class="community-award">
           <div class="award-header">
-            <h3 id="award-goal">Would you like to see my first ever lesbian video ?</h3>
+            <h4>Would you like to see my first ever lesbian video ?</h4>
           </div>
           <div class="award-info">
-            <p><strong>Goal:</strong> Reach 1000 community reviews and I’ll film my first lesbian collaboration.</p>
-          </div>
-          <section class="see-all-section">
-            <a href="#all-ratings" class="see-all-btn">More ratings</a>
-            <p class="see-all-description">Discover all lesbian porn videos rated by our community <strong>here</strong>.</p>
-          </section>
-        </section>
-
-        <!-- Affiliate Banner -->
-        <section class="affiliate-banner" aria-label="Live cam affiliate">
-          <div class="banner-content">
-            <div class="banner-image">
-              <img src="stripchat-banner2.webp" alt="Lesbian couple on cam" width="800" height="225" loading="lazy" decoding="async" />
+            <p><strong>Goal :</strong> Reach 1000 community reviews and I'll film my first lesbian collaboration</p>
             </div>
-            <p class="banner-subtitle">Check if they are live now <a href="#" class="affiliate-link" rel="sponsored noopener nofollow">here</a>.</p>
-          </div>
-        </section>
 
-        <!-- Comments Section -->
-        <section class="comments-section" aria-labelledby="community-comments">
-          <div class="comments-header">
-            <h2 id="community-comments">Community Comments</h2>
-            <p>Read what others think about this video.</p>
+              <!-- See All Ratings Button -->
+             <section class="see-all-section">
+             <a href="#all-ratings" class="see-all-btn" onclick="goToAllRatings()">
+             More ratings </a>
+            <p class="see-all-description">Discover all videos rated by our community <strong>here</strong></p>
+            </section>
+        
+        </div>
+
+
+          <!-- Affiliate Banner -->
+      <section class="affiliate-banner">
+        <div class="banner-content">
+          <div class="banner-image">
+               <img src="stripchat-banner2.png" alt="Lesbian couple on cam">
+          </div>
+          <p class="banner-subtitle">
+          Check if they are live now <strong>here.</strong>
+      
+        </div>
+      </section>
+     
+
+      <!-- Comments Section -->
+      <section class="comments-section">
+        <div class="comments-header">
+          <h3>Community Comments</h3>
+          <p>Read what others think about this video</p>
+        </div>
+
+        <div class="comment-form">
+          <button type="button" class="comment-submit" onclick="openCommentModal()">Post comment</button>
+        </div>
+
+        <div class="comments-list">
+          <div class="comment">
+            <div class="comment-author">TravelEnthusiast22</div>
+            <div class="comment-time">3 hours ago</div>
+            <div class="comment-rating">Rated: 9/10</div>
+            <div class="comment-text">
+              Absolutely stunning cinematography! Sarah's storytelling is incredible and really makes you feel 
+              like you're traveling with her. The editing is smooth and the cultural insights are fascinating. 
+              Definitely inspired me to plan my own European adventure.
+            </div>
           </div>
 
-          <div class="comment-form">
-            <button type="button" class="comment-submit" onclick="openCommentModal()">Post comment</button>
+          <div class="comment">
+            <div class="comment-author">CriticalViewer</div>
+            <div class="comment-time">8 hours ago</div>
+            <div class="comment-rating">Rated: 6/10</div>
+            <div class="comment-text">
+              Good content overall but felt a bit rushed in some parts. Would have loved to see more interaction 
+              with locals and deeper dives into the food culture. The Prague segment was particularly brief 
+              considering how amazing that city is.
+            </div>
           </div>
 
-          <div class="comments-list" id="commentsList">
-            <!-- Example static comments (replace with dynamic) -->
-            <article class="comment" aria-label="Comment by TravelEnthusiast22">
-              <div class="comment-author">TravelEnthusiast22</div>
-              <time class="comment-time" datetime="2025-08-26">3 hours ago</time>
-              <div class="comment-rating">Rated: 9/10</div>
-              <p class="comment-text">Great cinematography and story. Would watch again.</p>
-            </article>
-
-            <article class="comment" aria-label="Comment by CriticalViewer">
-              <div class="comment-author">CriticalViewer</div>
-              <time class="comment-time" datetime="2025-08-26">8 hours ago</time>
-              <div class="comment-rating">Rated: 6/10</div>
-              <p class="comment-text">Good overall but some segments felt rushed.</p>
-            </article>
+          <div class="comment">
+            <div class="comment-author">VideoProductionPro</div>
+            <div class="comment-time">12 hours ago</div>
+            <div class="comment-rating">Rated: 8/10</div>
+            <div class="comment-text">
+              From a technical standpoint, this is well-produced. Great use of drone shots and the color grading 
+              is on point. Audio quality is consistent throughout. Only minor complaint is some shaky handheld 
+              footage in the Venice scenes, but overall excellent work.
+            </div>
           </div>
-        </section>
+
+          <div class="comment">
+            <div class="comment-author">BackpackerLife</div>
+            <div class="comment-time">1 day ago</div>
+            <div class="comment-rating">Rated: 10/10</div>
+            <div class="comment-text">
+              As someone who's done similar trips, I can say this video captures the real backpacking experience 
+              perfectly. The budget breakdowns are super helpful and honest. Love that she showed both the 
+              amazing moments and the challenging ones. Very authentic!
+            </div>
+          </div>
+        </div>
       </section>
     </main>
 
+     </section>
+
+
     <!-- Recently Rated Videos Sidebar -->
-    <aside class="videos-sidebar" aria-label="Recently rated videos">
+    <aside class="videos-sidebar">
       <div class="sidebar-header">
-        <h2>Recent videos 👀</h2>
+        <h3>Recent videos 👀</h3>
         <p>No previous videos</p>
       </div>
 
-      <section class="profile-section">
+       <div class="profile-section">
         <div class="profile-placeholder">
-          <img src="/images/onlyjo.png" alt="Only Jo profile" width="200" height="200" loading="lazy" decoding="async" />
+          <img src="onlyjo.png" alt="Only Jo Profile">
         </div>
-      </section>
 
-      <section class="affiliate-section" aria-label="Only lesbian shows">
+
+      <!-- Examples recent videos 
+      <div class="previous-video">
+        <div class="video-thumbnail">
+          <iframe 
+            width="80" 
+            height="45" 
+            src="https://www.youtube.com/embed/jNQXAC9IVRw" 
+            title="Cooking Video" 
+            frameborder="0" 
+            style="border-radius: 8px; pointer-events: none;">
+          </iframe>
+        </div>
+        <div class="previous-info">
+          <a href="#" class="previous-title" onclick="loadVideo('jNQXAC9IVRw', 'Ultimate Pasta Making Tutorial')">Ultimate Pasta Making</a>
+        </div>
+      </div>
+
+      <div class="previous-video">
+        <div class="video-thumbnail">
+          <iframe 
+            width="80" 
+            height="45" 
+            src="https://www.youtube.com/embed/VFbhKZFzbzk" 
+            title="Guitar Tutorial" 
+            frameborder="0" 
+            style="border-radius: 8px; pointer-events: none;">
+          </iframe>
+        </div>
+        <div class="previous-info">
+          <a href="#" class="previous-title" onclick="loadVideo('VFbhKZFzbzk', 'Acoustic Guitar Tutorial for Beginners')">Acoustic Guitar Tutorial</a>
+        </div>
+      </div>
+      --->
+
+      <!-- Sidebar positioned next to the form -->
+      <div class="affiliate-section">
         <div class="affiliate-header">
           <h3>Only lesbian shows</h3>
-          <p>You might like them if…</p>
-          <img src="stripchat-logo.png" alt="Stripchat logo" width="120" height="40" loading="lazy" decoding="async" />
+          <p>You migh like them if ...</p>
+          <br>
+          <img src="stripchat-logo.png" alt="s logo" width="120px">
         </div>
 
-        <article class="page-card">
+        <!-- Affiliate sidebar -->
+        <div class="page-card">
           <div class="page-image">
-            <img src="stripchat3.png" alt="Lesbian couple cam girls" width="320" height="180" loading="lazy" decoding="async" />
+            <img src="stripchat3.png" alt="Girls doing yoga">
           </div>
           <div class="page-info">
-            <p class="page-description">You love watching girls being kinky and loving.</p>
-            <a href="#" class="affiliate-link" rel="sponsored noopener nofollow" onclick="trackAffiliate('stripchat-yoga')">Go to their room</a>
+            <div class="page-description">You love watching girls being kinky and loving.</div>
+            <a href="#" class="affiliate-link">Go to their room</a>
           </div>
-        </article>
+        </div>
 
-        <article class="page-card">
+        <div class="page-card">
           <div class="page-image">
-            <img src="stripchat4.png" alt="Lesbian couple cam girls" width="320" height="180" loading="lazy" decoding="async" />
+            <img src="stripchat4.png" alt="Girls having fun">
           </div>
           <div class="page-info">
-            <p class="page-description">You love watching lesbians having fun (and orgasms!).</p>
-            <a href="#" class="affiliate-link" rel="sponsored noopener nofollow" onclick="trackAffiliate('stripchat-fun')">Go to their room</a>
+            <div class="page-description">You love watching lesbians having fun (and orgasms !).</div>
+            <a href="#" class="affiliate-link">Go to their room</a>
           </div>
-        </article>
-      </section>
+        </div>
+      </div>
     </aside>
   </div>
 
   <!-- Comment Modal -->
-  <div id="commentModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div id="commentModal" class="modal">
     <div class="modal-content">
-      <button class="close" aria-label="Close" onclick="closeCommentModal()">×</button>
-      <h2 id="modalTitle">Write Your Review</h2>
+      <span class="close" onclick="closeCommentModal()">&times;</span>
+      <h3>Write Your Review</h3>
       <form class="modal-form" onsubmit="submitComment(event)">
-        <label for="userName" class="visually-hidden">Your Name</label>
-        <input type="text" class="modal-input" placeholder="Your Name" id="userName" required maxlength="50" />
-
-        <label for="userRating" class="visually-hidden">Your Rating (1–10)</label>
-        <input type="number" class="modal-input" placeholder="Your Rating (1–10)" id="userRating" min="1" max="10" required />
-
-        <label for="userComment" class="visually-hidden">Your Comment</label>
-        <textarea class="modal-input modal-textarea" placeholder="Share your thoughts about this video… Be specific and constructive." id="userComment" required maxlength="500"></textarea>
+        <input 
+          type="text" 
+          class="modal-input" 
+          placeholder="Your Name" 
+          id="userName" 
+          required
+          maxlength="50"
+        >
+        <input 
+          type="number" 
+          class="modal-input" 
+          placeholder="Your Rating (1-10)" 
+          id="userRating" 
+          min="1" 
+          max="10" 
+          required
+        >
+        <textarea 
+          class="modal-input modal-textarea" 
+          placeholder="Share your thoughts about this video... What did you like? What could be improved? Be specific and constructive."
+          id="userComment"
+          required
+          maxlength="500"
+        ></textarea>
         <button type="submit" class="modal-submit">Post Review</button>
       </form>
     </div>
   </div>
 
   <!-- Admin Panel Modal -->
-  <div id="adminPanel" class="admin-panel" aria-live="polite">
-    <button class="close-admin" aria-label="Close admin" onclick="closeAdminPanel()">×</button>
-    <h2>🔧 Admin Panel — Comments & Ratings Management</h2>
-    <div class="admin-stats"><div id="adminStats">Loading stats…</div></div>
-    <div id="adminCommentsList">Loading comments…</div>
+  <div id="adminPanel" class="admin-panel">
+    <span class="close-admin" onclick="closeAdminPanel()">&times;</span>
+    <h3>🔧 Admin Panel - Comments & Ratings Management</h3>
+    <div class="admin-stats">
+      <div id="adminStats">Loading stats...</div>
+    </div>
+    <div id="adminCommentsList">
+      Loading comments...
+    </div>
     <div class="admin-actions">
       <button class="admin-btn danger" onclick="clearAllComments()">Clear All Comments</button>
       <button class="admin-btn danger" onclick="clearAllRatings()">Clear All Ratings</button>
@@ -301,6 +412,10 @@
     </div>
   </div>
 
+
+  
+
+  
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-content">
@@ -351,6 +466,7 @@
   <script src="/js/lesbian-porn-rating.js" defer></script>
 </body>
 </html>
+
 
 
 
