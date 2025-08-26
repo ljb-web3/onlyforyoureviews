@@ -57,7 +57,7 @@
     <nav class="nav" aria-label="Primary">
       <div class="logo">
         <a href="/" aria-label="Home - OnlyforYouReviews">
-          <img src="logoOFYR.png" alt="OnlyforYouReviews logo" width="160" height="40" />
+          <img src="logoOFYR.png" alt="OnlyforYouReviews logo" />
         </a>
       </div>
       <ul class="nav-links">
@@ -102,13 +102,34 @@
     <main id="main" class="main-content">
       <!-- Featured Creator -->
       <section class="featured-creator" aria-labelledby="featuredCreator">
-        <h2 id="featuredCreator">Currently under investigation 👀</h2>
+          <h2>Currently under investigation 👀</h2>
+
 
         <!-- Countdown Timer -->
-        <section class="countdown-section" aria-labelledby="vote-now">
-          <h3 id="vote-now">Vote now!</h3>
-          <div class="countdown-timer" id="countdownTimer" aria-live="polite"></div>
-        </section>
+        <div class="countdown-section">
+          <div class="countdown-header">
+            <h4>Vote now !</h4>
+          </div>
+          <div class="countdown-timer" id="countdownTimer">
+            <div class="time-unit">
+              <span class="time-number" id="days">0</span>
+              <span class="time-label">Days</span>
+            </div>
+            <div class="time-unit">
+              <span class="time-number" id="hours">0</span>
+              <span class="time-label">Hours</span>
+            </div>
+            <div class="time-unit">
+              <span class="time-number" id="minutes">0</span>
+              <span class="time-label">Minutes</span>
+            </div>
+            <div class="time-unit">
+              <span class="time-number" id="seconds">0</span>
+              <span class="time-label">Seconds</span>
+            </div>
+          </div>
+        </div>
+      
 
         <div class="creator-profile">
           <div class="creator-image">
@@ -120,9 +141,9 @@
               clothing style that is as recognizable as her dreadlocks. She made in 2023 by becoming the first Black performer to win the prestigious AVN Awards Female Performer of the Year.
              </p>
             <div class="creator-stats">
-              <div class="stat-item"><span class="stat-value">2.7M</span><span class="stat-label">Followers</span></div>
-              <div class="stat-item"><span class="stat-value">494</span><span class="stat-label">Scenes</span></div>
-              <div class="stat-item"><span class="stat-value">2014</span><span class="stat-label">First Year</span></div>
+              <div class="stat-item"><span class="stat-value">   2.7M</span><span class="stat-label">Followers</span></div>
+              <div class="stat-item"><span class="stat-value">   494</span><span class="stat-label">Scenes</span></div>
+              <div class="stat-item"><span class="stat-value">   2014</span><span class="stat-label">First Year</span></div>
             </div>
             <a href="#" class="subscribe-btn">Watch my reaction 👀</a>
           </div>
@@ -137,21 +158,33 @@
         </div>
       </section>
 
-      <!-- Voting Section -->
-      <section class="voting-section" aria-labelledby="community-vote">
+            <!-- Voting Section -->
+      <section class="voting-section">
         <div class="voting-header">
-          <h2 id="community-vote">Community Votes</h2>
           <h3>Vote now !</h3>
-          <p>Don't forget to comment which videos you watched 👀</p>
+          <p>Comment which videos did you watch 👀</p>
         </div>
-        
+
         <div class="voting-buttons">
-          <button class="vote-btn vote-yes" onclick="vote('yes')" id="vote-yes-btn">YES 💦</button>
-          <button class="vote-btn vote-no" onclick="vote('no')" id="vote-no-btn">Probably not</button>
+          <button class="vote-btn vote-yes" onclick="vote('yes')" id="vote-yes-btn">
+            YES YES YES 💦
+          </button>
+          <button class="vote-btn vote-no" onclick="vote('no')" id="vote-no-btn">
+            Probably really straight 
+          </button>
         </div>
-        <div class="vote-results" id="voteResults" aria-live="polite"></div>
+
+        <div class="vote-results">
+          <div class="result-bar result-yes">
+            <div class="result-fill" id="yes-fill" style="width: 0%"></div>
+            <div class="result-text" id="yes-result-text">Yes: 0% (0 votes)</div>
+          </div>
+          <div class="result-bar result-no">
+            <div class="result-fill" id="no-fill" style="width: 0%"></div>
+            <div class="result-text" id="no-result-text">Probably Not: 0% (0 votes)</div>
+          </div>
+        </div>
       </section>
-    </main>
 
     <!-- Sidebar -->
     <aside class="results-sidebar" aria-label="Previous results">
@@ -160,7 +193,7 @@
         <p>No previous results yet.</p>
       </div>
       <section class="profile-section">
-        <img src="/images/onlyjo.png" alt="Only Jo profile" width="200" height="200" loading="lazy" decoding="async" />
+        <img src="onlyjo.png" alt="Only Jo profile" loading="lazy" decoding="async" />
       </section>
 
       <section class="affiliate-section" aria-label="Only lesbian cam shows">
@@ -201,6 +234,7 @@
   <script src="/js/lesbian-porn-vote.js" defer></script>
 </body>
 </html>
+
 
 
 
