@@ -423,29 +423,28 @@
         <a href="/all-reviews">All my reviews</a>
         <a href="/newsletter">Newsletter</a>
         <a href="/reddit" rel="noopener">Reddit</a>
-        <a href="/disclosure">Affiliate Disclosure</a>
       </nav>
       <section class="footer-newsletter">
         <h2 class="visually-hidden">Subscribe</h2>
         <div class="newsletter-form">
-          <h3>Stay Updated</h3>
+          <h4>Stay Updated</h4>
           <form id="newsletterForm" class="newsletter-signup" name="footer-newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field">
             <div style="display:none"><label>Don’t fill this out if you’re human: <input name="bot-field" /></label></div>
-            <input type="hidden" name="form-name" value="footer-newsletter" />
-            <input type="email" name="email" placeholder="Enter your email" class="newsletter-input" required />
+             <input type="email" placeholder="Enter your email" class="newsletter-input" required>
             <button type="submit" class="newsletter-btn">Subscribe</button>
-            <div class="gdpr-consent">
-              <input type="checkbox" id="gdprConsent" class="gdpr-checkbox" required />
-              <label for="gdprConsent" class="gdpr-label">
-                <span class="gdpr-checkmark"></span>
-                <span class="gdpr-text">I agree to receive marketing emails and understand I can unsubscribe at any time. <a href="/privacy-policy" class="privacy-link">Privacy Policy</a></span>
-              </label>
-            </div>
           </form>
+          <div class="gdpr-consent">
+            <input type="checkbox" id="gdprConsent" class="gdpr-checkbox" required>
+            <label for="gdprConsent" class="gdpr-label">
+              <span class="gdpr-checkmark"></span>
+              <span class="gdpr-text">I agree to receive marketing emails and understand I can unsubscribe at any time. <a href="#" class="privacy-link">Privacy Policy</a></span>
+            </label>
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   </footer>
+
 
   <!-- Optional: VideoObject JSON-LD (safe minimal, no guessed dates) -->
   <script type="application/ld+json">
@@ -465,6 +464,7 @@
   <script src="/js/lesbian-porn-rating.js" defer></script>
 </body>
 </html>
+
 
 
 
