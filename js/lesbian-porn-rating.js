@@ -98,8 +98,8 @@ function trackAffiliate(siteName, category = '', linkUrl = '') {
     let affiliateClicks = JSON.parse(localStorage.getItem('affiliate_clicks') || '[]');
     
     const clickData = {
-        site: siteName,           // Ex: "Jerkmate", "Chaturbate", "OnlyFans"
-        category: category,       // Ex: "cam", "premium", "dating"
+        site: siteName,          
+        category: category,       
         url: linkUrl || window.location.href,
         timestamp: new Date().toISOString(),
         page: window.location.pathname,
@@ -230,13 +230,12 @@ function getTotalReviews() {
 // SYSTÈME DE COUNTDOWN FIXE - 15 JOURS
 // ============================================
 
-// DATE FIXE DE FIN - 15 jours à partir d'aujourd'hui (modifiez selon vos besoins)
-// Calculé automatiquement à partir d'aujourd'hui (8 août 2025)
-const COUNTDOWN_START_DATE = new Date('2025-08-08 00:00:00');
-const COUNTDOWN_END_DATE = new Date(COUNTDOWN_START_DATE.getTime() + (15 * 24 * 60 * 60 * 1000)); // 15 jours après
+// DATE FIXE DE FIN - à partir d'aujourd'hui (modifiez selon vos besoins)
+const COUNTDOWN_START_DATE = new Date('2025-08-27 02:08:00');
+const COUNTDOWN_END_DATE = new Date(COUNTDOWN_START_DATE.getTime() + (08 * 24 * 60 * 60 * 1000)); // jours après
 
 // Alternative avec date fixe manuelle (décommentez pour utiliser)
-// const COUNTDOWN_END_DATE = new Date('2025-08-23 23:59:59'); // 15 jours à partir du 8 août
+// const COUNTDOWN_END_DATE = new Date('2025-08-23 23:59:59'); //
 
 // Initialiser le gestionnaire de données
 const dataManager = new DataManager();
