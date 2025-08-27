@@ -1,4 +1,38 @@
-// Voting functionality - starts with zero votes
+/* =========================================================
+   Reviews – Voting, Comments, Affiliate, Countdown (No alerts)
+   ========================================================= */
+
+/* -------------------------
+   Small UI helper: toast
+------------------------- */
+function showToast(msg, type = "info") {
+  const toast = document.createElement("div");
+  toast.textContent = msg;
+  toast.setAttribute("role", "status");
+  toast.style.position = "fixed";
+  toast.style.zIndex = "9999";
+  toast.style.left = "50%";
+  toast.style.transform = "translateX(-50%)";
+  toast.style.bottom = "24px";
+  toast.style.padding = "10px 14px";
+  toast.style.borderRadius = "10px";
+  toast.style.fontSize = "14px";
+  toast.style.lineHeight = "1.2";
+  toast.style.boxShadow = "0 6px 20px rgba(0,0,0,.18)";
+  toast.style.background = type === "error" ? "#ef4444" : type === "success" ? "#10b981" : "#111827";
+  toast.style.color = "#fff";
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.style.transition = "opacity .25s ease, transform .25s ease";
+    toast.style.opacity = "0";
+    toast.style.transform = "translateX(-50%) translateY(6px)";
+    setTimeout(() => toast.remove(), 250);
+  }, 1600);
+}
+
+/* -------------------------
+   Voting state
+------------------------- */
 let votingData = {
   hasVoted: false,
   userVote: null,
@@ -8,178 +42,226 @@ let votingData = {
 
 let commentCount = 4;
 
+/* -------------------------
+   Voting actions
+------------------------- */
 function vote(choice) {
   if (votingData.hasVoted) {
-    alert('You have already voted for this creator!');
+    showToast("You have already voted for this creator!", "error");
     return;
   }
 
   votingData.hasVoted = true;
   votingData.userVote = choice;
 
-  // Update vote counts
-  if (choice === 'yes') {
-    votingData.yesVotes++;
-  } else {
-    votingData.noVotes++;
-  }
+  // Update counts
+  if (choice === "yes") votingData.yesVotes++;
+  else votingData.noVotes++;
 
   const totalVotes = votingData.yesVotes + votingData.noVotes;
-  
-  // Calculate percentages (handle division by zero)
+
+  // Percentages
   let yesPercentage = 0;
   let noPercentage = 0;
-  
   if (totalVotes > 0) {
     yesPercentage = Math.round((votingData.yesVotes / totalVotes) * 100);
     noPercentage = 100 - yesPercentage;
   }
 
-  // Update button states
-  const yesBtn = document.getElementById('vote-yes-btn');
-  const noBtn = document.getElementById('vote-no-btn');
-  
-  // Reset button styles
-  yesBtn.classList.remove('voted');
-  noBtn.classList.remove('voted');
-  
-  // Mark voted button
-  if (choice === 'yes') {
-    yesBtn.classList.add('voted');
-  } else {
-    noBtn.classList.add('voted');
+  // Button states
+  const yesBtn = document.getElementById("vote-yes-btn");
+  const noBtn = document.getElementById("vote-no-btn");
+  if (yesBtn) {
+    yesBtn.classList.remove("voted");
+    yesBtn.disabled = true;
   }
+  if (noBtn) {
+    noBtn.classList.remove("voted");
+    noBtn.disabled = true;
+  }
+  if (choice === "yes" && yesBtn) yesBtn.classList.add("voted");
+  if (choice !== "yes" && noBtn) noBtn.classList.add("voted");
 
-  // Disable buttons
-  yesBtn.disabled = true;
-  noBtn.disabled = true;
-
-  // Update vote display
+  // Update UI
   updateVoteDisplay(yesPercentage, noPercentage, votingData.yesVotes, votingData.noVotes);
 
-  // Show confirmation
-  if (choice === 'yes') {
-    alert('✅ Vote recorded: YES YES YES 💦');
-  } else {
-    alert('❌ Vote recorded: Probably really straight');
-  }
+  // Non-blocking feedback
+  showToast(choice === "yes" ? "Vote recorded: YES" : "Vote recorded: Not this time", "success");
 }
 
 function updateVoteDisplay(yesPercentage, noPercentage, yesCount, noCount) {
-  document.getElementById('yes-fill').style.width = yesPercentage + '%';
-  document.getElementById('no-fill').style.width = noPercentage + '%';
-  
-  document.getElementById('yes-result-text').textContent = 
-    `Yes: ${yesPercentage}% (${yesCount.toLocaleString()} vote${yesCount === 1 ? '' : 's'})`;
-  document.getElementById('no-result-text').textContent = 
-    `Probably Not: ${noPercentage}% (${noCount.toLocaleString()} vote${noCount === 1 ? '' : 's'})`;
-}
+  const yesFill = document.getElementById("yes-fill");
+  const noFill = document.getElementById("no-fill");
+  if (yesFill) yesFill.style.width = yesPercentage + "%";
+  if (noFill) noFill.style.width = noPercentage + "%";
 
-function handleSubscribe() {
-  if (confirm('This will redirect you to the creator\'s page. Continue?')) {
-    alert('Redirecting... (In real implementation, this would open the page)');
+  const yesText = document.getElementById("yes-result-text");
+  const noText = document.getElementById("no-result-text");
+  if (yesText) {
+    yesText.textContent = `Yes: ${yesPercentage}% (${yesCount.toLocaleString()} vote${yesCount === 1 ? "" : "s"})`;
+  }
+  if (noText) {
+    noText.textContent = `Probably Not: ${noPercentage}% (${noCount.toLocaleString()} vote${noCount === 1 ? "" : "s"})`;
   }
 }
 
-function trackAffiliate(productId) {
-  console.log('Tracking affiliate click for:', productId);
-  alert('Redirecting to affiliate content...');
+/* -------------------------
+   Affiliate tracking + redirect
+------------------------- */
+function trackAffiliate(site = "", category = "", url = "") {
+  try {
+    const click = {
+      site,
+      category,
+      url: url || window.location.href,
+      timestamp: new Date().toISOString(),
+      page: window.location.pathname,
+      referrer: document.referrer || "direct",
+      sessionId: getSessionId()
+    };
+    let arr = JSON.parse(localStorage.getItem("affiliate_clicks") || "[]");
+    arr.push(click);
+    if (arr.length > 1000) arr = arr.slice(-1000);
+    localStorage.setItem("affiliate_clicks", JSON.stringify(arr));
+  } catch (e) {
+    console.log("Affiliate tracking failed:", e?.message || e);
+  }
+
+  if (url) {
+    // Open in a new tab without blocking dialogs
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
 }
 
-// Modal functionality
+// Unique session id helper
+function getSessionId() {
+  let sessionId = sessionStorage.getItem("session_id");
+  if (!sessionId) {
+    sessionId = "sess_" + Date.now() + "_" + Math.random().toString(36).slice(2, 10);
+    sessionStorage.setItem("session_id", sessionId);
+  }
+  return sessionId;
+}
+
+/* -------------------------
+   Subscribe action (simple)
+------------------------- */
+function handleSubscribe(url = "") {
+  if (url) {
+    // If you want to track this too:
+    trackAffiliate("subscribe", "cta", url);
+  }
+}
+
+/* -------------------------
+   Modal: comments
+------------------------- */
 function openCommentModal() {
-  document.getElementById('commentModal').style.display = 'block';
-  document.body.style.overflow = 'hidden';
+  const m = document.getElementById("commentModal");
+  if (m) {
+    m.style.display = "block";
+    document.body.style.overflow = "hidden";
+  }
 }
 
 function closeCommentModal() {
-  document.getElementById('commentModal').style.display = 'none';
-  document.body.style.overflow = 'auto';
-  // Clear form
-  document.getElementById('userName').value = '';
-  document.getElementById('userComment').value = '';
+  const m = document.getElementById("commentModal");
+  if (m) {
+    m.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+  const nameEl = document.getElementById("userName");
+  const txtEl = document.getElementById("userComment");
+  if (nameEl) nameEl.value = "";
+  if (txtEl) txtEl.value = "";
 }
 
-// Comment functionality
+/* -------------------------
+   Comments
+------------------------- */
 function submitComment(event) {
   event.preventDefault();
-  
-  const userName = document.getElementById('userName').value.trim();
-  const commentText = document.getElementById('userComment').value.trim();
-  
+
+  const userName = (document.getElementById("userName")?.value || "").trim();
+  const commentText = (document.getElementById("userComment")?.value || "").trim();
+
   if (!userName || !commentText) {
-    alert('Please fill in both name and comment fields.');
+    showToast("Please fill in both name and comment fields.", "error");
     return;
   }
-
   if (commentText.length < 10) {
-    alert('Please write a more detailed comment (at least 10 characters).');
+    showToast("Please write a more detailed comment (min 10 chars).", "error");
     return;
   }
 
-  // Create new comment element
-  const commentsList = document.getElementById('comments-list');
-  const newComment = document.createElement('div');
-  newComment.className = 'comment';
-  
+  const list = document.getElementById("comments-list");
+  if (!list) {
+    showToast("Comments container not found.", "error");
+    return;
+  }
+
+  // Create comment node
+  const newComment = document.createElement("div");
+  newComment.className = "comment";
   newComment.innerHTML = `
     <div class="comment-author">${userName}</div>
     <div class="comment-time">Just now</div>
     <div class="comment-text">${commentText}</div>
   `;
-  
-  // Add to top of comments list
-  commentsList.insertBefore(newComment, commentsList.firstChild);
-  
-  // Update comment count
+
+  // Add at the top
+  list.insertBefore(newComment, list.firstChild);
+
+  // Update count
   commentCount++;
-  document.getElementById('comments-count').textContent = `Community Discussion (${commentCount} comments)`;
-  
-  // Close modal and show success
+  const counter = document.getElementById("comments-count");
+  if (counter) counter.textContent = `Community Discussion (${commentCount} comments)`;
+
   closeCommentModal();
-  alert('Comment posted successfully!');
+  showToast("Comment posted!", "success");
 }
 
-// Close modal when clicking outside
-window.onclick = function(event) {
-  const modal = document.getElementById('commentModal');
-  if (event.target === modal) {
+/* Close modal when clicking outside */
+window.addEventListener("click", function (event) {
+  const modal = document.getElementById("commentModal");
+  if (modal && event.target === modal) {
     closeCommentModal();
   }
-}
-
-// Previous creator functionality
-function viewCreatorDetails(creatorId) {
-  alert(`Viewing details for ${creatorId}. This would redirect to their results page.`);
-}
-
-
-const START_DATE = new Date('2025-08-27 02:09:00');
-const COUNTDOWN_END_DATE = new Date(START_DATE.getTime() + (30 * 24 * 60 * 60 * 1000)); 
-
-
-// Initialize the page
-document.addEventListener('DOMContentLoaded', function() {
-  startCountdown();
-  updateProgressBar();
 });
 
-// Countdown functionality
+/* -------------------------
+   Creator details navigation
+------------------------- */
+function viewCreatorDetails(creatorId, url = "") {
+  if (url) {
+    window.location.href = url;
+    return;
+  }
+  // Fallback route
+  window.location.href = `/creators/${encodeURIComponent(creatorId)}`;
+}
+
+/* -------------------------
+   Countdown + progress
+------------------------- */
+const START_DATE = new Date("2025-08-27T02:09:00"); // ISO for reliability
+const COUNTDOWN_END_DATE = new Date(START_DATE.getTime() + 30 * 24 * 60 * 60 * 1000);
+
 function startCountdown() {
   function updateCountdown() {
-    const now = new Date().getTime();
+    const now = Date.now();
     const distance = COUNTDOWN_END_DATE.getTime() - now;
 
     if (distance < 0) {
-      // Countdown finished
-      document.getElementById('countdownTimer').innerHTML = '<div style="text-align: center; color: #dc2626; font-weight: 600; font-size: 1.2em; padding: 20px;">VOTING CLOSED</div>';
-      
-      // Désactiver les boutons de vote
-      const yesBtn = document.getElementById('vote-yes-btn');
-      const noBtn = document.getElementById('vote-no-btn');
+      const timer = document.getElementById("countdownTimer");
+      if (timer) {
+        timer.innerHTML =
+          '<div style="text-align:center;color:#dc2626;font-weight:600;font-size:1.2em;padding:20px;">VOTING CLOSED</div>';
+      }
+      const yesBtn = document.getElementById("vote-yes-btn");
+      const noBtn = document.getElementById("vote-no-btn");
       if (yesBtn) yesBtn.disabled = true;
       if (noBtn) noBtn.disabled = true;
-      
       return;
     }
 
@@ -188,81 +270,109 @@ function startCountdown() {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Mise à jour des éléments avec vérification d'existence
-    const daysElement = document.getElementById('days');
-    const hoursElement = document.getElementById('hours');
-    const minutesElement = document.getElementById('minutes');
-    const secondsElement = document.getElementById('seconds');
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
 
-    if (daysElement) daysElement.textContent = days;
-    if (hoursElement) hoursElement.textContent = hours;
-    if (minutesElement) minutesElement.textContent = minutes;
-    if (secondsElement) secondsElement.textContent = seconds;
+    if (daysEl) daysEl.textContent = String(days);
+    if (hoursEl) hoursEl.textContent = String(hours);
+    if (minutesEl) minutesEl.textContent = String(minutes);
+    if (secondsEl) secondsEl.textContent = String(seconds);
   }
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
 }
 
-// Progress bar functionality (optionnel)
 function updateProgressBar() {
-  const START_DATE = new Date('2025-08-08 00:00:00'); // Même date de début que pour le countdown
-  const totalDuration = COUNTDOWN_END_DATE.getTime() - START_DATE.getTime();
-  const elapsed = new Date().getTime() - START_DATE.getTime();
-  const progress = Math.min(100, Math.max(0, (elapsed / totalDuration) * 100));
-  
-  // Si vous avez une barre de progression dans votre HTML, décommentez la ligne suivante
-  // document.getElementById('progressBar').style.width = progress + '%';
+  const total = COUNTDOWN_END_DATE.getTime() - START_DATE.getTime();
+  const elapsed = Date.now() - START_DATE.getTime();
+  const progress = Math.min(100, Math.max(0, (elapsed / total) * 100));
+  const bar = document.getElementById("progressBar");
+  if (bar) bar.style.width = progress.toFixed(2) + "%";
 }
 
-// Newsletter functionality
-document.addEventListener('DOMContentLoaded', function() {
-  const newsletterForm = document.getElementById('newsletterForm');
+/* -------------------------
+   Newsletter mini-handler
+------------------------- */
+document.addEventListener("DOMContentLoaded", function () {
+  const newsletterForm = document.getElementById("newsletterForm");
   if (newsletterForm) {
-    newsletterForm.addEventListener('submit', function(e) {
+    newsletterForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      const email = this.querySelector('input[type="email"]').value;
-      const consentCheckbox = document.getElementById('gdprConsent');
-      const consent = consentCheckbox ? consentCheckbox.checked : true;
-      
-      if (consentCheckbox && !consent) {
-        alert('Please agree to receive marketing emails.');
+      const emailInput = this.querySelector('input[type="email"]');
+      const consentCheckbox = document.getElementById("gdprConsent");
+      const email = (emailInput?.value || "").trim();
+      const consent = consentCheckbox ? !!consentCheckbox.checked : true;
+
+      if (!email) {
+        showToast("Please enter your email.", "error");
         return;
       }
-      
-      alert('Thank you for subscribing!');
-      this.querySelector('input[type="email"]').value = '';
+      if (consentCheckbox && !consent) {
+        showToast("Please agree to receive marketing emails.", "error");
+        return;
+      }
+
+      // Optional local persistence
+      try {
+        const list = JSON.parse(localStorage.getItem("newsletter_signups") || "[]");
+        list.push({ email, timestamp: new Date().toISOString(), consent: true });
+        localStorage.setItem("newsletter_signups", JSON.stringify(list));
+      } catch {}
+
+      // Inline success
+      let msg = this.querySelector(".newsletter-message");
+      if (!msg) {
+        msg = document.createElement("div");
+        msg.className = "newsletter-message";
+        msg.style.marginTop = "8px";
+        this.appendChild(msg);
+      }
+      msg.textContent = `Thanks! ${email} subscribed.`;
+      showToast("Subscribed!", "success");
+
+      if (emailInput) emailInput.value = "";
       if (consentCheckbox) consentCheckbox.checked = false;
     });
   }
 });
 
-// Initialize page
-document.addEventListener('DOMContentLoaded', function() {
-  // Initialize vote display starting at 0%
+/* -------------------------
+   Init on load
+------------------------- */
+document.addEventListener("DOMContentLoaded", function () {
+  // Initialize vote display
   updateVoteDisplay(0, 0, 0, 0);
-  
-  // Start countdown
+
+  // Start countdown & progress
   startCountdown();
-  
-  // Add interactive effects to vote buttons
-  const voteButtons = document.querySelectorAll('.vote-btn');
-  voteButtons.forEach(btn => {
-    btn.addEventListener('mouseenter', function() {
-      if (!this.disabled) {
-        this.style.transform = 'translateY(-2px)';
-      }
+  updateProgressBar();
+
+  // Fancy hover effects on vote buttons
+  document.querySelectorAll(".vote-btn").forEach((btn) => {
+    btn.addEventListener("mouseenter", function () {
+      if (!this.disabled) this.style.transform = "translateY(-2px)";
     });
-    
-    btn.addEventListener('mouseleave', function() {
-      if (!this.disabled) {
-        this.style.transform = 'translateY(0)';
-      }
+    btn.addEventListener("mouseleave", function () {
+      if (!this.disabled) this.style.transform = "translateY(0)";
     });
   });
 
-  // Afficher la date de fin dans la console pour vérification
-  console.log('Countdown will end on:', COUNTDOWN_END_DATE.toLocaleString());
-  console.log('Current time:', new Date().toLocaleString());
-  console.log('Time remaining (ms):', COUNTDOWN_END_DATE.getTime() - new Date().getTime());
+  console.log("Countdown will end on:", COUNTDOWN_END_DATE.toLocaleString());
+  console.log("Current time:", new Date().toLocaleString());
+  console.log("Time remaining (ms):", COUNTDOWN_END_DATE.getTime() - Date.now());
 });
+
+/* -------------------------
+   Expose functions globally (for inline handlers)
+------------------------- */
+window.vote = vote;
+window.updateVoteDisplay = updateVoteDisplay;
+window.trackAffiliate = trackAffiliate;
+window.handleSubscribe = handleSubscribe;
+window.openCommentModal = openCommentModal;
+window.closeCommentModal = closeCommentModal;
+window.submitComment = submitComment;
+window.viewCreatorDetails = viewCreatorDetails;
