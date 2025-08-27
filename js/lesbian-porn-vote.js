@@ -153,12 +153,9 @@ function viewCreatorDetails(creatorId) {
   alert(`Viewing details for ${creatorId}. This would redirect to their results page.`);
 }
 
-// DATE FIXE DE FIN - Modifiez cette date selon vos besoins
-// Format: new Date('YYYY-MM-DD HH:MM:SS')
-const COUNTDOWN_END_DATE = new Date('2025-09-08 23:59:59');
 
-const START_DATE = new Date('2025-08-27 02:09:00'); // Date de début fixe
-const COUNTDOWN_END_DATE = new Date(START_DATE.getTime() + (30 * 24 * 60 * 60 * 1000)); // 30 jours après
+const START_DATE = new Date('2025-08-27 02:09:00');
+const COUNTDOWN_END_DATE = new Date(START_DATE.getTime() + (30 * 24 * 60 * 60 * 1000)); 
 
 
 // Initialize the page
