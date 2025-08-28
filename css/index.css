@@ -1249,16 +1249,13 @@ body {
     }
 
 
-
-.faq-section {
+.faq-section h2 {
   font-size: 2.5rem;
   font-weight: 700;
   color: #c5b0e5;
   margin-bottom: 1rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
-   
 
     .faq-header p {
       font-size: 1.1rem;
