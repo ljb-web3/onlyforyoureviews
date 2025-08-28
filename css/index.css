@@ -1248,6 +1248,16 @@ body {
       margin-bottom: 3rem;
     }
 
+
+
+.faq-section {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #c5b0e5;
+  margin-bottom: 1rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
    
 
     .faq-header p {
