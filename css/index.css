@@ -1240,9 +1240,7 @@ body {
     /* FAQ Section */
     .faq-section {
       background: var(--white);
-      border-radius: 24px;
-      padding: 3rem;
-      border: 1px solid #e5e5e5;
+      padding: 6rem;
       margin-bottom: 4rem;
     }
 
