@@ -1239,7 +1239,6 @@ body {
 
     /* FAQ Section */
     .faq-section {
-      background: var(--white);
       padding: 6rem;
       margin-bottom: 4rem;
     }
