@@ -918,3 +918,42 @@ console.log(`
 • Modal submission disabled after deadline
 • Visual countdown status indicators
 `);
+
+
+<script>
+  (function () {
+    function mountIframe(wrapper) {
+      if (!wrapper || wrapper.dataset.loaded) return;
+      const src = wrapper.getAttribute('data-src');
+      const frame = wrapper.querySelector('.ph-embed__frame');
+      const iframe = document.createElement('iframe');
+      iframe.className = 'ph-embed__iframe';
+      iframe.setAttribute('src', src);
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.setAttribute('referrerpolicy', 'origin-when-cross-origin');
+      iframe.setAttribute('allow', 'autoplay; encrypted-media');
+      frame.innerHTML = ''; // remove poster + play btn
+      frame.appendChild(iframe);
+      wrapper.dataset.loaded = 'true';
+    }
+
+    // click-to-play
+    document.addEventListener('click', function (e) {
+      const btn = e.target.closest('.ph-embed__play');
+      if (!btn) return;
+      const wrapper = btn.closest('.ph-embed');
+      mountIframe(wrapper);
+    }, { passive: true });
+
+    // Optional: load on viewport (lazy-autoplay) if you prefer
+    // const observer = new IntersectionObserver((entries) => {
+    //   entries.forEach(entry => {
+    //     if (entry.isIntersecting) {
+    //       mountIframe(entry.target);
+    //       observer.unobserve(entry.target);
+    //     }
+    //   });
+    // }, { threshold: 0.25 });
+    // document.querySelectorAll('.ph-embed').forEach(el => observer.observe(el));
+  })();
