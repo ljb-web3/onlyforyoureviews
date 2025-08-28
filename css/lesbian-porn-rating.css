@@ -1060,6 +1060,60 @@
       opacity: 0.8;
     }
 
+
+ .ph-embed {
+    position: relative;
+    width: 100%;
+    max-width: 800px; /* tweak as you like */
+    margin: 0 auto;
+  }
+  /* 16:9 aspect ratio */
+  .ph-embed__frame {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: #000;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  .ph-embed__poster,
+  .ph-embed__iframe,
+  .ph-embed__play {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+  }
+  .ph-embed__poster {
+    object-fit: cover;
+    display: block;
+  }
+  .ph-embed__play {
+    display: grid;
+    place-items: center;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+  .ph-embed__play::before {
+    content: "";
+    width: 84px; height: 84px;
+    border-radius: 50%;
+    background: rgba(0,0,0,.45);
+    box-shadow: 0 2px 16px rgba(0,0,0,.35), inset 0 0 0 2px rgba(255,255,255,.2);
+  }
+  .ph-embed__play::after {
+    content: "";
+    position: absolute;
+    width: 0; height: 0;
+    border-left: 22px solid white;
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    transform: translateX(6px);
+  }
+  .ph-embed__play:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+
+
+
+
     /* Stats Dashboard */
     .stats-dashboard {
       position: fixed;
