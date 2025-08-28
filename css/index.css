@@ -1248,12 +1248,7 @@ body {
       margin-bottom: 3rem;
     }
 
-    .faq-header h2 {
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--purple);
-      margin-bottom: 1rem;
-    }
+   
 
     .faq-header p {
       font-size: 1.1rem;
