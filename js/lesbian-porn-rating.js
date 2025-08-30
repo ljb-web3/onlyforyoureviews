@@ -181,54 +181,197 @@ function showAffiliateStats() {
 // COUNTDOWN SYSTEM
 // ============================================
 
+
+// ============================
+// PERSISTENT, CONFIGURABLE COUNTDOWN
+// ============================
+
+const COUNTDOWN_KEYS = {
+  start: 'ofyr_countdown_start_iso',
+  end:   'ofyr_countdown_end_iso'
+};
+
+// Default (used only if nothing in URL or localStorage)
+const DEFAULT_START_ISO = "2025-08-27T02:09:00"; // change if you want
+const DEFAULT_DURATION_DAYS = 30;
+
+// Helper: parse safe ISO -> number (ms) or null
+function parseISOToMs(iso) {
+  if (!iso) return null;
+  const t = Date.parse(iso);
+  return Number.isFinite(t) ? t : null;
+}
+
+// Set & persist countdown dates (admin utility)
+function setCountdownDates(startISO, endISO) {
+  const startMs = parseISOToMs(startISO);
+  const endMs   = parseISOToMs(endISO);
+
+  if (!endMs && !startMs) {
+    alert("Invalid dates. Provide at least a valid end date, or start + duration.");
+    return;
+  }
+  if (startMs && endMs && endMs <= startMs) {
+    alert("End date must be after start date.");
+    return;
+  }
+
+  if (startISO) localStorage.setItem(COUNTDOWN_KEYS.start, startISO);
+  if (endISO)   localStorage.setItem(COUNTDOWN_KEYS.end,   endISO);
+
+  // Refresh page UI after change
+  location.reload();
+}
+window.setCountdownDates = setCountdownDates; // optional global for admin pages
+
+// Optional admin: clear only countdown (for testing)
+// window.resetCountdown = () => { localStorage.removeItem(COUNTDOWN_KEYS.start); localStorage.removeItem(COUNTDOWN_KEYS.end); location.reload(); };
+
+// Build dates (URL > localStorage > default)
+function initCountdownConfig() {
+  const params = new URLSearchParams(location.search);
+
+  // URL overrides
+  const urlEndISO   = params.get("end");
+  const urlStartISO = params.get("start");
+  const urlDuration = Number(params.get("durationDays"));
+
+  // localStorage
+  const savedStartISO = localStorage.getItem(COUNTDOWN_KEYS.start);
+  const savedEndISO   = localStorage.getItem(COUNTDOWN_KEYS.end);
+
+  let startISO = urlStartISO || savedStartISO || DEFAULT_START_ISO;
+  let endISO   = urlEndISO   || savedEndISO   || null;
+
+  // If no explicit end, compute end = start + duration
+  if (!endISO) {
+    const startMs = parseISOToMs(startISO);
+    const days = Number.isFinite(urlDuration) && urlDuration > 0 ? urlDuration : DEFAULT_DURATION_DAYS;
+    endISO = new Date(startMs + days * 24 * 60 * 60 * 1000).toISOString();
+  }
+
+  // Persist what we’re using (so it sticks across reloads)
+  localStorage.setItem(COUNTDOWN_KEYS.start, startISO);
+  localStorage.setItem(COUNTDOWN_KEYS.end,   endISO);
+
+  return {
+    COUNTDOWN_START_DATE: new Date(startISO),
+    COUNTDOWN_END_DATE:   new Date(endISO)
+  };
+}
+
+// Initialize once, then use these constants everywhere
+const { COUNTDOWN_START_DATE, COUNTDOWN_END_DATE } = initCountdownConfig();
+
+// ============================
+// COUNTDOWN RUNTIME
+// ============================
+
 function startCountdown() {
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = COUNTDOWN_END_DATE.getTime() - now;
+  function setClosedUI() {
+    const timer = document.getElementById("countdownTimer");
+    if (timer) {
+      timer.innerHTML = '<div style="text-align:center;color:#dc2626;font-weight:600;font-size:1.2em;padding:20px;">VOTING CLOSED</div>';
+    }
+    const yesBtn = document.getElementById("vote-yes-btn");
+    const noBtn  = document.getElementById("vote-no-btn");
+    if (yesBtn) yesBtn.disabled = true;
+    if (noBtn)  noBtn.disabled  = true;
+  }
 
-        if (distance < 0) {
-            // Countdown finished
-            const countdownElement = document.getElementById('countdownTimer');
-            if (countdownElement) {
-                countdownElement.innerHTML = '<div style="text-align: center; color: #dc2626; font-weight: 600; font-size: 1.2em; padding: 20px;">VOTING CLOSED</div>';
-            }
-            
-            // Disable submission buttons
-            const submitButton = document.querySelector('.modal-submit');
-            const commentButton = document.querySelector('.comment-submit');
-            if (submitButton) {
-                submitButton.disabled = true;
-                submitButton.textContent = 'Voting Closed';
-            }
-            if (commentButton) {
-                commentButton.disabled = true;
-                commentButton.textContent = 'Voting Closed';
-            }
-            
-            return;
-        }
+  function updateCountdown() {
+    const now = Date.now();
+    const distance = COUNTDOWN_END_DATE.getTime() - now;
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        // Update countdown display elements
-        const daysElement = document.getElementById('days');
-        const hoursElement = document.getElementById('hours');
-        const minutesElement = document.getElementById('minutes');
-        const secondsElement = document.getElementById('seconds');
-
-        if (daysElement) daysElement.textContent = days;
-        if (hoursElement) hoursElement.textContent = hours;
-        if (minutesElement) minutesElement.textContent = minutes;
-        if (secondsElement) secondsElement.textContent = seconds;
+    if (distance <= 0) {
+      setClosedUI();
+      return; // stop updating
     }
 
-    // Update immediately and then every second
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    const days    = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours   = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    const daysEl    = document.getElementById("days");
+    const hoursEl   = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    if (daysEl)    daysEl.textContent    = String(days);
+    if (hoursEl)   hoursEl.textContent   = String(hours);
+    if (minutesEl) minutesEl.textContent = String(minutes);
+    if (secondsEl) secondsEl.textContent = String(seconds);
+  }
+
+  // First paint
+  updateCountdown();
+
+  // If already expired on load, keep closed state and don’t schedule updates
+  if (Date.now() >= COUNTDOWN_END_DATE.getTime()) {
+    // lock the UI closed and exit
+    const timer = document.getElementById("countdownTimer");
+    if (timer) {
+      timer.innerHTML = '<div style="text-align:center;color:#dc2626;font-weight:600;font-size:1.2em;padding:20px;">VOTING CLOSED</div>';
+    }
+    const yesBtn = document.getElementById("vote-yes-btn");
+    const noBtn  = document.getElementById("vote-no-btn");
+    if (yesBtn) yesBtn.disabled = true;
+    if (noBtn)  noBtn.disabled  = true;
+    return;
+  }
+
+  // Otherwise, tick
+  setInterval(updateCountdown, 1000);
 }
+
+// ============================
+// STATUS HELPERS (rewritten)
+// ============================
+
+function showDataStatus() {
+  const stats = {
+    ratings: storedData.ratings.length,
+    comments: storedData.comments.length,
+    affiliateClicks: storedData.affiliateClicks.length,
+    newsletters: storedData.newsletterSignups.length,
+    totalReviews: storedData.totalReviews,
+    userPersonalRating: storedData.userPersonalRating,
+    lastBackup: storedData.lastBackup || 'Never',
+    countdownStart: COUNTDOWN_START_DATE.toLocaleString(),
+    countdownEnd: COUNTDOWN_END_DATE.toLocaleString(),
+    countdownActive: Date.now() < COUNTDOWN_END_DATE.getTime()
+  };
+  console.log('📊 Data Status:', stats);
+  return stats;
+}
+
+function getCountdownStatus() {
+  const now = Date.now();
+  const startMs = COUNTDOWN_START_DATE.getTime();
+  const endMs   = COUNTDOWN_END_DATE.getTime();
+
+  const distance = endMs - now;
+  const totalDuration = endMs - startMs;
+  const elapsed = Math.max(0, Math.min(totalDuration, now - startMs));
+  const progress = totalDuration > 0 ? Math.min(100, Math.max(0, (elapsed / totalDuration) * 100)) : 100;
+
+  const status = {
+    isActive: distance > 0,
+    timeRemaining: Math.max(0, distance),
+    daysRemaining: Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24))),
+    hoursRemaining: Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))),
+    minutesRemaining: Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))),
+    secondsRemaining: Math.max(0, Math.floor((distance % (1000 * 60)) / 1000)),
+    progressPercentage: progress.toFixed(2),
+    startDate: COUNTDOWN_START_DATE.toLocaleString(),
+    endDate: COUNTDOWN_END_DATE.toLocaleString()
+  };
+
+  console.log('⏰ Countdown Status:', status);
+  return status;
+}
+
 
 // ============================================
 // MODAL FUNCTIONALITY
