@@ -1,6 +1,107 @@
 /* =========================================================
-   Reviews – Voting, Comments, Affiliate, Countdown (No alerts)
+   Reviews – Voting, Comments, Affiliate, Countdown (Simple + Persistent)
    ========================================================= */
+
+/* -------------------------
+   Persistent data storage (for voting/comments/progress)
+------------------------- */
+let persistentData = {
+  // Voting data
+  hasVoted: false,
+  userVote: null,
+  yesVotes: 0,
+  noVotes: 0,
+  
+  // Progress bar data
+  progressStartTime: null,
+  
+  // Other data
+  commentCount: 4
+};
+
+// Try to load data from localStorage
+function loadPersistedData() {
+  try {
+    const stored = localStorage.getItem('persistent_reviews_data');
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      Object.assign(persistentData, parsed);
+      console.log('Loaded persistent data from localStorage');
+    }
+  } catch (e) {
+    console.log('Failed to load persistent data:', e);
+  }
+}
+
+// Save data to localStorage
+function savePersistedData() {
+  try {
+    localStorage.setItem('persistent_reviews_data', JSON.stringify(persistentData));
+  } catch (e) {
+    console.log('Failed to save persistent data:', e);
+  }
+}
+
+/* -------------------------
+   SIMPLE COUNTDOWN CONFIGURATION - EASY TO CHANGE!
+------------------------- */
+const START_DATE = new Date("2025-08-30T14:30:00"); // ISO for reliability - CHANGE THIS DATE
+const COUNTDOWN_END_DATE = new Date(START_DATE.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 days from start
+
+/* -------------------------
+   Countdown + progress
+------------------------- */
+function startCountdown() {
+  function updateCountdown() {
+    const now = Date.now();
+    const distance = COUNTDOWN_END_DATE.getTime() - now;
+
+    if (distance < 0) {
+      const timer = document.getElementById("countdownTimer");
+      if (timer) {
+        timer.innerHTML =
+          '<div style="text-align:center;color:#dc2626;font-weight:600;font-size:1.2em;padding:20px;">VOTING CLOSED</div>';
+      }
+      const yesBtn = document.getElementById("vote-yes-btn");
+      const noBtn = document.getElementById("vote-no-btn");
+      if (yesBtn) yesBtn.disabled = true;
+      if (noBtn) noBtn.disabled = true;
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    if (daysEl) daysEl.textContent = String(days);
+    if (hoursEl) hoursEl.textContent = String(hours);
+    if (minutesEl) minutesEl.textContent = String(minutes);
+    if (secondsEl) secondsEl.textContent = String(seconds);
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+}
+
+function updateProgressBar() {
+  const total = COUNTDOWN_END_DATE.getTime() - START_DATE.getTime();
+  
+  // Use saved start time if available, otherwise use START_DATE
+  const startTime = persistentData.progressStartTime ? 
+    new Date(persistentData.progressStartTime).getTime() : 
+    START_DATE.getTime();
+    
+  const elapsed = Date.now() - startTime;
+  const progress = Math.min(100, Math.max(0, (elapsed / total) * 100));
+  const bar = document.getElementById("progressBar");
+  if (bar) bar.style.width = progress.toFixed(2) + "%";
+}
 
 /* -------------------------
    Small UI helper: toast
@@ -31,40 +132,28 @@ function showToast(msg, type = "info") {
 }
 
 /* -------------------------
-   Voting state
-------------------------- */
-let votingData = {
-  hasVoted: false,
-  userVote: null,
-  yesVotes: 0,
-  noVotes: 0
-};
-
-let commentCount = 4;
-
-/* -------------------------
-   Voting actions
+   Voting actions (PERSISTENT)
 ------------------------- */
 function vote(choice) {
-  if (votingData.hasVoted) {
+  if (persistentData.hasVoted) {
     showToast("You have already voted for this creator!", "error");
     return;
   }
 
-  votingData.hasVoted = true;
-  votingData.userVote = choice;
+  persistentData.hasVoted = true;
+  persistentData.userVote = choice;
 
   // Update counts
-  if (choice === "yes") votingData.yesVotes++;
-  else votingData.noVotes++;
+  if (choice === "yes") persistentData.yesVotes++;
+  else persistentData.noVotes++;
 
-  const totalVotes = votingData.yesVotes + votingData.noVotes;
+  const totalVotes = persistentData.yesVotes + persistentData.noVotes;
 
   // Percentages
   let yesPercentage = 0;
   let noPercentage = 0;
   if (totalVotes > 0) {
-    yesPercentage = Math.round((votingData.yesVotes / totalVotes) * 100);
+    yesPercentage = Math.round((persistentData.yesVotes / totalVotes) * 100);
     noPercentage = 100 - yesPercentage;
   }
 
@@ -83,7 +172,10 @@ function vote(choice) {
   if (choice !== "yes" && noBtn) noBtn.classList.add("voted");
 
   // Update UI
-  updateVoteDisplay(yesPercentage, noPercentage, votingData.yesVotes, votingData.noVotes);
+  updateVoteDisplay(yesPercentage, noPercentage, persistentData.yesVotes, persistentData.noVotes);
+
+  // Save voting data
+  savePersistedData();
 
   // Non-blocking feedback
   showToast(choice === "yes" ? "Vote recorded: YES" : "Vote recorded: Not this time", "success");
@@ -154,7 +246,7 @@ function handleSubscribe(url = "") {
 }
 
 /* -------------------------
-   Modal: comments
+   Modal: comments (PERSISTENT)
 ------------------------- */
 function openCommentModal() {
   const m = document.getElementById("commentModal");
@@ -177,7 +269,7 @@ function closeCommentModal() {
 }
 
 /* -------------------------
-   Comments
+   Comments (PERSISTENT)
 ------------------------- */
 function submitComment(event) {
   event.preventDefault();
@@ -213,9 +305,29 @@ function submitComment(event) {
   list.insertBefore(newComment, list.firstChild);
 
   // Update count
-  commentCount++;
+  persistentData.commentCount++;
   const counter = document.getElementById("comments-count");
-  if (counter) counter.textContent = `Community Discussion (${commentCount} comments)`;
+  if (counter) counter.textContent = `Community Discussion (${persistentData.commentCount} comments)`;
+
+  // Save data to localStorage
+  savePersistedData();
+
+  // Also save the actual comment content for persistence
+  try {
+    let comments = JSON.parse(localStorage.getItem('user_comments') || '[]');
+    comments.unshift({
+      author: userName,
+      text: commentText,
+      timestamp: new Date().toISOString()
+    });
+    // Keep only last 50 comments to prevent storage bloat
+    if (comments.length > 50) {
+      comments = comments.slice(0, 50);
+    }
+    localStorage.setItem('user_comments', JSON.stringify(comments));
+  } catch (e) {
+    console.log('Failed to save comment:', e);
+  }
 
   closeCommentModal();
   showToast("Comment posted!", "success");
@@ -242,55 +354,35 @@ function viewCreatorDetails(creatorId, url = "") {
 }
 
 /* -------------------------
-   Countdown + progress
+   Load saved comments on page load
 ------------------------- */
-const START_DATE = new Date("2025-08-27T02:09:00"); // ISO for reliability
-const COUNTDOWN_END_DATE = new Date(START_DATE.getTime() + 30 * 24 * 60 * 60 * 1000);
-
-function startCountdown() {
-  function updateCountdown() {
-    const now = Date.now();
-    const distance = COUNTDOWN_END_DATE.getTime() - now;
-
-    if (distance < 0) {
-      const timer = document.getElementById("countdownTimer");
-      if (timer) {
-        timer.innerHTML =
-          '<div style="text-align:center;color:#dc2626;font-weight:600;font-size:1.2em;padding:20px;">VOTING CLOSED</div>';
-      }
-      const yesBtn = document.getElementById("vote-yes-btn");
-      const noBtn = document.getElementById("vote-no-btn");
-      if (yesBtn) yesBtn.disabled = true;
-      if (noBtn) noBtn.disabled = true;
-      return;
+function loadSavedComments() {
+  try {
+    const comments = JSON.parse(localStorage.getItem('user_comments') || '[]');
+    const list = document.getElementById("comments-list");
+    
+    if (list && comments.length > 0) {
+      comments.forEach(comment => {
+        const commentEl = document.createElement("div");
+        commentEl.className = "comment";
+        
+        // Format the saved timestamp
+        const date = new Date(comment.timestamp);
+        const timeText = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+        
+        commentEl.innerHTML = `
+          <div class="comment-author">${comment.author}</div>
+          <div class="comment-time">${timeText}</div>
+          <div class="comment-text">${comment.text}</div>
+        `;
+        
+        // Add to comments list (they're already in reverse chronological order)
+        list.appendChild(commentEl);
+      });
     }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    const daysEl = document.getElementById("days");
-    const hoursEl = document.getElementById("hours");
-    const minutesEl = document.getElementById("minutes");
-    const secondsEl = document.getElementById("seconds");
-
-    if (daysEl) daysEl.textContent = String(days);
-    if (hoursEl) hoursEl.textContent = String(hours);
-    if (minutesEl) minutesEl.textContent = String(minutes);
-    if (secondsEl) secondsEl.textContent = String(seconds);
+  } catch (e) {
+    console.log('Failed to load saved comments:', e);
   }
-
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-}
-
-function updateProgressBar() {
-  const total = COUNTDOWN_END_DATE.getTime() - START_DATE.getTime();
-  const elapsed = Date.now() - START_DATE.getTime();
-  const progress = Math.min(100, Math.max(0, (elapsed / total) * 100));
-  const bar = document.getElementById("progressBar");
-  if (bar) bar.style.width = progress.toFixed(2) + "%";
 }
 
 /* -------------------------
@@ -343,8 +435,43 @@ document.addEventListener("DOMContentLoaded", function () {
    Init on load
 ------------------------- */
 document.addEventListener("DOMContentLoaded", function () {
-  // Initialize vote display
-  updateVoteDisplay(0, 0, 0, 0);
+  // Load persistent data first
+  loadPersistedData();
+  
+  // Initialize progress start time if not set
+  if (!persistentData.progressStartTime) {
+    persistentData.progressStartTime = START_DATE.toISOString();
+    savePersistedData();
+  }
+  
+  // Initialize vote display with stored data
+  const totalVotes = persistentData.yesVotes + persistentData.noVotes;
+  let yesPercentage = 0;
+  let noPercentage = 0;
+  if (totalVotes > 0) {
+    yesPercentage = Math.round((persistentData.yesVotes / totalVotes) * 100);
+    noPercentage = 100 - yesPercentage;
+  }
+  updateVoteDisplay(yesPercentage, noPercentage, persistentData.yesVotes, persistentData.noVotes);
+  
+  // Restore voting state
+  if (persistentData.hasVoted) {
+    const yesBtn = document.getElementById("vote-yes-btn");
+    const noBtn = document.getElementById("vote-no-btn");
+    if (yesBtn) {
+      yesBtn.disabled = true;
+      if (persistentData.userVote === "yes") yesBtn.classList.add("voted");
+    }
+    if (noBtn) {
+      noBtn.disabled = true;
+      if (persistentData.userVote !== "yes") noBtn.classList.add("voted");
+    }
+  }
+  
+  // Update comment count and load saved comments
+  const counter = document.getElementById("comments-count");
+  if (counter) counter.textContent = `Community Discussion (${persistentData.commentCount} comments)`;
+  loadSavedComments();
 
   // Start countdown & progress
   startCountdown();
@@ -363,6 +490,7 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("Countdown will end on:", COUNTDOWN_END_DATE.toLocaleString());
   console.log("Current time:", new Date().toLocaleString());
   console.log("Time remaining (ms):", COUNTDOWN_END_DATE.getTime() - Date.now());
+  console.log("Progress bar initialized from:", persistentData.progressStartTime);
 });
 
 /* -------------------------
