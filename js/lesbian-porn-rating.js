@@ -1,6 +1,9 @@
+/* =========================================================
+   Reviews – Voting, Comments, Affiliate, Countdown (Simple + Persistent)
+   ========================================================= */
 
 /* -------------------------
-   Persistent data storage
+   Persistent data storage (for voting/comments only)
 ------------------------- */
 let persistentData = {
   // Voting data
@@ -9,14 +12,6 @@ let persistentData = {
   yesVotes: 0,
   noVotes: 0,
   
-  // Countdown data - persistent across reloads
-  countdownStartDate: null,
-  countdownEndDate: null,
-  countdownDuration: 30 * 24 * 60 * 60 * 1000, // 30 days default
-  countdownPaused: false,
-  countdownRemainingTime: null,
-  countdownPausedAt: null,
-  
   // Other data
   commentCount: 4
 };
@@ -24,7 +19,7 @@ let persistentData = {
 // Try to load data from localStorage
 function loadPersistedData() {
   try {
-    const stored = localStorage.getItem('persistent_countdown_data');
+    const stored = localStorage.getItem('persistent_reviews_data');
     if (stored) {
       const parsed = JSON.parse(stored);
       Object.assign(persistentData, parsed);
@@ -38,125 +33,65 @@ function loadPersistedData() {
 // Save data to localStorage
 function savePersistedData() {
   try {
-    localStorage.setItem('persistent_countdown_data', JSON.stringify(persistentData));
+    localStorage.setItem('persistent_reviews_data', JSON.stringify(persistentData));
   } catch (e) {
     console.log('Failed to save persistent data:', e);
   }
 }
 
-// Initialize countdown dates
-function initializeCountdownDates() {
-  const now = new Date();
-  
-  // If no stored countdown data exists, create new countdown
-  if (!persistentData.countdownStartDate || !persistentData.countdownEndDate) {
-    persistentData.countdownStartDate = now.toISOString();
-    persistentData.countdownEndDate = new Date(now.getTime() + persistentData.countdownDuration).toISOString();
-    savePersistedData();
-    console.log('New countdown initialized for 30 days');
-  } else {
-    console.log('Existing countdown loaded from storage');
-  }
-  
-  return {
-    start: new Date(persistentData.countdownStartDate),
-    end: new Date(persistentData.countdownEndDate)
-  };
-}
-
-// Get countdown dates as Date objects
-function getCountdownDates() {
-  return {
-    start: new Date(persistentData.countdownStartDate),
-    end: new Date(persistentData.countdownEndDate)
-  };
-}
+/* -------------------------
+   SIMPLE COUNTDOWN CONFIGURATION - EASY TO CHANGE!
+------------------------- */
+const START_DATE = new Date("2025-08-30T14:30:00"); // ISO for reliability - CHANGE THIS DATE
+const COUNTDOWN_END_DATE = new Date(START_DATE.getTime() + 07 * 24 * 60 * 60 * 1000); // 30 days from start
 
 /* -------------------------
-   Countdown management functions
+   Countdown + progress
 ------------------------- */
-function setCountdownDate(endDate, startDate = null) {
-  const now = new Date();
-  const targetEndDate = new Date(endDate);
-  const targetStartDate = startDate ? new Date(startDate) : now;
-  
-  // Validation
-  if (targetEndDate <= now) {
-    throw new Error('End date must be in the future');
+function startCountdown() {
+  function updateCountdown() {
+    const now = Date.now();
+    const distance = COUNTDOWN_END_DATE.getTime() - now;
+
+    if (distance < 0) {
+      const timer = document.getElementById("countdownTimer");
+      if (timer) {
+        timer.innerHTML =
+          '<div style="text-align:center;color:#dc2626;font-weight:600;font-size:1.2em;padding:20px;">VOTING CLOSED</div>';
+      }
+      const yesBtn = document.getElementById("vote-yes-btn");
+      const noBtn = document.getElementById("vote-no-btn");
+      if (yesBtn) yesBtn.disabled = true;
+      if (noBtn) noBtn.disabled = true;
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    if (daysEl) daysEl.textContent = String(days);
+    if (hoursEl) hoursEl.textContent = String(hours);
+    if (minutesEl) minutesEl.textContent = String(minutes);
+    if (secondsEl) secondsEl.textContent = String(seconds);
   }
-  
-  if (startDate && targetStartDate >= targetEndDate) {
-    throw new Error('Start date must be before end date');
-  }
-  
-  // Update stored data
-  persistentData.countdownStartDate = targetStartDate.toISOString();
-  persistentData.countdownEndDate = targetEndDate.toISOString();
-  persistentData.countdownDuration = targetEndDate.getTime() - targetStartDate.getTime();
-  persistentData.countdownPaused = false;
-  
-  savePersistedData();
-  
-  console.log('Countdown updated:', {
-    start: targetStartDate.toLocaleString(),
-    end: targetEndDate.toLocaleString(),
-    duration: Math.floor(persistentData.countdownDuration / (1000 * 60 * 60 * 24)) + ' days'
-  });
-  
-  // Restart countdown display
-  startCountdown();
-  
-  return {
-    start: targetStartDate,
-    end: targetEndDate,
-    duration: persistentData.countdownDuration
-  };
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 }
 
-function setCountdownDays(days) {
-  const now = new Date();
-  const endDate = new Date(now.getTime() + (days * 24 * 60 * 60 * 1000));
-  return setCountdownDate(endDate, now);
-}
-
-function setCountdownHours(hours) {
-  const now = new Date();
-  const endDate = new Date(now.getTime() + (hours * 60 * 60 * 1000));
-  return setCountdownDate(endDate, now);
-}
-
-function pauseCountdown() {
-  const now = new Date();
-  const dates = getCountdownDates();
-  const remainingTime = dates.end.getTime() - now.getTime();
-  
-  // Store the remaining time
-  persistentData.countdownPaused = true;
-  persistentData.countdownRemainingTime = remainingTime;
-  persistentData.countdownPausedAt = now.toISOString();
-  
-  savePersistedData();
-  console.log('Countdown paused with', Math.floor(remainingTime / 1000), 'seconds remaining');
-  return remainingTime;
-}
-
-function resumeCountdown() {
-  if (!persistentData.countdownPaused) {
-    console.log('Countdown is not currently paused');
-    return false;
-  }
-  
-  const now = new Date();
-  const newEndDate = new Date(now.getTime() + persistentData.countdownRemainingTime);
-  
-  // Clear pause data
-  persistentData.countdownPaused = false;
-  delete persistentData.countdownRemainingTime;
-  delete persistentData.countdownPausedAt;
-  
-  setCountdownDate(newEndDate, persistentData.countdownStartDate);
-  console.log('Countdown resumed');
-  return true;
+function updateProgressBar() {
+  const total = COUNTDOWN_END_DATE.getTime() - START_DATE.getTime();
+  const elapsed = Date.now() - START_DATE.getTime();
+  const progress = Math.min(100, Math.max(0, (elapsed / total) * 100));
+  const bar = document.getElementById("progressBar");
+  if (bar) bar.style.width = progress.toFixed(2) + "%";
 }
 
 /* -------------------------
@@ -188,7 +123,7 @@ function showToast(msg, type = "info") {
 }
 
 /* -------------------------
-   Voting actions
+   Voting actions (PERSISTENT)
 ------------------------- */
 function vote(choice) {
   if (persistentData.hasVoted) {
@@ -302,7 +237,7 @@ function handleSubscribe(url = "") {
 }
 
 /* -------------------------
-   Modal: comments
+   Modal: comments (PERSISTENT)
 ------------------------- */
 function openCommentModal() {
   const m = document.getElementById("commentModal");
@@ -325,7 +260,7 @@ function closeCommentModal() {
 }
 
 /* -------------------------
-   Comments
+   Comments (PERSISTENT)
 ------------------------- */
 function submitComment(event) {
   event.preventDefault();
@@ -365,8 +300,25 @@ function submitComment(event) {
   const counter = document.getElementById("comments-count");
   if (counter) counter.textContent = `Community Discussion (${persistentData.commentCount} comments)`;
 
-  // Save data
+  // Save data to localStorage
   savePersistedData();
+
+  // Also save the actual comment content for persistence
+  try {
+    let comments = JSON.parse(localStorage.getItem('user_comments') || '[]');
+    comments.unshift({
+      author: userName,
+      text: commentText,
+      timestamp: new Date().toISOString()
+    });
+    // Keep only last 50 comments to prevent storage bloat
+    if (comments.length > 50) {
+      comments = comments.slice(0, 50);
+    }
+    localStorage.setItem('user_comments', JSON.stringify(comments));
+  } catch (e) {
+    console.log('Failed to save comment:', e);
+  }
 
   closeCommentModal();
   showToast("Comment posted!", "success");
@@ -393,124 +345,35 @@ function viewCreatorDetails(creatorId, url = "") {
 }
 
 /* -------------------------
-   Countdown + progress (PERSISTENT VERSION)
+   Load saved comments on page load
 ------------------------- */
-let countdownInterval = null;
-
-function startCountdown() {
-  // Clear existing interval
-  if (countdownInterval) {
-    clearInterval(countdownInterval);
-  }
-  
-  // Check if countdown is paused
-  if (persistentData.countdownPaused) {
-    const countdownElement = document.getElementById("countdownTimer");
-    if (countdownElement) {
-      countdownElement.innerHTML = `
-        <div style="text-align: center; color: #f59e0b; font-weight: 600; font-size: 1.2em; padding: 20px;">
-          COUNTDOWN PAUSED<br><small>Use resumeCountdown() to continue</small>
-        </div>
-      `;
+function loadSavedComments() {
+  try {
+    const comments = JSON.parse(localStorage.getItem('user_comments') || '[]');
+    const list = document.getElementById("comments-list");
+    
+    if (list && comments.length > 0) {
+      comments.forEach(comment => {
+        const commentEl = document.createElement("div");
+        commentEl.className = "comment";
+        
+        // Format the saved timestamp
+        const date = new Date(comment.timestamp);
+        const timeText = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+        
+        commentEl.innerHTML = `
+          <div class="comment-author">${comment.author}</div>
+          <div class="comment-time">${timeText}</div>
+          <div class="comment-text">${comment.text}</div>
+        `;
+        
+        // Add to comments list (they're already in reverse chronological order)
+        list.appendChild(commentEl);
+      });
     }
-    return;
+  } catch (e) {
+    console.log('Failed to load saved comments:', e);
   }
-  
-  const dates = getCountdownDates();
-  
-  function updateCountdown() {
-    const now = Date.now();
-    const distance = dates.end.getTime() - now;
-
-    if (distance < 0) {
-      clearInterval(countdownInterval);
-      const timer = document.getElementById("countdownTimer");
-      if (timer) {
-        timer.innerHTML =
-          '<div style="text-align:center;color:#dc2626;font-weight:600;font-size:1.2em;padding:20px;">VOTING CLOSED</div>';
-      }
-      const yesBtn = document.getElementById("vote-yes-btn");
-      const noBtn = document.getElementById("vote-no-btn");
-      if (yesBtn) yesBtn.disabled = true;
-      if (noBtn) noBtn.disabled = true;
-      console.log('Countdown finished!');
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    const daysEl = document.getElementById("days");
-    const hoursEl = document.getElementById("hours");
-    const minutesEl = document.getElementById("minutes");
-    const secondsEl = document.getElementById("seconds");
-
-    if (daysEl) daysEl.textContent = String(days);
-    if (hoursEl) hoursEl.textContent = String(hours);
-    if (minutesEl) minutesEl.textContent = String(minutes);
-    if (secondsEl) secondsEl.textContent = String(seconds);
-  }
-
-  updateCountdown();
-  countdownInterval = setInterval(updateCountdown, 1000);
-}
-
-function updateProgressBar() {
-  const dates = getCountdownDates();
-  const total = dates.end.getTime() - dates.start.getTime();
-  const elapsed = Date.now() - dates.start.getTime();
-  const progress = Math.min(100, Math.max(0, (elapsed / total) * 100));
-  const bar = document.getElementById("progressBar");
-  if (bar) bar.style.width = progress.toFixed(2) + "%";
-}
-
-/* -------------------------
-   Status and debug functions
-------------------------- */
-function getCountdownStatus() {
-  const dates = getCountdownDates();
-  const now = new Date().getTime();
-  const distance = dates.end.getTime() - now;
-  const totalDuration = dates.end.getTime() - dates.start.getTime();
-  const elapsed = now - dates.start.getTime();
-  const progress = Math.min(100, Math.max(0, (elapsed / totalDuration) * 100));
-  
-  const status = {
-    isActive: distance > 0,
-    isPaused: persistentData.countdownPaused || false,
-    timeRemaining: distance,
-    daysRemaining: Math.floor(distance / (1000 * 60 * 60 * 24)),
-    hoursRemaining: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-    minutesRemaining: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-    secondsRemaining: Math.floor((distance % (1000 * 60)) / 1000),
-    progressPercentage: progress.toFixed(2),
-    startDate: dates.start.toLocaleString(),
-    endDate: dates.end.toLocaleString(),
-    totalDuration: totalDuration
-  };
-  
-  console.log('Countdown Status:', status);
-  return status;
-}
-
-function showDataStatus() {
-  const dates = getCountdownDates();
-  const stats = {
-    hasVoted: persistentData.hasVoted,
-    userVote: persistentData.userVote,
-    yesVotes: persistentData.yesVotes,
-    noVotes: persistentData.noVotes,
-    commentCount: persistentData.commentCount,
-    countdownStart: dates.start.toLocaleString(),
-    countdownEnd: dates.end.toLocaleString(),
-    countdownActive: new Date() < dates.end,
-    countdownPaused: persistentData.countdownPaused || false
-  };
-  
-  console.log('Data Status:', stats);
-  return stats;
 }
 
 /* -------------------------
@@ -566,9 +429,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Load persistent data first
   loadPersistedData();
   
-  // Initialize countdown dates from stored data
-  initializeCountdownDates();
-  
   // Initialize vote display with stored data
   const totalVotes = persistentData.yesVotes + persistentData.noVotes;
   let yesPercentage = 0;
@@ -593,9 +453,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
   
-  // Update comment count
+  // Update comment count and load saved comments
   const counter = document.getElementById("comments-count");
   if (counter) counter.textContent = `Community Discussion (${persistentData.commentCount} comments)`;
+  loadSavedComments();
 
   // Start countdown & progress
   startCountdown();
@@ -611,11 +472,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  const dates = getCountdownDates();
-  console.log("Countdown will end on:", dates.end.toLocaleString());
+  console.log("Countdown will end on:", COUNTDOWN_END_DATE.toLocaleString());
   console.log("Current time:", new Date().toLocaleString());
-  console.log("Time remaining (ms):", dates.end.getTime() - Date.now());
-  console.log("Countdown management functions available: setCountdownDays(), setCountdownHours(), pauseCountdown(), resumeCountdown()");
+  console.log("Time remaining (ms):", COUNTDOWN_END_DATE.getTime() - Date.now());
+  console.log("✅ Simple countdown system loaded - edit START_DATE to change countdown easily!");
 });
 
 /* -------------------------
@@ -629,12 +489,3 @@ window.openCommentModal = openCommentModal;
 window.closeCommentModal = closeCommentModal;
 window.submitComment = submitComment;
 window.viewCreatorDetails = viewCreatorDetails;
-
-// Countdown management functions
-window.setCountdownDate = setCountdownDate;
-window.setCountdownDays = setCountdownDays;
-window.setCountdownHours = setCountdownHours;
-window.pauseCountdown = pauseCountdown;
-window.resumeCountdown = resumeCountdown;
-window.getCountdownStatus = getCountdownStatus;
-window.showDataStatus = showDataStatus;
