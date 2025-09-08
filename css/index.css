@@ -1240,7 +1240,7 @@ body {
 
 /* FAQ Section - Responsive Design */
 .faq-section {
-  padding: 6rem 2rem;
+  padding: 6rem 4rem;
   margin-bottom: 4rem;
   max-width: 1200px;
   margin-left: auto;
@@ -1373,7 +1373,7 @@ body {
 /* Tablet Responsiveness (768px - 1024px) */
 @media (max-width: 1024px) and (min-width: 769px) {
   .faq-section {
-    padding: 5rem 2rem;
+    padding: 5rem 4rem;
   }
 
   .faq-section h2 {
