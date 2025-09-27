@@ -753,6 +753,7 @@ body {
 }
 
 .post-title-reviews a {
+  color: var(--black);
   text-decoration: none;
   transition: color 0.3s ease;
 }
