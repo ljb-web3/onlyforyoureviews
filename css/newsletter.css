@@ -158,12 +158,6 @@ body {
   background: white;
 }
 
-.form-input:focus {
-  outline: none;
-  border-color: var(--lilac);
-  box-shadow: 0 0 0 3px rgba(197, 176, 229, 0.1);
-}
-
 .form-select {
   width: 100%;
   padding: 1rem;
@@ -173,12 +167,6 @@ body {
   background: white;
   cursor: pointer;
   transition: all 0.3s ease;
-}
-
-.form-select:focus {
-  outline: none;
-  border-color: var(--lilac);
-  box-shadow: 0 0 0 3px rgba(197, 176, 229, 0.1);
 }
 
 .checkbox-group {
@@ -264,31 +252,7 @@ body {
   color: var(--gray-700);
 }
 
-/* Stats */
-.newsletter-stats {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  background: var(--light-lilac);
-  border-radius: 12px;
-}
 
-.stat {
-  text-align: center;
-}
-
-.stat-number {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--purple);
-  display: block;
-}
-
-.stat-label {
-  font-size: 0.8rem;
-  color: var(--gray-600);
-}
 
 /* Footer */
 .footer-note {
