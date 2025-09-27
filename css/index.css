@@ -125,6 +125,9 @@ body {
   margin: 0 auto;
 }
 
+.subtitle p {
+  
+
 /* Optional inner wrapper */
 .section-container {
   max-width: 1000px;
@@ -370,7 +373,7 @@ body {
   overflow: hidden;
 }
 
-.profile-name {
+.profile-name h4 {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--black);
@@ -752,7 +755,7 @@ body {
   color: var(--black);
 }
 
-.post-title reviews a {
+.post-title-reviews a {
   text-decoration: none;
   transition: color 0.3s ease;
 }
