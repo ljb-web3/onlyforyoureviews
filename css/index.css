@@ -1352,11 +1352,15 @@ body {
   }
 
   .hero h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   .section-header h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
+  }
+
+  about-content h2 {
+     font-size: 1.5rem;
   }
 
   .about-container {
@@ -1402,10 +1406,18 @@ body {
     padding: 0 1rem;
   }
 
-  .hero h1 {
+    .hero h1 {
     font-size: 2rem;
   }
 
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  about-content h2 {
+     font-size: 1.5rem;
+  }
+    
   .main-content {
     padding: 2rem 1rem;
     margin-top: 2rem;
