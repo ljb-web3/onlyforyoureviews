@@ -741,6 +741,8 @@ body {
   margin-bottom: 1rem;
 }
 
+
+
 .post-title-reviews {
   font-size: 1.25rem;
   text-decoration: none;
@@ -751,7 +753,7 @@ body {
 }
 
 .post-title reviews a {
-  color: inherit;
+  text-decoration: none;
   transition: color 0.3s ease;
 }
 
