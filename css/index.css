@@ -1406,7 +1406,7 @@ body {
     padding: 0 1rem;
   }
 
-    .hero h1 {
+  .hero h1 {
     font-size: 2rem;
   }
 
@@ -1414,8 +1414,8 @@ body {
     font-size: 1.5rem;
   }
 
-  about-content h2 {
-     font-size: 1.5rem;
+  .about-content h2 {
+     font-size: 1.4rem;
   }
     
   .main-content {
@@ -1644,7 +1644,11 @@ body {
   }
 
   .section-header h2 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+  }
+
+  .about-content h2 {
+    font-size: 1.3rem;
   }
 
   .page-title {
