@@ -757,7 +757,7 @@ body {
   transition: color 0.3s ease;
 }
 
-.post-title reviews a:hover {
+.post-title-reviews a:hover {
   color: var(--lilac);
 }
 
