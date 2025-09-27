@@ -487,6 +487,7 @@
       color: #666;
       margin-bottom: 1rem;
       line-height: 1.4;
+     text-align: center;
     }
 
     .sextpanther-features {
@@ -494,6 +495,7 @@
       flex-direction: column;
       gap: 0.4rem;
       margin: 0.8rem 0;
+     text-align: center;
     }
 
     .product-feature {
@@ -504,6 +506,7 @@
       font-size: 0.75rem;
       font-weight: 500;
       line-height: 1.4;
+      text-align: center;
     }
 
     .product-audience {
@@ -513,6 +516,7 @@
       font-size: 0.8rem;
       line-height: 1.4;
       margin-bottom: 1rem;
+      text-align: center;
     }
 
     .product-audience strong {
