@@ -1405,6 +1405,7 @@ body {
     margin-top: 2rem;
     padding: 0 1rem;
   }
+  
 
   .hero h1 {
     font-size: 2rem;
@@ -1417,7 +1418,15 @@ body {
   .about-content h2 {
      font-size: 1.4rem;
   }
-    
+
+  .content-section h3 {
+  font-size: 1.1rem;
+}
+  
+
+
+
+  
   .main-content {
     padding: 2rem 1rem;
     margin-top: 2rem;
@@ -1473,6 +1482,8 @@ body {
   .section-header h2 {
     font-size: 1.8rem;
   }
+
+  
 
   .section-header p {
     font-size: 1rem;
@@ -1644,12 +1655,16 @@ body {
   }
 
   .section-header h2 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 
   .about-content h2 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
+
+  content-section h3 {
+  font-size: 1rem;
+}
 
   .page-title {
     font-size: 2rem;
