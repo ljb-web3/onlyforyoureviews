@@ -1422,10 +1422,11 @@ body {
   .content-section h3 {
   font-size: 1.1rem;
 }
+
+.hero .subtitle {
+  font-size: 0.9rem;
+}
   
-
-
-
   
   .main-content {
     padding: 2rem 1rem;
