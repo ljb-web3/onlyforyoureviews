@@ -77,14 +77,15 @@ function filterByCategory(category, evt) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+
 /* -------------------------
-   Post Navigation
+   Post Navigation - FIXED
 ------------------------- */
 function openPost(postId) {
-  // Navigate to a dedicated review page
-  window.location.href = `/reviews/${encodeURIComponent(postId)}`;
+  // Navigate to the correct OnlyFans reviews page path
+  window.location.href = `/all-Onlyfans-reviews/${encodeURIComponent(postId)}`;
   // For SPA, you could instead do:
-  // history.pushState({}, "", `/reviews/${encodeURIComponent(postId)}`);
+  // history.pushState({}, "", `/all-Onlyfans-reviews/${encodeURIComponent(postId)}`);
   // renderPost(postId);
 }
 
