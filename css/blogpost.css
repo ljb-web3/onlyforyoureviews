@@ -989,3 +989,10 @@ body {
     padding: 1.5rem;
   }
 }
+
+/* Hide duplicate ad cards on tablet and mobile */
+@media (max-width: 1024px) {
+  .hide-on-mobile {
+    display: none;
+  }
+}
